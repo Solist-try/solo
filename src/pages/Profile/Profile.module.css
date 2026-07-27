@@ -1,0 +1,101 @@
+.page {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.heroBlock {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  animation: fade-rise var(--duration-slow) var(--ease-out) both;
+}
+
+.kicker {
+  font-size: var(--text-sm);
+  font-weight: 550;
+  color: var(--peach-500);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.heroBlock h1 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-2);
+}
+
+.bio {
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  padding-block: var(--space-2);
+  border-block: 1px solid var(--color-border);
+}
+
+.stat {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.stat strong {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--taupe-800);
+}
+
+.stat span {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 36rem;
+}
+
+.textareaField {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.textareaField span {
+  font-size: var(--text-sm);
+  font-weight: 550;
+  color: var(--taupe-600);
+}
+
+.textareaField textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  resize: vertical;
+  line-height: var(--leading-normal);
+}
+
+.textareaField textarea:focus {
+  outline: none;
+  border-color: var(--peach-400);
+  box-shadow: 0 0 0 3px rgba(224, 138, 82, 0.2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 560px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
