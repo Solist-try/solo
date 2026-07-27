@@ -1,63 +1,146 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Section } from "../../components/ui";
+import { useMemo, useState } from "react";
+import { useAuth } from "../../auth";
+import {
+  EVENT_TYPES,
+  EventCard,
+  eventsCatalog,
+  eventTypeLabels,
+  type EventType,
+} from "../../modules/events";
+import { Button, Card, CardBody, CardHeader } from "../../components/ui";
 import styles from "./Events.module.css";
 
-const events = [
-  {
-    title: "Sunrise coastal walk",
-    when: "Sat · 7:00 AM",
-    place: "Ocean Avenue trailhead",
-    detail: "A quiet mile for solo walkers — optional coffee after.",
-  },
-  {
-    title: "Packing circle (virtual)",
-    when: "Tue · 6:30 PM",
-    place: "Online",
-    detail: "Bring your bag list and trim what you do not need.",
-  },
-  {
-    title: "Solo dinner night",
-    when: "Thu · 7:15 PM",
-    place: "Harbor District",
-    detail: "Reserved seats for one — arrive as you are, leave when ready.",
-  },
-];
+type Filter = "All" | EventType | "Going";
+
+const EMPTY_RSVPS: string[] = [];
 
 export function Events() {
+  const { user, updateProfile } = useAuth();
+  const [filter, setFilter] = useState<Filter>("All");
+  const [pendingId, setPendingId] = useState<string | null>(null);
+  const rsvpIds = user?.rsvpEventIds ?? EMPTY_RSVPS;
+
+  const visible = useMemo(() => {
+    const going = user?.rsvpEventIds ?? EMPTY_RSVPS;
+    if (filter === "All") return eventsCatalog;
+    if (filter === "Going") {
+      return eventsCatalog.filter((event) => going.includes(event.id));
+    }
+    return eventsCatalog.filter((event) => event.type === filter);
+  }, [filter, user?.rsvpEventIds]);
+
+  const toggleRsvp = async (eventId: string) => {
+    if (!user) return;
+    setPendingId(eventId);
+    const next = rsvpIds.includes(eventId)
+      ? rsvpIds.filter((id) => id !== eventId)
+      : [...rsvpIds, eventId];
+    try {
+      await updateProfile({ rsvpEventIds: next });
+    } finally {
+      setPendingId(null);
+    }
+  };
+
   return (
     <div className={`container page ${styles.page}`}>
       <header className="page__header">
         <h1>Events</h1>
         <p>
-          Soft gatherings designed for independent travelers — join in, or just
-          know they are there.
+          Virtual meetups, workshops, and community discussions — RSVP and add
+          them to your calendar when you are ready.
         </p>
       </header>
 
-      <Section
-        title="Coming up"
-        description="Small, paced events that respect your rhythm."
-        action={<Button variant="secondary">Suggest an event</Button>}
-      >
-        <div className={styles.list}>
-          {events.map((event) => (
-            <Card key={event.title} variant="interactive">
-              <CardHeader
-                eyebrow={`${event.when} · ${event.place}`}
-                title={event.title}
+      <div className={styles.toolbar}>
+        <div
+          className={styles.filters}
+          role="toolbar"
+          aria-label="Filter events"
+        >
+          <FilterChip
+            label="All"
+            active={filter === "All"}
+            onClick={() => setFilter("All")}
+          />
+          {EVENT_TYPES.map((type) => (
+            <FilterChip
+              key={type}
+              label={eventTypeLabels[type]}
+              active={filter === type}
+              onClick={() => setFilter(type)}
+            />
+          ))}
+          <FilterChip
+            label={`Going (${rsvpIds.length})`}
+            active={filter === "Going"}
+            onClick={() => setFilter("Going")}
+          />
+        </div>
+      </div>
+
+      <Card variant="soft" padding="md" className={styles.calendarNote}>
+        <CardHeader
+          eyebrow="Calendar"
+          title="Stay in sync"
+          description="RSVP to hold your spot, then download an .ics file or open Google Calendar."
+        />
+        <CardBody>
+          <p className={styles.noteText}>
+            You are going to <strong>{rsvpIds.length}</strong> upcoming{" "}
+            {rsvpIds.length === 1 ? "event" : "events"}.
+          </p>
+        </CardBody>
+      </Card>
+
+      {visible.length === 0 ? (
+        <div className={styles.empty}>
+          <p>No events in this view yet.</p>
+          <Button variant="soft" onClick={() => setFilter("All")}>
+            Show all events
+          </Button>
+        </div>
+      ) : (
+        <div className={styles.grid}>
+          {visible.map((event, index) => (
+            <div
+              key={event.id}
+              style={{ animationDelay: `${0.05 + index * 0.05}s` }}
+              className={styles.item}
+            >
+              <EventCard
+                event={event}
+                rsvped={rsvpIds.includes(event.id)}
+                onToggleRsvp={() => {
+                  if (pendingId) return;
+                  void toggleRsvp(event.id);
+                }}
               />
-              <CardBody>{event.detail}</CardBody>
-              <CardFooter>
-                <Button size="sm" variant="soft">
-                  Save spot
-                </Button>
-                <Button size="sm" variant="ghost">
-                  Details
-                </Button>
-              </CardFooter>
-            </Card>
+            </div>
           ))}
         </div>
-      </Section>
+      )}
     </div>
+  );
+}
+
+function FilterChip({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      className={`${styles.chip} ${active ? styles.chipActive : ""}`}
+      aria-pressed={active}
+      onClick={onClick}
+    >
+      {label}
+    </button>
   );
 }

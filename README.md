@@ -53,6 +53,14 @@ Reusable module at `src/modules/soloLivingToolkit`:
 - Emotional check-ins
 - Practical solo-living tasks
 
+## Events
+
+Reusable module at `src/modules/events`:
+
+- Virtual meetups, workshops, and community discussions
+- Event cards with capacity and RSVP
+- Calendar integration via `.ics` download and Google Calendar links
+
 ## Design system
 
 - **Color** — warm neutrals, peach accent, soft gold (`src/styles/tokens.css`)

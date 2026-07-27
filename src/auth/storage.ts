@@ -47,6 +47,7 @@ export function defaultProfileDetails(
     preferences: interests.slice(0, 3),
     savedPosts: defaultSavedPosts,
     toolkitItems: defaultToolkitItems,
+    rsvpEventIds: [],
   };
 }
 
@@ -62,6 +63,7 @@ export function normalizeUser<T extends Partial<AuthUser> & Pick<AuthUser, "id" 
     preferences: user.preferences ?? defaults.preferences,
     savedPosts: user.savedPosts ?? defaults.savedPosts,
     toolkitItems: user.toolkitItems ?? defaults.toolkitItems,
+    rsvpEventIds: user.rsvpEventIds ?? defaults.rsvpEventIds,
   };
 }
 

@@ -25,6 +25,7 @@ export type ProfileDetails = {
   preferences: string[];
   savedPosts: SavedPost[];
   toolkitItems: ToolkitItem[];
+  rsvpEventIds: string[];
 };
 
 export type AuthUser = {
@@ -47,5 +48,14 @@ export type AuthState = {
 };
 
 export type ProfileUpdate = Partial<
-  Pick<AuthUser, "name" | "bio" | "homeBase" | "preferences" | "savedPosts" | "toolkitItems">
+  Pick<
+    AuthUser,
+    | "name"
+    | "bio"
+    | "homeBase"
+    | "preferences"
+    | "savedPosts"
+    | "toolkitItems"
+    | "rsvpEventIds"
+  >
 >;
