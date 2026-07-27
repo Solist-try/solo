@@ -27,6 +27,16 @@ npm run preview
 | `/resources` | Resources |
 | `/profile` | Profile |
 | `/settings` | Settings |
+| `/design-system` | Design system showcase |
+
+## Design system
+
+- **Color** — warm neutrals, peach accent, soft gold (`src/styles/tokens.css`)
+- **Typography** — Fraunces display + Outfit body scale (`src/styles/typography.css`)
+- **Spacing** — 4px base scale `--space-1` … `--space-12`
+- **Buttons** — primary, secondary, soft, outline, ghost, danger (pill shape)
+- **Cards** — elevated, soft, outline, interactive
+- **Motif** — `SoftCurve` waves, blobs, arcs, and pills
 
 ## Architecture
 
@@ -34,7 +44,7 @@ npm run preview
 src/
   components/
     layout/     # AppShell, Navbar, Footer
-    ui/         # Button, TextField, Toggle, Avatar, Section
+    ui/         # Button, Card, SoftCurve, TextField, Toggle, Avatar, Section
   pages/        # Route-level views
-  styles/       # Global tokens, base styles, motion
+  styles/       # Tokens, typography, motif, motion, global
 ```
