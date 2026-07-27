@@ -26,3 +26,14 @@ export const INTEREST_OPTIONS = [
   "Travel planning",
   "Home rituals",
 ] as const;
+
+export const PREFERENCE_OPTIONS = [
+  "Quiet evenings at home",
+  "Slow morning routines",
+  "Budget-minded living",
+  "Safety-first travel",
+  "Community check-ins",
+  "Minimal packing",
+  "Emotional wellness focus",
+  "Practical home systems",
+] as const;

@@ -5,9 +5,15 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { AuthProvider as AuthProviderId, AuthUser, OnboardingProfile } from "./types";
+import type {
+  AuthProvider as AuthProviderId,
+  AuthUser,
+  OnboardingProfile,
+  ProfileUpdate,
+} from "./types";
 import { AuthContext } from "./authContextInstance";
 import {
+  defaultProfileDetails,
   hashPassword,
   readAccounts,
   readSession,
@@ -68,6 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         onboarding: null,
         createdAt: new Date().toISOString(),
         passwordHash: hashPassword(password),
+        ...defaultProfileDetails(),
       };
 
       writeAccounts([...accounts, account]);
@@ -121,6 +128,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         onboarding: null,
         createdAt: new Date().toISOString(),
         passwordHash: null,
+        ...defaultProfileDetails(),
       };
 
       writeAccounts([...accounts, account]);
@@ -144,6 +152,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         ...accounts[index],
         onboardingComplete: true,
         onboarding: profile,
+        preferences:
+          accounts[index].preferences?.length
+            ? accounts[index].preferences
+            : profile.interests.slice(0, 3),
+      };
+      const nextAccounts = [...accounts];
+      nextAccounts[index] = updated;
+      writeAccounts(nextAccounts);
+
+      const publicUser = toPublicUser(updated);
+      persistUser(publicUser);
+      return publicUser;
+    },
+    [persistUser, user],
+  );
+
+  const updateProfile = useCallback(
+    async (patch: ProfileUpdate) => {
+      await delay(220);
+      if (!user) throw new Error("You need to be signed in.");
+
+      const accounts = readAccounts();
+      const index = accounts.findIndex((account) => account.id === user.id);
+      if (index === -1) throw new Error("Account not found.");
+
+      const updated = {
+        ...accounts[index],
+        ...patch,
+        name: patch.name?.trim() || accounts[index].name,
       };
       const nextAccounts = [...accounts];
       nextAccounts[index] = updated;
@@ -168,6 +205,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signInWithEmail,
       signInWithSocial,
       completeOnboarding,
+      updateProfile,
       signOut,
     }),
     [
@@ -177,6 +215,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signInWithEmail,
       signInWithSocial,
       completeOnboarding,
+      updateProfile,
       signOut,
     ],
   );

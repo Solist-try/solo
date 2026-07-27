@@ -1,5 +1,10 @@
 import { createContext } from "react";
-import type { AuthProvider as AuthProviderId, AuthUser, OnboardingProfile } from "./types";
+import type {
+  AuthProvider as AuthProviderId,
+  AuthUser,
+  OnboardingProfile,
+  ProfileUpdate,
+} from "./types";
 
 export type AuthContextValue = {
   user: AuthUser | null;
@@ -17,6 +22,7 @@ export type AuthContextValue = {
     provider: Exclude<AuthProviderId, "email">,
   ) => Promise<AuthUser>;
   completeOnboarding: (profile: OnboardingProfile) => Promise<AuthUser>;
+  updateProfile: (patch: ProfileUpdate) => Promise<AuthUser>;
   signOut: () => void;
 };
 
