@@ -25,6 +25,7 @@ npm run preview
 | `/` | Home |
 | `/community` | Community |
 | `/resources` | Resources |
+| `/events` | Events |
 | `/profile` | Profile |
 | `/settings` | Settings |
 | `/design-system` | Design system showcase |
