@@ -1,95 +1,148 @@
-import { Avatar, Button, Card, CardFooter, CardHeader, Section } from "../../components/ui";
+import { useMemo, useState } from "react";
+import { Button } from "../../components/ui";
+import { TOPICS, initialPosts, type Post, type Topic } from "./data";
+import { PostCard } from "./PostCard";
 import styles from "./Community.module.css";
 
-const members = [
-  {
-    name: "Mira Chen",
-    focus: "Coastal weekenders",
-    note: "Looking for sunrise hiking partners near Lisbon.",
-  },
-  {
-    name: "Jordan Hale",
-    focus: "Slow city walks",
-    note: "Sharing cafe maps for first-time solo nights out.",
-  },
-  {
-    name: "Ava Ruiz",
-    focus: "Train journeys",
-    note: "Hosting a quiet thread on overnight rail tips.",
-  },
-  {
-    name: "Sam Okonkwo",
-    focus: "Photography trails",
-    note: "Trading golden-hour spots that stay uncrowded.",
-  },
-];
-
-const circles = [
-  {
-    title: "First solo trip",
-    detail: "Encouragement and packing lists for people taking the leap.",
-  },
-  {
-    title: "Women traveling alone",
-    detail: "Safety-minded routes, lodging notes, and local check-ins.",
-  },
-  {
-    title: "Digital nomad stretch",
-    detail: "Work-friendly cafes, quiet stays, and weekly accountability.",
-  },
-];
+type Filter = "All" | Topic;
 
 export function Community() {
+  const [filter, setFilter] = useState<Filter>("All");
+  const [posts, setPosts] = useState<Post[]>(initialPosts);
+  const [likedIds, setLikedIds] = useState<Set<string>>(() => new Set());
+
+  const visiblePosts = useMemo(() => {
+    if (filter === "All") return posts;
+    return posts.filter((post) => post.tags.includes(filter));
+  }, [filter, posts]);
+
+  const toggleLike = (postId: string) => {
+    const liked = likedIds.has(postId);
+
+    setLikedIds((current) => {
+      const next = new Set(current);
+      if (liked) next.delete(postId);
+      else next.add(postId);
+      return next;
+    });
+
+    setPosts((list) =>
+      list.map((post) =>
+        post.id === postId
+          ? { ...post, likes: post.likes + (liked ? -1 : 1) }
+          : post,
+      ),
+    );
+  };
+
+  const addComment = (postId: string, body: string) => {
+    setPosts((list) =>
+      list.map((post) =>
+        post.id === postId
+          ? {
+              ...post,
+              comments: [
+                ...post.comments,
+                {
+                  id: `local-${postId}-${post.comments.length + 1}`,
+                  author: "Alex Rivera",
+                  body,
+                  time: "Just now",
+                },
+              ],
+            }
+          : post,
+      ),
+    );
+  };
+
   return (
     <div className={`container page ${styles.page}`}>
       <header className="page__header">
-        <h1>Community</h1>
+        <h1>Community Feed</h1>
         <p>
-          Soft introductions, shared routes, and circles that respect your
-          independence.
+          Posts, encouragement, and practical notes from people walking solo —
+          with room to reply when you want company.
         </p>
       </header>
 
-      <Section
-        title="Active circles"
-        description="Join a conversation that matches your pace — no noise, just useful company."
-        action={<Button variant="secondary">Start a circle</Button>}
-      >
-        <div className={styles.circles}>
-          {circles.map((circle) => (
-            <Card key={circle.title} variant="interactive">
-              <CardHeader title={circle.title} description={circle.detail} />
-              <CardFooter>
-                <Button size="sm" variant="soft">
-                  Enter circle
-                </Button>
-              </CardFooter>
-            </Card>
+      <div className={styles.toolbar}>
+        <div
+          className={styles.filters}
+          role="toolbar"
+          aria-label="Filter posts by topic"
+        >
+          <FilterChip
+            label="All"
+            active={filter === "All"}
+            onClick={() => setFilter("All")}
+          />
+          {TOPICS.map((topic) => (
+            <FilterChip
+              key={topic}
+              label={topic}
+              active={filter === topic}
+              onClick={() => setFilter(topic)}
+            />
           ))}
         </div>
-      </Section>
+        <Button variant="secondary" size="sm">
+          New post
+        </Button>
+      </div>
 
-      <Section
-        title="People nearby in spirit"
-        description="Members exploring similar rhythms this month."
-      >
-        <ul className={styles.members}>
-          {members.map((member) => (
-            <Card key={member.name} as="li" variant="soft" padding="sm">
-              <div className={styles.member}>
-                <Avatar name={member.name} />
-                <div>
-                  <div className={styles.memberTop}>
-                    <strong>{member.name}</strong>
-                    <span>{member.focus}</span>
-                  </div>
-                  <p>{member.note}</p>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </ul>
-      </Section>
+      <p className={styles.count} aria-live="polite">
+        {visiblePosts.length}{" "}
+        {visiblePosts.length === 1 ? "post" : "posts"}
+        {filter !== "All" ? ` in ${filter}` : ""}
+      </p>
+
+      <div className={styles.feed}>
+        {visiblePosts.length === 0 ? (
+          <div className={styles.empty}>
+            <p>No posts in this topic yet. Try another filter or start one.</p>
+            <Button variant="soft" onClick={() => setFilter("All")}>
+              Show all posts
+            </Button>
+          </div>
+        ) : (
+          visiblePosts.map((post, index) => (
+            <div
+              key={post.id}
+              style={{ animationDelay: `${0.05 + index * 0.06}s` }}
+              className={styles.feedItem}
+            >
+              <PostCard
+                post={post}
+                liked={likedIds.has(post.id)}
+                onToggleLike={() => toggleLike(post.id)}
+                onAddComment={(body) => addComment(post.id, body)}
+              />
+            </div>
+          ))
+        )}
+      </div>
     </div>
+  );
+}
+
+function FilterChip({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      className={`${styles.chip} ${active ? styles.chipActive : ""}`}
+      aria-pressed={active}
+      onClick={onClick}
+    >
+      {label}
+    </button>
   );
 }
