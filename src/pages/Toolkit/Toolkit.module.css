@@ -1,0 +1,26 @@
+.page {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.panel {
+  box-shadow: var(--shadow-soft);
+  animation: fade-rise var(--duration-slow) var(--ease-out) both;
+}
+
+.split {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 960px) {
+  .split {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: start;
+  }
+}

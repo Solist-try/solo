@@ -2,12 +2,13 @@ import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
 const links = [
-  { to: "/", label: "Home", end: true },
-  { to: "/community", label: "Community" },
-  { to: "/resources", label: "Resources" },
-  { to: "/events", label: "Events" },
-  { to: "/profile", label: "Profile" },
-  { to: "/settings", label: "Settings" },
+  { to: "/", label: "Home", end: true, mobile: false },
+  { to: "/community", label: "Community", mobile: false },
+  { to: "/resources", label: "Resources", mobile: false },
+  { to: "/events", label: "Events", mobile: false },
+  { to: "/toolkit", label: "Toolkit", mobile: true },
+  { to: "/profile", label: "Profile", mobile: false },
+  { to: "/settings", label: "Settings", mobile: true },
 ] as const;
 
 export function Navbar() {
@@ -29,7 +30,7 @@ export function Navbar() {
                 [
                   styles.link,
                   isActive ? styles.active : "",
-                  link.to === "/settings" ? styles.settingsLink : styles.desktopOnly,
+                  link.mobile ? styles.mobileVisible : styles.desktopOnly,
                 ]
                   .filter(Boolean)
                   .join(" ")

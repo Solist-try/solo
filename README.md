@@ -26,9 +26,21 @@ npm run preview
 | `/community` | Community |
 | `/resources` | Resources |
 | `/events` | Events |
+| `/toolkit` | Solo Living Toolkit |
 | `/profile` | Profile |
 | `/settings` | Settings |
 | `/design-system` | Design system showcase |
+
+## Solo Living Toolkit
+
+Reusable module at `src/modules/soloLivingToolkit`:
+
+- Checklists with progress
+- Habit tracker (Mon–Sun)
+- Quick tips
+- Daily routines (morning / evening)
+- Emotional check-ins
+- Practical solo-living tasks
 
 ## Design system
 
@@ -44,8 +56,10 @@ npm run preview
 ```
 src/
   components/
-    layout/     # AppShell, Navbar, Footer
+    layout/     # AppShell, Navbar, BottomNav, Footer
     ui/         # Button, Card, SoftCurve, TextField, Toggle, Avatar, Section
+  modules/
+    soloLivingToolkit/  # Toolkit components + data
   pages/        # Route-level views
   styles/       # Tokens, typography, motif, motion, global
 ```

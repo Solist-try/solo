@@ -90,6 +90,10 @@
   color: var(--neutral-600);
 }
 
+.mobileVisible {
+  color: var(--neutral-600);
+}
+
 @media (max-width: 899px) {
   .desktopOnly {
     display: none;
@@ -105,7 +109,8 @@
 }
 
 @media (min-width: 900px) {
-  .settingsLink {
-    margin-left: 0.25rem;
+  .settingsLink,
+  .mobileVisible {
+    margin-left: 0.15rem;
   }
 }

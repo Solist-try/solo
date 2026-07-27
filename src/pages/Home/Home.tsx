@@ -60,9 +60,9 @@ export function Home() {
             <a href="#quick-access">
               <Button size="lg">Explore quick access</Button>
             </a>
-            <Link to="/community">
+            <Link to="/toolkit">
               <Button size="lg" variant="secondary">
-                Meet the community
+                Open toolkit
               </Button>
             </Link>
           </div>

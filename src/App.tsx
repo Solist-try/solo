@@ -8,6 +8,7 @@ import {
   Profile,
   Resources,
   Settings,
+  Toolkit,
 } from "./pages";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="community" element={<Community />} />
           <Route path="resources" element={<Resources />} />
           <Route path="events" element={<Events />} />
+          <Route path="toolkit" element={<Toolkit />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
           <Route path="design-system" element={<DesignSystem />} />
