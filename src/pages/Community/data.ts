@@ -16,6 +16,7 @@ export type Comment = {
 
 export type Post = {
   id: string;
+  authorId: string;
   author: string;
   time: string;
   title: string;
@@ -28,6 +29,7 @@ export type Post = {
 export const initialPosts: Post[] = [
   {
     id: "p1",
+    authorId: "u-mira",
     author: "Mira Chen",
     time: "2h ago",
     title: "First week in a studio — what actually helped",
@@ -51,6 +53,7 @@ export const initialPosts: Post[] = [
   },
   {
     id: "p2",
+    authorId: "u-sam",
     author: "Sam Okonkwo",
     time: "5h ago",
     title: "Grocery rhythm that cut my weekly spend",
@@ -68,6 +71,7 @@ export const initialPosts: Post[] = [
   },
   {
     id: "p3",
+    authorId: "u-jordan",
     author: "Jordan Hale",
     time: "Yesterday",
     title: "When solo nights feel heavy",
@@ -91,6 +95,7 @@ export const initialPosts: Post[] = [
   },
   {
     id: "p4",
+    authorId: "u-ava",
     author: "Ava Ruiz",
     time: "Yesterday",
     title: "Packing cubes + a one-bag checklist",
@@ -101,6 +106,7 @@ export const initialPosts: Post[] = [
   },
   {
     id: "p5",
+    authorId: "u-alex",
     author: "Alex Rivera",
     time: "2d ago",
     title: "Transit day meals under $12",
@@ -118,6 +124,7 @@ export const initialPosts: Post[] = [
   },
   {
     id: "p6",
+    authorId: "u-mira",
     author: "Mira Chen",
     time: "3d ago",
     title: "Asking for help without over-explaining",

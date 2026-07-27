@@ -1,5 +1,10 @@
 import { useId, useState, type FormEvent } from "react";
 import { Avatar, Button, Card, CardBody, CardFooter } from "../../components/ui";
+import {
+  BlockUserButton,
+  ReportButton,
+  useSafety,
+} from "../../modules/safety";
 import type { Post } from "./data";
 import styles from "./PostCard.module.css";
 
@@ -16,16 +21,22 @@ export function PostCard({
   onToggleLike,
   onAddComment,
 }: PostCardProps) {
+  const { moderate } = useSafety();
   const [showComments, setShowComments] = useState(false);
   const [draft, setDraft] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const formId = useId();
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
-    const body = draft.trim();
-    if (!body) return;
-    onAddComment(body);
+    const result = moderate(draft, "comment");
+    if (!result.ok) {
+      setError(result.reason);
+      return;
+    }
+    onAddComment(draft.trim());
     setDraft("");
+    setError(null);
     setShowComments(true);
   };
 
@@ -36,6 +47,14 @@ export function PostCard({
         <div className={styles.meta}>
           <strong>{post.author}</strong>
           <span>{post.time}</span>
+        </div>
+        <div className={styles.safetyActions}>
+          <ReportButton
+            targetType="post"
+            targetId={post.id}
+            targetLabel={post.title}
+          />
+          <BlockUserButton userId={post.authorId} userName={post.author} />
         </div>
       </header>
 
@@ -91,6 +110,11 @@ export function PostCard({
                     <div className={styles.commentMeta}>
                       <strong>{comment.author}</strong>
                       <span>{comment.time}</span>
+                      <ReportButton
+                        targetType="comment"
+                        targetId={comment.id}
+                        targetLabel={`Comment by ${comment.author}`}
+                      />
                     </div>
                     <p>{comment.body}</p>
                   </div>
@@ -100,13 +124,17 @@ export function PostCard({
           )}
 
           <form className={styles.form} onSubmit={submit} id={formId}>
+            {error ? <p className={styles.error}>{error}</p> : null}
             <label className="sr-only" htmlFor={`${formId}-input`}>
               Add a comment
             </label>
             <input
               id={`${formId}-input`}
               value={draft}
-              onChange={(event) => setDraft(event.target.value)}
+              onChange={(event) => {
+                setDraft(event.target.value);
+                if (error) setError(null);
+              }}
               placeholder="Share a supportive reply…"
               className={styles.input}
             />

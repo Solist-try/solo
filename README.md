@@ -27,6 +27,7 @@ npm run preview
 | `/resources` | Resources |
 | `/events` | Events |
 | `/messages` | Supportive messaging |
+| `/safety` | Safety center |
 | `/toolkit` | Solo Living Toolkit |
 | `/profile` | Profile |
 | `/settings` | Settings |
@@ -69,6 +70,15 @@ Reusable module at `src/modules/messaging`:
 - Conversation list + chat thread UI
 - Message bubbles with timestamps
 - Safety filters for romantic, explicit, hostile, and unsafe location requests
+
+## Safety
+
+Reusable module at `src/modules/safety`:
+
+- Content moderation hooks (`moderateContent`) for posts, comments, and messages
+- Report buttons with reason selection
+- Blocked-user logic across Community and Messages
+- Community guideline reminders + Safety center page
 
 ## Design system
 

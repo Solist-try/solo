@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
+import { useAuth } from "../../auth";
 import { Button } from "../../components/ui";
+import { GuidelinesReminder, useSafety } from "../../modules/safety";
 import { TOPICS, initialPosts, type Post, type Topic } from "./data";
 import { PostCard } from "./PostCard";
 import styles from "./Community.module.css";
@@ -7,14 +9,19 @@ import styles from "./Community.module.css";
 type Filter = "All" | Topic;
 
 export function Community() {
+  const { user } = useAuth();
+  const { isBlocked } = useSafety();
   const [filter, setFilter] = useState<Filter>("All");
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [likedIds, setLikedIds] = useState<Set<string>>(() => new Set());
 
   const visiblePosts = useMemo(() => {
-    if (filter === "All") return posts;
-    return posts.filter((post) => post.tags.includes(filter));
-  }, [filter, posts]);
+    return posts.filter((post) => {
+      if (isBlocked(post.authorId)) return false;
+      if (filter === "All") return true;
+      return post.tags.includes(filter);
+    });
+  }, [filter, posts, isBlocked]);
 
   const toggleLike = (postId: string) => {
     const liked = likedIds.has(postId);
@@ -45,7 +52,7 @@ export function Community() {
                 ...post.comments,
                 {
                   id: `local-${postId}-${post.comments.length + 1}`,
-                  author: "Alex Rivera",
+                  author: user?.name ?? "You",
                   body,
                   time: "Just now",
                 },
@@ -65,6 +72,8 @@ export function Community() {
           with room to reply when you want company.
         </p>
       </header>
+
+      <GuidelinesReminder />
 
       <div className={styles.toolbar}>
         <div

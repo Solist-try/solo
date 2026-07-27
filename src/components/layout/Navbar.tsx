@@ -9,6 +9,7 @@ const links = [
   { to: "/messages", label: "Messages", mobile: true },
   { to: "/toolkit", label: "Toolkit", mobile: true },
   { to: "/profile", label: "Profile", mobile: false },
+  { to: "/safety", label: "Safety", mobile: true },
   { to: "/settings", label: "Settings", mobile: true },
 ] as const;
 

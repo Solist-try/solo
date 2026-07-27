@@ -71,6 +71,17 @@ export function Settings() {
       </Section>
 
       <Section
+        title="Safety"
+        description="Guidelines, blocked members, and reports."
+      >
+        <div className={styles.actions}>
+          <Button type="button" variant="outline" onClick={() => navigate("/safety")}>
+            Open safety center
+          </Button>
+        </div>
+      </Section>
+
+      <Section
         title="Account"
         description="Update the email tied to your Go Solo membership."
       >

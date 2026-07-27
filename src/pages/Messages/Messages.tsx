@@ -7,6 +7,7 @@ import {
   messagesSeed,
   type ChatMessage,
 } from "../../modules/messaging";
+import { GuidelinesReminder, useSafety } from "../../modules/safety";
 import styles from "./Messages.module.css";
 
 function storageKey(userId: string) {
@@ -30,6 +31,7 @@ function writeExtraMessages(userId: string, messages: ChatMessage[]) {
 
 export function Messages() {
   const { user } = useAuth();
+  const { isBlocked } = useSafety();
   const [activeId, setActiveId] = useState(conversationsSeed[0]?.id ?? "");
   const [extraMessages, setExtraMessages] = useState<ChatMessage[]>([]);
 
@@ -38,37 +40,47 @@ export function Messages() {
     setExtraMessages(readExtraMessages(user.id));
   }, [user]);
 
+  const conversations = useMemo(() => {
+    return conversationsSeed
+      .filter((conversation) => !isBlocked(conversation.participantId))
+      .map((conversation) => {
+        const latest = [...messagesSeed, ...extraMessages]
+          .filter((message) => message.conversationId === conversation.id)
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+          )[0];
+        if (!latest) return conversation;
+        return {
+          ...conversation,
+          preview: latest.body,
+          updatedAt: latest.createdAt,
+        };
+      });
+  }, [extraMessages, isBlocked]);
+
+  useEffect(() => {
+    if (conversations.length === 0) return;
+    if (!conversations.some((conversation) => conversation.id === activeId)) {
+      setActiveId(conversations[0].id);
+    }
+  }, [conversations, activeId]);
+
+  const activeConversation =
+    conversations.find((conversation) => conversation.id === activeId) ??
+    conversations[0];
+
   const messages = useMemo(() => {
+    if (!activeConversation) return [];
     return [...messagesSeed, ...extraMessages]
-      .filter((message) => message.conversationId === activeId)
+      .filter((message) => message.conversationId === activeConversation.id)
       .sort(
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
       );
-  }, [activeId, extraMessages]);
+  }, [activeConversation, extraMessages]);
 
-  const activeConversation =
-    conversationsSeed.find((conversation) => conversation.id === activeId) ??
-    conversationsSeed[0];
-
-  const conversations = useMemo(() => {
-    return conversationsSeed.map((conversation) => {
-      const latest = [...messagesSeed, ...extraMessages]
-        .filter((message) => message.conversationId === conversation.id)
-        .sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-        )[0];
-      if (!latest) return conversation;
-      return {
-        ...conversation,
-        preview: latest.body,
-        updatedAt: latest.createdAt,
-      };
-    });
-  }, [extraMessages]);
-
-  if (!user || !activeConversation) return null;
+  if (!user) return null;
 
   return (
     <div className={`container page ${styles.page}`}>
@@ -80,37 +92,46 @@ export function Messages() {
         </p>
       </header>
 
-      <div className={styles.layout}>
-        <aside className={styles.sidebar}>
-          <h2 className={styles.sidebarTitle}>Conversations</h2>
-          <ConversationList
-            conversations={conversations}
-            activeId={activeConversation.id}
-            onSelect={setActiveId}
-          />
-        </aside>
+      <GuidelinesReminder compact />
 
-        <ChatThread
-          conversation={activeConversation}
-          messages={messages}
-          onSend={(body) => {
-            const next: ChatMessage = {
-              id: `local-${Date.now()}`,
-              conversationId: activeConversation.id,
-              senderId: user.id,
-              senderName: user.name,
-              body,
-              createdAt: new Date().toISOString(),
-              mine: true,
-            };
-            setExtraMessages((current) => {
-              const updated = [...current, next];
-              writeExtraMessages(user.id, updated);
-              return updated;
-            });
-          }}
-        />
-      </div>
+      {conversations.length === 0 || !activeConversation ? (
+        <p className={styles.emptyState}>
+          No open conversations. Blocked members are hidden here — manage them
+          in Safety.
+        </p>
+      ) : (
+        <div className={styles.layout}>
+          <aside className={styles.sidebar}>
+            <h2 className={styles.sidebarTitle}>Conversations</h2>
+            <ConversationList
+              conversations={conversations}
+              activeId={activeConversation.id}
+              onSelect={setActiveId}
+            />
+          </aside>
+
+          <ChatThread
+            conversation={activeConversation}
+            messages={messages}
+            onSend={(body) => {
+              const next: ChatMessage = {
+                id: `local-${Date.now()}`,
+                conversationId: activeConversation.id,
+                senderId: user.id,
+                senderName: user.name,
+                body,
+                createdAt: new Date().toISOString(),
+                mine: true,
+              };
+              setExtraMessages((current) => {
+                const updated = [...current, next];
+                writeExtraMessages(user.id, updated);
+                return updated;
+              });
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
