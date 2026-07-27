@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Section } from "../../components/ui";
+import { Button, Section, SoftCurve } from "../../components/ui";
 import styles from "./Home.module.css";
 
 const pathways = [
@@ -24,6 +24,7 @@ export function Home() {
         <div className={styles.heroMedia} aria-hidden="true">
           <div className={styles.horizon} />
           <div className={styles.sun} />
+          <SoftCurve variant="blob" tone="gold" className={styles.motifBlob} />
           <div className={styles.path} />
           <div className={styles.glow} />
         </div>
@@ -47,6 +48,8 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      <SoftCurve tone="cream" className={styles.heroCurve} />
 
       <div className={`container ${styles.below}`}>
         <Section

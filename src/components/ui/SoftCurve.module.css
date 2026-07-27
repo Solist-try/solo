@@ -1,0 +1,86 @@
+.wave {
+  display: block;
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.wave svg {
+  width: 100%;
+  height: clamp(2.75rem, 7vw, 5rem);
+}
+
+.wave path {
+  fill: var(--neutral-0);
+}
+
+.flip {
+  transform: scaleY(-1);
+}
+
+.blob {
+  width: min(100%, 18rem);
+  aspect-ratio: 1.1 / 1;
+  border-radius: var(--radius-blob);
+  background: var(--gradient-curve);
+  box-shadow: var(--shadow-soft);
+  animation: soft-float 8s var(--ease-soft) infinite;
+}
+
+.arc {
+  width: min(100%, 12rem);
+  height: 4.5rem;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: var(--gradient-soft);
+  border: 1px solid var(--color-border);
+}
+
+.pill {
+  width: min(100%, 10rem);
+  height: 2.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+}
+
+.tone-cream path,
+.tone-cream.blob,
+.tone-cream.arc,
+.tone-cream.pill {
+  fill: var(--neutral-0);
+}
+
+.tone-cream.blob,
+.tone-cream.arc,
+.tone-cream.pill {
+  background: var(--neutral-0);
+}
+
+.tone-peach path {
+  fill: var(--peach-50);
+}
+
+.tone-peach.blob,
+.tone-peach.arc,
+.tone-peach.pill {
+  background: linear-gradient(145deg, var(--peach-100), var(--peach-200));
+}
+
+.tone-gold path {
+  fill: var(--gold-100);
+}
+
+.tone-gold.blob,
+.tone-gold.arc,
+.tone-gold.pill {
+  background: linear-gradient(145deg, var(--gold-100), var(--gold-300));
+}
+
+.tone-taupe path {
+  fill: var(--neutral-100);
+}
+
+.tone-taupe.blob,
+.tone-taupe.arc,
+.tone-taupe.pill {
+  background: linear-gradient(145deg, var(--neutral-100), var(--neutral-300));
+}

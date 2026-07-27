@@ -1,4 +1,4 @@
-import { Button, Section } from "../../components/ui";
+import { Button, Card, CardBody, CardFooter, CardHeader, Section } from "../../components/ui";
 import styles from "./Resources.module.css";
 
 const guides = [
@@ -46,18 +46,18 @@ export function Resources() {
       >
         <div className={styles.list}>
           {guides.map((guide) => (
-            <article key={guide.title} className={styles.item}>
-              <div className={styles.meta}>
-                <span>{guide.type}</span>
-                <span aria-hidden="true">·</span>
-                <span>{guide.time}</span>
-              </div>
-              <h3>{guide.title}</h3>
-              <p>{guide.blurb}</p>
-              <Button size="sm" variant="ghost">
-                Open resource
-              </Button>
-            </article>
+            <Card key={guide.title} variant="elevated">
+              <CardHeader
+                eyebrow={`${guide.type} · ${guide.time}`}
+                title={guide.title}
+              />
+              <CardBody>{guide.blurb}</CardBody>
+              <CardFooter>
+                <Button size="sm" variant="outline">
+                  Open resource
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       </Section>

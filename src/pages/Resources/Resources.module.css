@@ -1,50 +1,15 @@
 .page {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-10);
 }
 
 .list {
   display: grid;
-  gap: 0;
-}
-
-.item {
-  display: grid;
-  gap: var(--space-2);
-  justify-items: start;
-  padding-block: var(--space-5);
-  border-top: 1px solid var(--color-border);
-}
-
-.item:last-child {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.meta {
-  display: flex;
-  gap: var(--space-2);
-  font-size: var(--text-sm);
-  color: var(--peach-500);
-  font-weight: 500;
-}
-
-.item h3 {
-  font-size: var(--text-xl);
-  color: var(--taupe-800);
-}
-
-.item p {
-  color: var(--color-text-muted);
-  max-width: 40rem;
+  gap: var(--space-5);
 }
 
 @media (min-width: 860px) {
   .list {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: var(--space-7);
-  }
-
-  .item:nth-child(2) {
-    border-top: 1px solid var(--color-border);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

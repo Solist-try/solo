@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppShell } from "./components/layout";
 import {
   Community,
+  DesignSystem,
   Home,
   Profile,
   Resources,
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="resources" element={<Resources />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="design-system" element={<DesignSystem />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

@@ -15,6 +15,7 @@ export function Footer() {
           <Link to="/community">Community</Link>
           <Link to="/resources">Resources</Link>
           <Link to="/settings">Settings</Link>
+          <Link to="/design-system">Design system</Link>
         </div>
         <p className={styles.copy}>© {new Date().getFullYear()} Go Solo</p>
       </div>

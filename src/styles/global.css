@@ -1,4 +1,6 @@
 @import "./tokens.css";
+@import "./typography.css";
+@import "./motif.css";
 @import "./animations.css";
 
 *,
@@ -16,6 +18,7 @@ body {
   min-height: 100vh;
   font-family: var(--font-body);
   font-size: var(--text-base);
+  font-weight: var(--weight-regular);
   line-height: var(--leading-normal);
   color: var(--color-text);
   background: var(--gradient-wash);
@@ -52,7 +55,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-display);
   margin: 0;
@@ -92,28 +95,29 @@ ol {
 }
 
 .page {
-  padding-block: var(--space-7) var(--space-9);
+  padding-block: var(--space-9) var(--space-12);
   animation: fade-rise var(--duration-slow) var(--ease-out) both;
 }
 
 .page__header {
-  margin-bottom: var(--space-7);
-  max-width: 40rem;
+  margin-bottom: var(--space-9);
+  max-width: var(--container-narrow);
 }
 
 .page__header h1 {
-  font-size: var(--text-3xl);
-  color: var(--taupe-800);
+  font-size: var(--text-4xl);
+  color: var(--color-text);
   margin-bottom: var(--space-3);
 }
 
 .page__header p {
   color: var(--color-text-muted);
   font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
 }
 
 @media (max-width: 720px) {
   .page {
-    padding-block: var(--space-6) var(--space-8);
+    padding-block: var(--space-7) var(--space-10);
   }
 }

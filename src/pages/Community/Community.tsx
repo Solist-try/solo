@@ -1,4 +1,4 @@
-import { Avatar, Button, Section } from "../../components/ui";
+import { Avatar, Button, Card, CardFooter, CardHeader, Section } from "../../components/ui";
 import styles from "./Community.module.css";
 
 const members = [
@@ -57,13 +57,14 @@ export function Community() {
       >
         <div className={styles.circles}>
           {circles.map((circle) => (
-            <article key={circle.title} className={styles.circle}>
-              <h3>{circle.title}</h3>
-              <p>{circle.detail}</p>
-              <Button size="sm" variant="ghost">
-                Enter circle
-              </Button>
-            </article>
+            <Card key={circle.title} variant="interactive">
+              <CardHeader title={circle.title} description={circle.detail} />
+              <CardFooter>
+                <Button size="sm" variant="soft">
+                  Enter circle
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       </Section>
@@ -74,16 +75,18 @@ export function Community() {
       >
         <ul className={styles.members}>
           {members.map((member) => (
-            <li key={member.name} className={styles.member}>
-              <Avatar name={member.name} />
-              <div>
-                <div className={styles.memberTop}>
-                  <strong>{member.name}</strong>
-                  <span>{member.focus}</span>
+            <Card key={member.name} as="li" variant="soft" padding="sm">
+              <div className={styles.member}>
+                <Avatar name={member.name} />
+                <div>
+                  <div className={styles.memberTop}>
+                    <strong>{member.name}</strong>
+                    <span>{member.focus}</span>
+                  </div>
+                  <p>{member.note}</p>
                 </div>
-                <p>{member.note}</p>
               </div>
-            </li>
+            </Card>
           ))}
         </ul>
       </Section>
