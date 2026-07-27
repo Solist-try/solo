@@ -86,12 +86,26 @@
   background: var(--gradient-cta);
 }
 
-@media (max-width: 720px) {
+.settingsLink {
+  color: var(--neutral-600);
+}
+
+@media (max-width: 899px) {
+  .desktopOnly {
+    display: none;
+  }
+
   .brandName {
     font-size: 1.2rem;
   }
 
   .link {
-    padding: 0.4rem 0.55rem;
+    padding: 0.4rem 0.7rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .settingsLink {
+    margin-left: 0.25rem;
   }
 }

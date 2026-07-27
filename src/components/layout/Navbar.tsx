@@ -26,7 +26,13 @@ export function Navbar() {
               to={link.to}
               end={"end" in link ? link.end : false}
               className={({ isActive }) =>
-                `${styles.link} ${isActive ? styles.active : ""}`.trim()
+                [
+                  styles.link,
+                  isActive ? styles.active : "",
+                  link.to === "/settings" ? styles.settingsLink : styles.desktopOnly,
+                ]
+                  .filter(Boolean)
+                  .join(" ")
               }
             >
               {link.label}

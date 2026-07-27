@@ -177,6 +177,7 @@
   --container: 72rem;
   --container-narrow: 40rem;
   --nav-height: 4.25rem;
+  --bottom-nav-height: 5.15rem;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
