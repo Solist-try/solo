@@ -1,22 +1,40 @@
+import { useAuth } from "../../auth";
 import { Avatar, Button, Section, TextField } from "../../components/ui";
 import styles from "./Profile.module.css";
 
-const highlights = [
-  { label: "Trips logged", value: "12" },
-  { label: "Circles joined", value: "4" },
-  { label: "Guides saved", value: "9" },
-];
-
 export function Profile() {
+  const { user } = useAuth();
+  const name = user?.name ?? "Go Solo member";
+  const interests = user?.onboarding?.interests ?? [];
+  const goals = user?.onboarding?.goals ?? [];
+
+  const highlights = [
+    { label: "Goals set", value: String(goals.length || "—") },
+    { label: "Interests", value: String(interests.length || "—") },
+    {
+      label: "Signed in via",
+      value:
+        user?.provider === "email"
+          ? "Email"
+          : user?.provider === "google"
+            ? "Google"
+            : user?.provider === "apple"
+              ? "Apple"
+              : "—",
+    },
+  ];
+
   return (
     <div className={`container page ${styles.page}`}>
       <header className={styles.heroBlock}>
-        <Avatar name="Alex Rivera" size="lg" />
+        <Avatar name={name} size="lg" />
         <div>
           <p className={styles.kicker}>Your profile</p>
-          <h1>Alex Rivera</h1>
+          <h1>{name}</h1>
           <p className={styles.bio}>
-            Coastal walker · Quiet mornings · Always packing light
+            {interests.length > 0
+              ? interests.slice(0, 3).join(" · ")
+              : "Your solo living path is taking shape."}
           </p>
         </div>
       </header>
@@ -30,6 +48,21 @@ export function Profile() {
         ))}
       </div>
 
+      {goals.length > 0 || interests.length > 0 ? (
+        <Section
+          title="Onboarding snapshot"
+          description="From the goals and interests you shared when you joined."
+        >
+          <div className={styles.chips}>
+            {[...goals, ...interests].map((item) => (
+              <span key={item} className={styles.chip}>
+                {item}
+              </span>
+            ))}
+          </div>
+        </Section>
+      ) : null}
+
       <Section
         title="About you"
         description="This is how the community sees your pace and preferences."
@@ -38,17 +71,19 @@ export function Profile() {
           <TextField
             label="Display name"
             name="displayName"
-            defaultValue="Alex Rivera"
+            defaultValue={name}
+          />
+          <TextField
+            label="Email"
+            name="email"
+            type="email"
+            defaultValue={user?.email ?? ""}
+            readOnly
           />
           <TextField
             label="Home base"
             name="homeBase"
             defaultValue="Portland, OR"
-          />
-          <TextField
-            label="Travel style"
-            name="style"
-            defaultValue="Slow · Scenic · Solo-friendly cities"
           />
           <label className={styles.textareaField}>
             <span>Bio</span>

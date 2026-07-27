@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../auth";
 import {
   Button,
   Card,
@@ -37,6 +38,9 @@ const quickAccess = [
 ];
 
 export function Home() {
+  const { user } = useAuth();
+  const firstName = user?.name?.split(" ")[0] ?? "friend";
+
   return (
     <div className={styles.page}>
       <section className={styles.banner} aria-label="Welcome banner">
@@ -50,7 +54,7 @@ export function Home() {
 
         <div className={`container ${styles.bannerContent}`}>
           <p className={styles.brand}>Go Solo</p>
-          <p className={styles.welcome}>Welcome home</p>
+          <p className={styles.welcome}>Welcome home, {firstName}</p>
           <h1 className={styles.tagline}>Go solo, not alone.</h1>
           <p className={styles.lede}>
             Your calm base for independent travel — connect, learn, and show up

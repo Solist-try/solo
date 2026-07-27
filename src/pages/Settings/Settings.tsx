@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth";
 import { Button, Section, TextField, Toggle } from "../../components/ui";
 import styles from "./Settings.module.css";
 
@@ -9,6 +11,8 @@ type Prefs = {
 };
 
 export function Settings() {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   const [prefs, setPrefs] = useState<Prefs>({
     emailDigest: true,
     circleNudges: true,
@@ -75,7 +79,8 @@ export function Settings() {
             label="Email"
             type="email"
             name="email"
-            defaultValue="alex@example.com"
+            defaultValue={user?.email ?? ""}
+            readOnly
           />
           <TextField
             label="Timezone"
@@ -85,7 +90,14 @@ export function Settings() {
           />
           <div className={styles.actions}>
             <Button type="submit">Save settings</Button>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => {
+                signOut();
+                navigate("/login", { replace: true });
+              }}
+            >
               Sign out
             </Button>
           </div>

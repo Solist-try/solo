@@ -29,7 +29,18 @@ npm run preview
 | `/toolkit` | Solo Living Toolkit |
 | `/profile` | Profile |
 | `/settings` | Settings |
+| `/login` | Sign in |
+| `/signup` | Create account |
+| `/onboarding` | Goals, challenges, interests |
 | `/design-system` | Design system showcase |
+
+## Authentication
+
+Client-side auth (local persistence) with:
+- Email + password sign up / sign in
+- Optional Google and Apple social login buttons
+- Multi-step onboarding for solo living goals, challenges, and interests
+- Protected app routes until signed in and onboarded
 
 ## Solo Living Toolkit
 

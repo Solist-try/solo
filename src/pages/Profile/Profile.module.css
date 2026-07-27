@@ -94,6 +94,24 @@
   margin-top: var(--space-2);
 }
 
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.85rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--peach-700);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
 @media (max-width: 560px) {
   .stats {
     grid-template-columns: 1fr;

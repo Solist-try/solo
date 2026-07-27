@@ -116,8 +116,12 @@ ol {
   line-height: var(--leading-relaxed);
 }
 
-@media (max-width: 720px) {
-  .page {
-    padding-block: var(--space-7) var(--space-10);
-  }
+.auth-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  background: var(--gradient-wash);
 }
