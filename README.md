@@ -26,6 +26,7 @@ npm run preview
 | `/community` | Community |
 | `/resources` | Resources |
 | `/events` | Events |
+| `/messages` | Supportive messaging |
 | `/toolkit` | Solo Living Toolkit |
 | `/profile` | Profile |
 | `/settings` | Settings |
@@ -60,6 +61,14 @@ Reusable module at `src/modules/events`:
 - Virtual meetups, workshops, and community discussions
 - Event cards with capacity and RSVP
 - Calendar integration via `.ics` download and Google Calendar links
+
+## Messaging
+
+Reusable module at `src/modules/messaging`:
+
+- Conversation list + chat thread UI
+- Message bubbles with timestamps
+- Safety filters for romantic, explicit, hostile, and unsafe location requests
 
 ## Design system
 

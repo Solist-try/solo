@@ -6,6 +6,7 @@ const links = [
   { to: "/community", label: "Community", mobile: false },
   { to: "/resources", label: "Resources", mobile: false },
   { to: "/events", label: "Events", mobile: false },
+  { to: "/messages", label: "Messages", mobile: true },
   { to: "/toolkit", label: "Toolkit", mobile: true },
   { to: "/profile", label: "Profile", mobile: false },
   { to: "/settings", label: "Settings", mobile: true },

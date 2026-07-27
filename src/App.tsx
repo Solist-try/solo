@@ -13,6 +13,7 @@ import {
   DesignSystem,
   Events,
   Home,
+  Messages,
   Profile,
   Resources,
   Settings,
@@ -36,6 +37,7 @@ export default function App() {
               <Route path="community" element={<Community />} />
               <Route path="resources" element={<Resources />} />
               <Route path="events" element={<Events />} />
+              <Route path="messages" element={<Messages />} />
               <Route path="toolkit" element={<Toolkit />} />
               <Route path="profile" element={<Profile />} />
               <Route path="settings" element={<Settings />} />

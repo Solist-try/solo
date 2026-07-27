@@ -15,6 +15,7 @@ export function Footer() {
           <Link to="/community">Community</Link>
           <Link to="/resources">Resources</Link>
           <Link to="/events">Events</Link>
+          <Link to="/messages">Messages</Link>
           <Link to="/toolkit">Toolkit</Link>
           <Link to="/settings">Settings</Link>
           <Link to="/design-system">Design system</Link>

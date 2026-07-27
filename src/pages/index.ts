@@ -5,4 +5,5 @@ export { Events } from "./Events/Events";
 export { Profile } from "./Profile/Profile";
 export { Settings } from "./Settings/Settings";
 export { Toolkit } from "./Toolkit/Toolkit";
+export { Messages } from "./Messages/Messages";
 export { DesignSystem } from "./DesignSystem/DesignSystem";
