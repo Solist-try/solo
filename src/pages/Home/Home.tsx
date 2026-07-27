@@ -1,27 +1,46 @@
 import { Link } from "react-router-dom";
-import { Button, Section, SoftCurve } from "../../components/ui";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  SoftCurve,
+} from "../../components/ui";
 import styles from "./Home.module.css";
 
-const pathways = [
+const quickAccess = [
   {
-    title: "Plan your stretch",
-    body: "Turn a quiet weekend into a deliberate solo adventure with maps, pacing, and local anchors.",
+    to: "/community",
+    eyebrow: "Connect",
+    title: "Community",
+    description: "Circles and members who get the solo stretch.",
+    action: "Enter community",
+    tone: "soft" as const,
   },
   {
-    title: "Find your people",
-    body: "Meet travelers who value independence — without giving up connection when you want it.",
+    to: "/resources",
+    eyebrow: "Learn",
+    title: "Resources",
+    description: "Guides, checklists, and calm packing rituals.",
+    action: "Browse resources",
+    tone: "elevated" as const,
   },
   {
-    title: "Travel with clarity",
-    body: "Guides, checklists, and soft rituals that make going alone feel grounded, not lonely.",
+    to: "/events",
+    eyebrow: "Gather",
+    title: "Events",
+    description: "Walks, meetups, and quiet nights planned for one—or a few.",
+    action: "See events",
+    tone: "outline" as const,
   },
 ];
 
 export function Home() {
   return (
-    <div>
-      <section className={styles.hero} aria-label="Go Solo hero">
-        <div className={styles.heroMedia} aria-hidden="true">
+    <div className={styles.page}>
+      <section className={styles.banner} aria-label="Welcome banner">
+        <div className={styles.bannerMedia} aria-hidden="true">
           <div className={styles.horizon} />
           <div className={styles.sun} />
           <SoftCurve variant="blob" tone="gold" className={styles.motifBlob} />
@@ -29,48 +48,64 @@ export function Home() {
           <div className={styles.glow} />
         </div>
 
-        <div className={`container ${styles.heroContent}`}>
+        <div className={`container ${styles.bannerContent}`}>
           <p className={styles.brand}>Go Solo</p>
-          <h1 className={styles.headline}>Your own path, warmly lit.</h1>
+          <p className={styles.welcome}>Welcome home</p>
+          <h1 className={styles.tagline}>Go solo, not alone.</h1>
           <p className={styles.lede}>
-            A calm home for independent travelers — plan boldly, move at your
-            pace, and stay connected when it matters.
+            Your calm base for independent travel — connect, learn, and show up
+            when you want company.
           </p>
           <div className={styles.ctas}>
+            <a href="#quick-access">
+              <Button size="lg">Explore quick access</Button>
+            </a>
             <Link to="/community">
-              <Button size="lg">Join the community</Button>
-            </Link>
-            <Link to="/resources">
               <Button size="lg" variant="secondary">
-                Browse resources
+                Meet the community
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      <SoftCurve tone="cream" className={styles.heroCurve} />
+      <SoftCurve tone="cream" className={styles.bannerCurve} />
 
-      <div className={`container ${styles.below}`}>
-        <Section
-          title="Built for the independent stretch"
-          description="Three quiet pillars that keep solo travel intentional from first spark to last mile."
-        >
-          <div className={styles.pathways}>
-            {pathways.map((item, index) => (
-              <article
-                key={item.title}
-                className={styles.pathway}
-                style={{ animationDelay: `${0.1 + index * 0.08}s` }}
-              >
-                <span className={styles.index}>0{index + 1}</span>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </Section>
-      </div>
+      <section
+        id="quick-access"
+        className={`container ${styles.quickSection}`}
+        aria-labelledby="quick-access-heading"
+      >
+        <header className={styles.quickHeader}>
+          <h2 id="quick-access-heading">Quick access</h2>
+          <p>Jump into the places you need most — ready when you are.</p>
+        </header>
+
+        <div className={styles.quickGrid}>
+          {quickAccess.map((item, index) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={styles.quickLink}
+              style={{ animationDelay: `${0.12 + index * 0.1}s` }}
+            >
+              <Card variant="interactive" className={styles.quickCard}>
+                <CardHeader
+                  eyebrow={item.eyebrow}
+                  title={item.title}
+                  description={item.description}
+                />
+                <CardBody>
+                  <span className={styles.cardAccent} data-tone={item.tone} />
+                </CardBody>
+                <CardFooter>
+                  <span className={styles.cardAction}>{item.action}</span>
+                </CardFooter>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

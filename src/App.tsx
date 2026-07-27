@@ -3,6 +3,7 @@ import { AppShell } from "./components/layout";
 import {
   Community,
   DesignSystem,
+  Events,
   Home,
   Profile,
   Resources,
@@ -17,6 +18,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="community" element={<Community />} />
           <Route path="resources" element={<Resources />} />
+          <Route path="events" element={<Events />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
           <Route path="design-system" element={<DesignSystem />} />

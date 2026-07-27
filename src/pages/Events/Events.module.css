@@ -1,0 +1,15 @@
+.page {
+  display: grid;
+  gap: var(--space-10);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 860px) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
