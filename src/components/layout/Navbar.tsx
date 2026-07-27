@@ -8,6 +8,7 @@ const links = [
   { to: "/events", label: "Events", mobile: false },
   { to: "/messages", label: "Messages", mobile: true },
   { to: "/toolkit", label: "Toolkit", mobile: true },
+  { to: "/mission", label: "Mission", mobile: true },
   { to: "/profile", label: "Profile", mobile: false },
   { to: "/safety", label: "Safety", mobile: true },
   { to: "/settings", label: "Settings", mobile: true },

@@ -15,6 +15,7 @@ import {
   Events,
   Home,
   Messages,
+  Mission,
   Profile,
   Resources,
   Safety,
@@ -42,6 +43,7 @@ export default function App() {
                 <Route path="events" element={<Events />} />
                 <Route path="messages" element={<Messages />} />
                 <Route path="toolkit" element={<Toolkit />} />
+                <Route path="mission" element={<Mission />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="safety" element={<Safety />} />

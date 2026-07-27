@@ -29,6 +29,7 @@ npm run preview
 | `/messages` | Supportive messaging |
 | `/safety` | Safety center |
 | `/toolkit` | Solo Living Toolkit |
+| `/mission` | Mission & Values |
 | `/profile` | Profile |
 | `/settings` | Settings |
 | `/login` | Sign in |

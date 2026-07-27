@@ -64,9 +64,9 @@ export function Home() {
             <a href="#quick-access">
               <Button size="lg">Explore quick access</Button>
             </a>
-            <Link to="/toolkit">
+            <Link to="/mission">
               <Button size="lg" variant="secondary">
-                Open toolkit
+                Our mission
               </Button>
             </Link>
           </div>
