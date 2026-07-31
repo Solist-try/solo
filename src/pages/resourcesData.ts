@@ -8,7 +8,12 @@ export const CATEGORIES = [
 
 export type Category = (typeof CATEGORIES)[number];
 
-export type ResourceFormat = "Guide" | "Checklist" | "Worksheet" | "Essay" | "Toolkit";
+export type ResourceFormat =
+  | "Guide"
+  | "Checklist"
+  | "Worksheet"
+  | "Essay"
+  | "Toolkit";
 
 export type Resource = {
   id: string;

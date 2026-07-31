@@ -4,8 +4,12 @@ import {
   useState,
   type CSSProperties,
 } from "react";
-import { CATEGORIES, resources, type Category, type Resource } from "./data";
-import styles from "./Resources.module.css";
+import {
+  CATEGORIES,
+  resources,
+  type Category,
+  type Resource,
+} from "./resourcesData";
 
 type Filter = "All" | Category;
 
@@ -38,8 +42,8 @@ export function Resources() {
   }, [deferredQuery, filter]);
 
   return (
-    <div className={`container page ${styles.page}`}>
-      <header className={styles.header}>
+    <div className="container resources-page">
+      <header className="resources-header">
         <h1>Resources Library</h1>
         <p>
           Guides, tools, and checklists for solo living — search by topic when
@@ -47,8 +51,8 @@ export function Resources() {
         </p>
       </header>
 
-      <div className={styles.controls}>
-        <label className={styles.search}>
+      <div className="resources-controls">
+        <label className="resources-search">
           <span className="sr-only">Search resources</span>
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
             <circle
@@ -77,7 +81,7 @@ export function Resources() {
         </label>
 
         <div
-          className={styles.filters}
+          className="resources-filters"
           role="toolbar"
           aria-label="Filter resources by category"
         >
@@ -97,18 +101,18 @@ export function Resources() {
         </div>
       </div>
 
-      <p className={styles.count} aria-live="polite">
+      <p className="resources-count" aria-live="polite">
         {visible.length} {visible.length === 1 ? "resource" : "resources"}
         {filter !== "All" ? ` · ${filter}` : ""}
         {deferredQuery.trim() ? ` matching “${deferredQuery.trim()}”` : ""}
       </p>
 
       {visible.length === 0 ? (
-        <div className={styles.empty}>
+        <div className="resources-empty">
           <p>No resources match that search. Try another keyword or category.</p>
           <button
             type="button"
-            className={styles.emptyAction}
+            className="resources-empty__action"
             onClick={() => {
               setQuery("");
               setFilter("All");
@@ -118,7 +122,7 @@ export function Resources() {
           </button>
         </div>
       ) : (
-        <div className={styles.grid}>
+        <div className="resources-grid">
           {visible.map((resource, index) => (
             <ResourceCard
               key={resource.id}
@@ -150,13 +154,13 @@ function ResourceCard({
   style?: CSSProperties;
 }) {
   return (
-    <article className={styles.card} style={style}>
-      <span className={styles.category}>{resource.category}</span>
-      <h2 className={styles.title}>{resource.title}</h2>
-      <p className={styles.summary}>{resource.summary}</p>
+    <article className="resources-card" style={style}>
+      <span className="resources-card__category">{resource.category}</span>
+      <h2 className="resources-card__title">{resource.title}</h2>
+      <p className="resources-card__description">{resource.summary}</p>
 
       {expanded ? (
-        <div className={styles.details}>
+        <div className="resources-card__details">
           <p>
             <strong>{resource.format}</strong> · {resource.readTime} read
           </p>
@@ -169,7 +173,7 @@ function ResourceCard({
 
       <button
         type="button"
-        className={styles.readMore}
+        className="resources-card__read-more"
         aria-expanded={expanded}
         onClick={onReadMore}
       >
@@ -192,7 +196,7 @@ function FilterChip({
   return (
     <button
       type="button"
-      className={`${styles.chip} ${active ? styles.chipActive : ""}`}
+      className={`resources-chip${active ? " is-active" : ""}`}
       aria-pressed={active}
       onClick={onClick}
     >
@@ -200,3 +204,5 @@ function FilterChip({
     </button>
   );
 }
+
+export default Resources;
