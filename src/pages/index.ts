@@ -1,5 +1,5 @@
 export { Home } from "./Home";
-export { Community } from "./Community/Community";
+export { Community } from "./Community";
 export { Resources } from "./Resources/Resources";
 export { Events } from "./Events/Events";
 export { Profile } from "./Profile/Profile";
