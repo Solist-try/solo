@@ -1,0 +1,102 @@
+/* --------------------------------------------------------------------------
+   GoSolo global UI shell
+   Peach-gold #F7C8A5 · Taupe gray #8E8D8A
+   -------------------------------------------------------------------------- */
+
+:root {
+  --gosolo-peach-gold: #f7c8a5;
+  --gosolo-taupe-gray: #8e8d8a;
+  --shell-radius: 1.5rem;
+  --shell-shadow: 0 10px 28px rgba(42, 36, 31, 0.07);
+  --shell-shadow-lift: 0 16px 36px rgba(42, 36, 31, 0.11);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(
+      ellipse 70% 50% at 12% 0%,
+      rgba(247, 200, 165, 0.45),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 55% 40% at 92% 8%,
+      rgba(142, 141, 138, 0.12),
+      transparent 50%
+    ),
+    var(--color-bg, #f8ebe1);
+  padding-bottom: calc(var(--bottom-nav-height, 5.15rem) + env(safe-area-inset-bottom));
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Shared shell surfaces */
+.app-surface {
+  border-radius: var(--shell-radius);
+  background: rgba(255, 250, 246, 0.92);
+  border: 1px solid rgba(142, 141, 138, 0.18);
+  box-shadow: var(--shell-shadow);
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-surface:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shell-shadow-lift);
+  border-color: rgba(247, 200, 165, 0.55);
+}
+
+.app-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(247, 200, 165, 0.35);
+  color: #6f6156;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    background 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.app-chip:hover {
+  background: rgba(247, 200, 165, 0.55);
+  transform: translateY(-1px);
+}
+
+/* Bottom navigation — mobile only */
+.app-bottom-nav {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .app-shell {
+    padding-bottom: 0;
+  }
+
+  .app-bottom-nav {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-surface,
+  .app-chip {
+    transition: none;
+  }
+
+  .app-surface:hover,
+  .app-chip:hover {
+    transform: none;
+  }
+}

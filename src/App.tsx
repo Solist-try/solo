@@ -4,7 +4,7 @@ import {
   RedirectIfAuthed,
   RequireAuth,
 } from "./auth";
-import { AppShell } from "./components/layout";
+import { AppLayout } from "./components/AppLayout";
 import { SafetyProvider } from "./modules/safety";
 import { Login } from "./pages/Auth/Login";
 import { Onboarding } from "./pages/Auth/Onboarding";
@@ -36,7 +36,7 @@ export default function App() {
 
             <Route element={<RequireAuth />}>
               <Route path="onboarding" element={<Onboarding />} />
-              <Route element={<AppShell />}>
+              <Route element={<AppLayout />}>
                 <Route index element={<Home />} />
                 <Route path="community" element={<Community />} />
                 <Route path="resources" element={<Resources />} />

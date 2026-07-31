@@ -16,10 +16,14 @@
   --neutral-900: #2a241f;
   --neutral-950: #1a1613;
 
+  /* Brand anchors */
+  --gosolo-peach-gold: #f7c8a5;
+  --gosolo-taupe-gray: #8e8d8a;
+
   /* Peach scale */
   --peach-50: #fff4ec;
   --peach-100: #ffe4d1;
-  --peach-200: #fbc9a8;
+  --peach-200: #f7c8a5;
   --peach-300: #f0a978;
   --peach-400: #e08a52;
   --peach-500: #c97b4b;
@@ -33,12 +37,12 @@
   --gold-400: #d4a84b;
   --gold-500: #b8903a;
 
-  /* Legacy taupe aliases (map to neutrals) */
+  /* Legacy taupe aliases (map to neutrals + brand taupe) */
   --taupe-50: var(--neutral-100);
   --taupe-100: var(--neutral-200);
   --taupe-200: var(--neutral-300);
   --taupe-300: var(--neutral-400);
-  --taupe-400: var(--neutral-500);
+  --taupe-400: var(--gosolo-taupe-gray);
   --taupe-500: var(--neutral-600);
   --taupe-600: var(--neutral-700);
   --taupe-700: var(--neutral-800);

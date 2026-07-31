@@ -2,6 +2,7 @@
 @import "./typography.css";
 @import "./motif.css";
 @import "./animations.css";
+@import "./layout.css";
 
 *,
 *::before,
