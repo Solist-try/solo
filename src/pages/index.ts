@@ -6,6 +6,6 @@ export { Profile } from "./Profile";
 export { Settings } from "./Settings/Settings";
 export { Toolkit } from "./Toolkit";
 export { Messages } from "./Messages/Messages";
-export { Safety } from "./Safety/Safety";
+export { Safety } from "./Safety";
 export { Mission } from "./Mission/Mission";
 export { DesignSystem } from "./DesignSystem/DesignSystem";
