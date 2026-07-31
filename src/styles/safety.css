@@ -244,13 +244,13 @@
 
 @media (prefers-reduced-motion: reduce) {
   .safety-guideline,
-  .safety-report-btn,
+  .safety-report-card > button,
   .safety-unblock {
     animation: none !important;
     transition: none !important;
   }
 
-  .safety-report-btn:hover,
+  .safety-report-card > button:hover,
   .safety-unblock:hover {
     transform: none;
   }
