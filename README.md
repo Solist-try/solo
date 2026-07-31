@@ -2,6 +2,28 @@
 
 A modern, responsive web app for independent travelers — plan boldly, move at your pace, and stay connected when it matters.
 
+## Quick start (React UI)
+
+Until [PR #1](https://github.com/Solist-try/solo/pull/1) is merged into `main`, use the app branch — `main` only has the older Express API and will show `Missing script: "dev"`.
+
+```bash
+git fetch origin
+git checkout cursor/go-solo-web-app-f092
+git pull origin cursor/go-solo-web-app-f092
+npm install
+npm run dev
+```
+
+Then open **http://localhost:5173/**.
+
+Confirm the `dev` script exists:
+
+```bash
+npm run
+```
+
+You should see `dev` → `vite --host 0.0.0.0 --port 5173 --open`. If you only see `start` and `test`, you are still on `main`.
+
 ## Requirements
 
 - **Node.js** 20+ (tested with Node 22)
@@ -16,7 +38,7 @@ npm -v
 
 ## Open the app with Node
 
-Install dependencies once:
+Install dependencies once (on the app branch above):
 
 ```bash
 npm install
