@@ -31,9 +31,16 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      # Install dependencies (uses package-lock.json/ npm ci for consistent installs)
+      # Install dependencies: prefer npm ci when package-lock.json exists, otherwise fall back to npm install.
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            echo "Lockfile found — running npm ci"
+            npm ci
+          else
+            echo "No lockfile found — running npm install"
+            npm install
+          fi
 
       # Build (if a build script exists, --if-present prevents failure if absent)
       - name: Build
@@ -44,11 +51,11 @@ jobs:
         run: npm test --if-present
 
       # For manual runs: start the app. This runs only when you trigger the workflow manually.
-      # It tries npm start, falls back to node index.js, and prints a message if neither exists.
+      # It tries npm start, falls back to node app.js (app's main), and prints a message if neither exists.
       - name: Start app (manual runs)
         if: github.event_name == 'workflow_dispatch'
         run: |
-          npm start --if-present || node index.js || echo "No start command found. Update this step to run your app."
+          npm start --if-present || node app.js || echo "No start command found. Update this step to run your app."
 
       # Helpful quick output step
       - name: Done
