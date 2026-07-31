@@ -14,6 +14,7 @@
     "preview": "vite preview --host 0.0.0.0 --port 4173",
     "preview:open": "vite preview --host 0.0.0.0 --port 4173 --open",
     "serve": "npm run build && npm run preview:open",
+    "start:api": "node server/app.js",
     "typecheck": "tsc -b --pretty false",
     "lint": "oxlint",
     "test": "vitest run",
@@ -21,6 +22,7 @@
     "check": "npm run typecheck && npm run lint && npm run test && npm run build"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.13.0"
@@ -31,6 +33,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
+    "supertest": "^6.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.1.1",
     "vitest": "^4.0.18"

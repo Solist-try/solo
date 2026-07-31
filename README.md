@@ -52,6 +52,14 @@ npm run serve
 
 Preview runs on **http://localhost:4173**.
 
+### Optional Node API (health)
+
+`main` contributed a small Express health endpoint. It lives at `server/app.js`:
+
+```bash
+npm run start:api   # http://localhost:3000/health
+```
+
 ## Test with Node
 
 | Command | What it does |
