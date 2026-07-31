@@ -1,0 +1,35 @@
+.avatar {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--peach-300), var(--gold-400));
+  color: #fff8f2;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sm {
+  width: 2rem;
+  height: 2rem;
+  font-size: var(--text-xs);
+}
+
+.md {
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: var(--text-sm);
+}
+
+.lg {
+  width: 4.5rem;
+  height: 4.5rem;
+  font-size: var(--text-xl);
+}

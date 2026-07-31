@@ -1,0 +1,86 @@
+.trigger {
+  border: none;
+  background: transparent;
+  color: var(--color-text-soft);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  padding: 0.25rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+.trigger:hover {
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: rgba(42, 36, 31, 0.45);
+}
+
+.dialog {
+  width: min(100%, 26rem);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lift);
+  padding: var(--space-6);
+  animation: fade-rise var(--duration-med) var(--ease-out) both;
+}
+
+.form,
+.success {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.form h2,
+.success h2 {
+  font-size: var(--text-2xl);
+}
+
+.lede,
+.success p {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field span {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--neutral-600);
+}
+
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-strong);
+  background: var(--neutral-0);
+}
+
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--peach-400);
+  box-shadow: 0 0 0 3px rgba(224, 138, 82, 0.2);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Go Solo — a warm space for independent travelers to connect, learn, and thrive."
+    />
+    <title>Go Solo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="nav">
+        <div class="container nav__inner">
+          <a class="nav__brand" href="#home" data-nav="home">Go Solo</a>
+          <nav class="nav__links" aria-label="Primary">
+            <a href="#home" data-nav="home" class="is-active">Home</a>
+            <a href="#community" data-nav="community">Community</a>
+            <a href="#resources" data-nav="resources">Resources</a>
+            <a href="#events" data-nav="events">Events</a>
+            <a href="#toolkit" data-nav="toolkit">Toolkit</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <!-- HOME -->
+        <section id="view-home" class="view is-active" aria-labelledby="home-brand">
+          <div class="hero">
+            <div class="hero__media" aria-hidden="true">
+              <div class="hero__horizon"></div>
+              <div class="hero__sun"></div>
+              <div class="hero__glow"></div>
+              <div class="hero__path"></div>
+            </div>
+            <div class="container hero__content">
+              <p id="home-brand" class="hero__brand">Go Solo</p>
+              <h1 class="hero__headline">Go solo, not alone.</h1>
+              <p class="hero__lede">
+                Your calm base for independent travel — connect, learn, and show
+                up when you want company.
+              </p>
+              <div class="hero__ctas">
+                <a class="btn btn--primary" href="#community" data-nav="community"
+                  >Enter community</a
+                >
+                <a class="btn btn--secondary" href="#toolkit" data-nav="toolkit"
+                  >Open toolkit</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="hero__curve" aria-hidden="true"></div>
+
+          <div class="container section">
+            <header class="section__header">
+              <h2>Quick access</h2>
+              <p>Jump into the places you need most — ready when you are.</p>
+            </header>
+            <div class="pathway-grid" id="feature-grid">
+              <button type="button" class="pathway" data-nav="community">
+                <span class="pathway__accent" aria-hidden="true"></span>
+                <h3>Community</h3>
+                <p>Circles and members who get the solo stretch.</p>
+              </button>
+              <button type="button" class="pathway" data-nav="resources">
+                <span class="pathway__accent" aria-hidden="true"></span>
+                <h3>Resources</h3>
+                <p>Guides, checklists, and calm packing rituals.</p>
+              </button>
+              <button type="button" class="pathway" data-nav="events">
+                <span class="pathway__accent" aria-hidden="true"></span>
+                <h3>Events</h3>
+                <p>Walks, meetups, and quiet nights planned for one—or a few.</p>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- COMMUNITY -->
+        <section
+          id="view-community"
+          class="view"
+          hidden
+          aria-labelledby="community-heading"
+        >
+          <div class="container section">
+            <header class="section__header">
+              <h2 id="community-heading">Community</h2>
+              <p>Share a note or browse what fellow solo travelers are saying.</p>
+            </header>
+
+            <form id="compose-form" class="compose">
+              <label class="sr-only" for="compose-text">Write a post</label>
+              <textarea
+                id="compose-text"
+                rows="3"
+                maxlength="280"
+                placeholder="What’s one small win from traveling alone today?"
+                required
+              ></textarea>
+              <div class="compose__actions">
+                <button type="submit" class="btn btn--primary">Share post</button>
+              </div>
+            </form>
+
+            <ul id="feed" class="feed" aria-live="polite"></ul>
+          </div>
+        </section>
+
+        <!-- RESOURCES -->
+        <section
+          id="view-resources"
+          class="view"
+          hidden
+          aria-labelledby="resources-heading"
+        >
+          <div class="container section">
+            <header class="section__header">
+              <h2 id="resources-heading">Resources</h2>
+              <p>Practical guides to keep solo living grounded and light.</p>
+            </header>
+            <ul class="resource-list">
+              <li>
+                <article class="resource">
+                  <h3>First-night checklist</h3>
+                  <p>Settle in: water, light, lock, and a calm bedtime cue.</p>
+                </article>
+              </li>
+              <li>
+                <article class="resource">
+                  <h3>Solo dining without the awkward</h3>
+                  <p>Pick seats, pace, and rituals that make eating alone feel easy.</p>
+                </article>
+              </li>
+              <li>
+                <article class="resource">
+                  <h3>When loneliness shows up</h3>
+                  <p>Short resets and reach-out scripts for the quieter hours.</p>
+                </article>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- EVENTS -->
+        <section
+          id="view-events"
+          class="view"
+          hidden
+          aria-labelledby="events-heading"
+        >
+          <div class="container section">
+            <header class="section__header">
+              <h2 id="events-heading">Events</h2>
+              <p>Show up for a walk, a café hour, or a quiet evening in.</p>
+            </header>
+            <ul id="events-list" class="events"></ul>
+          </div>
+        </section>
+
+        <!-- TOOLKIT -->
+        <section
+          id="view-toolkit"
+          class="view"
+          hidden
+          aria-labelledby="toolkit-heading"
+        >
+          <div class="container section">
+            <header class="section__header">
+              <h2 id="toolkit-heading">Solo Living Toolkit</h2>
+              <p>Small daily anchors for independence with support nearby.</p>
+            </header>
+
+            <div class="toolkit">
+              <div>
+                <h3>Today’s checklist</h3>
+                <ul id="checklist" class="checklist"></ul>
+              </div>
+              <div>
+                <h3>Mood check-in</h3>
+                <div class="moods" role="group" aria-label="How are you feeling?">
+                  <button type="button" class="mood" data-mood="steady">Steady</button>
+                  <button type="button" class="mood" data-mood="curious">Curious</button>
+                  <button type="button" class="mood" data-mood="tender">Tender</button>
+                  <button type="button" class="mood" data-mood="tired">Tired</button>
+                </div>
+                <p id="mood-note" class="mood-note" aria-live="polite">
+                  Tap a mood to leave a soft note for yourself.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="Mobile">
+        <a href="#home" data-nav="home" class="is-active">Home</a>
+        <a href="#community" data-nav="community">Community</a>
+        <a href="#events" data-nav="events">Events</a>
+        <a href="#toolkit" data-nav="toolkit">Toolkit</a>
+      </nav>
+
+      <footer class="site-footer">
+        <div class="container">
+          <p>Go Solo · independent travel, shared warmth</p>
+          <p class="site-footer__meta">
+            <span id="health-label">Checking service…</span>
+            ·
+            <a href="/api/data">API data</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
