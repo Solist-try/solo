@@ -1,4 +1,4 @@
-export { Home } from "./Home/Home";
+export { Home } from "./Home";
 export { Community } from "./Community/Community";
 export { Resources } from "./Resources/Resources";
 export { Events } from "./Events/Events";
