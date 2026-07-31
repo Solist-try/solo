@@ -10,6 +10,7 @@ import { Login } from "./pages/Login";
 import { Onboarding } from "./pages/Onboarding";
 import { Signup } from "./pages/Auth/Signup";
 import {
+  Blog,
   Community,
   DesignSystem,
   Events,
@@ -40,6 +41,7 @@ export default function App() {
                 <Route index element={<Home />} />
                 <Route path="community" element={<Community />} />
                 <Route path="resources" element={<Resources />} />
+                <Route path="blog" element={<Blog />} />
                 <Route path="events" element={<Events />} />
                 <Route path="messages" element={<Messages />} />
                 <Route path="toolkit" element={<Toolkit />} />
