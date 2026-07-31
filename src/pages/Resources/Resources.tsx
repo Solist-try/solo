@@ -1,6 +1,10 @@
-import { useDeferredValue, useMemo, useState } from "react";
-import { Button, Card, CardBody, CardFooter, CardHeader } from "../../components/ui";
-import { CATEGORIES, resources, type Category } from "./data";
+import {
+  useDeferredValue,
+  useMemo,
+  useState,
+  type CSSProperties,
+} from "react";
+import { CATEGORIES, resources, type Category, type Resource } from "./data";
 import styles from "./Resources.module.css";
 
 type Filter = "All" | Category;
@@ -8,15 +12,14 @@ type Filter = "All" | Category;
 export function Resources() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("All");
+  const [openId, setOpenId] = useState<string | null>(null);
   const deferredQuery = useDeferredValue(query);
 
   const visible = useMemo(() => {
     const normalized = deferredQuery.trim().toLowerCase();
 
     return resources.filter((resource) => {
-      const matchesCategory =
-        filter === "All" || resource.category === filter;
-
+      const matchesCategory = filter === "All" || resource.category === filter;
       if (!matchesCategory) return false;
       if (!normalized) return true;
 
@@ -36,11 +39,11 @@ export function Resources() {
 
   return (
     <div className={`container page ${styles.page}`}>
-      <header className="page__header">
+      <header className={styles.header}>
         <h1>Resources Library</h1>
         <p>
-          Guides, tools, and checklists for solo living — searchable by topic
-          when you need something steady and useful.
+          Guides, tools, and checklists for solo living — search by topic when
+          you need something steady and useful.
         </p>
       </header>
 
@@ -68,7 +71,7 @@ export function Resources() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search guides, tools, tags…"
+            placeholder="Search guides, tools, topics…"
             autoComplete="off"
           />
         </label>
@@ -96,64 +99,84 @@ export function Resources() {
 
       <p className={styles.count} aria-live="polite">
         {visible.length} {visible.length === 1 ? "resource" : "resources"}
-        {filter !== "All" ? ` in ${filter}` : ""}
+        {filter !== "All" ? ` · ${filter}` : ""}
         {deferredQuery.trim() ? ` matching “${deferredQuery.trim()}”` : ""}
       </p>
 
       {visible.length === 0 ? (
         <div className={styles.empty}>
           <p>No resources match that search. Try another keyword or category.</p>
-          <div className={styles.emptyActions}>
-            <Button
-              variant="soft"
-              onClick={() => {
-                setQuery("");
-                setFilter("All");
-              }}
-            >
-              Clear search & filters
-            </Button>
-          </div>
+          <button
+            type="button"
+            className={styles.emptyAction}
+            onClick={() => {
+              setQuery("");
+              setFilter("All");
+            }}
+          >
+            Clear search & filters
+          </button>
         </div>
       ) : (
         <div className={styles.grid}>
           {visible.map((resource, index) => (
-            <Card
+            <ResourceCard
               key={resource.id}
-              variant="elevated"
-              className={styles.card}
+              resource={resource}
+              expanded={openId === resource.id}
+              onReadMore={() =>
+                setOpenId((current) =>
+                  current === resource.id ? null : resource.id,
+                )
+              }
               style={{ animationDelay: `${0.04 + index * 0.04}s` }}
-            >
-              <CardHeader
-                eyebrow={`${resource.format} · ${resource.readTime}`}
-                title={resource.title}
-              />
-              <CardBody>
-                <p className={styles.summary}>{resource.summary}</p>
-                <div className={styles.metaRow}>
-                  <span className={styles.category}>{resource.category}</span>
-                  <ul className={styles.tags} aria-label="Tags">
-                    {resource.tags.map((tag) => (
-                      <li key={tag}>
-                        <span className={styles.tag}>{tag}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardBody>
-              <CardFooter>
-                <Button size="sm" variant="outline">
-                  Open resource
-                </Button>
-                <Button size="sm" variant="ghost">
-                  Save
-                </Button>
-              </CardFooter>
-            </Card>
+            />
           ))}
         </div>
       )}
     </div>
+  );
+}
+
+function ResourceCard({
+  resource,
+  expanded,
+  onReadMore,
+  style,
+}: {
+  resource: Resource;
+  expanded: boolean;
+  onReadMore: () => void;
+  style?: CSSProperties;
+}) {
+  return (
+    <article className={styles.card} style={style}>
+      <span className={styles.category}>{resource.category}</span>
+      <h2 className={styles.title}>{resource.title}</h2>
+      <p className={styles.summary}>{resource.summary}</p>
+
+      {expanded ? (
+        <div className={styles.details}>
+          <p>
+            <strong>{resource.format}</strong> · {resource.readTime} read
+          </p>
+          <p>
+            Keep this nearby for the moments when solo living asks for a clear
+            next step — steady, practical, and kind to your pace.
+          </p>
+        </div>
+      ) : null}
+
+      <button
+        type="button"
+        className={styles.readMore}
+        aria-expanded={expanded}
+        onClick={onReadMore}
+      >
+        {expanded ? "Show less" : "Read more"}
+        <span aria-hidden="true">{expanded ? "↑" : "→"}</span>
+      </button>
+    </article>
   );
 }
 
