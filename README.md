@@ -2,21 +2,79 @@
 
 A modern, responsive web app for independent travelers — plan boldly, move at your pace, and stay connected when it matters.
 
-## Stack
+## Requirements
 
-- React 19 + TypeScript
-- Vite
-- React Router
-- Modular CSS (design tokens + CSS modules)
+- **Node.js** 20+ (tested with Node 22)
+- **npm** 10+
 
-## Scripts
+Check your versions:
+
+```bash
+node -v
+npm -v
+```
+
+## Open the app with Node
+
+Install dependencies once:
 
 ```bash
 npm install
-npm run dev
-npm run build
-npm run preview
 ```
+
+### Development (hot reload)
+
+```bash
+npm start
+```
+
+This starts Vite on **http://localhost:5173** and opens your browser.
+
+Equivalent commands:
+
+```bash
+npm run dev        # same server, no auto-open
+npm run dev:open   # server + browser open
+```
+
+### Production build preview
+
+```bash
+npm run build
+npm run preview:open
+```
+
+Or in one step:
+
+```bash
+npm run serve
+```
+
+Preview runs on **http://localhost:4173**.
+
+## Test with Node
+
+| Command | What it does |
+|---------|--------------|
+| `npm test` | Run unit tests once (Vitest) |
+| `npm run test:watch` | Re-run tests on file changes |
+| `npm run typecheck` | TypeScript project check |
+| `npm run lint` | Lint with oxlint |
+| `npm run build` | Typecheck + production build |
+| `npm run check` | typecheck + lint + test + build |
+
+Quick verification:
+
+```bash
+npm run check
+```
+
+## Auth smoke path (manual)
+
+1. `npm start`
+2. Open `/signup` (or you’ll be redirected to `/login`)
+3. Create an account, complete onboarding
+4. Explore Home, Community, Messages, Events, Toolkit, Safety, Mission
 
 ## Routes
 
@@ -99,6 +157,9 @@ src/
     ui/         # Button, Card, SoftCurve, TextField, Toggle, Avatar, Section
   modules/
     soloLivingToolkit/  # Toolkit components + data
+    events/             # Event cards, RSVP, calendar helpers
+    messaging/          # Chat UI + safety filters
+    safety/             # Moderation, reports, blocking
   pages/        # Route-level views
   styles/       # Tokens, typography, motif, motion, global
 ```
