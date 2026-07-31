@@ -2,7 +2,7 @@ export { Home } from "./Home";
 export { Community } from "./Community";
 export { Resources } from "./Resources";
 export { Events } from "./Events";
-export { Profile } from "./Profile/Profile";
+export { Profile } from "./Profile";
 export { Settings } from "./Settings/Settings";
 export { Toolkit } from "./Toolkit";
 export { Messages } from "./Messages/Messages";

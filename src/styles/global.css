@@ -9,6 +9,7 @@
 @import "./toolkit.css";
 @import "./events.css";
 @import "./auth.css";
+@import "./profile.css";
 
 *,
 *::before,
