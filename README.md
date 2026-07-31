@@ -52,13 +52,18 @@ npm run serve
 
 Preview runs on **http://localhost:4173**.
 
-### Optional Node API (health)
+### Optional Node API + HTML/CSS UI
 
-`main` contributed a small Express health endpoint. It lives at `server/app.js`:
+Express serves a polished HTML/CSS landing page and a JSON health endpoint:
 
 ```bash
-npm run start:api   # http://localhost:3000/health
+npm run start:api
 ```
+
+- UI: **http://localhost:3000/**
+- Health: **http://localhost:3000/health** → `{ "ok": true }`
+
+Static files live in `server/public/` (`index.html`, `styles.css`).
 
 ## Test with Node
 

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Go Solo — a warm space for independent travelers to connect, learn, and thrive."
+    />
+    <title>Go Solo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="hero" aria-label="Go Solo welcome">
+      <div class="hero__media" aria-hidden="true">
+        <div class="hero__horizon"></div>
+        <div class="hero__sun"></div>
+        <div class="hero__glow"></div>
+        <div class="hero__path"></div>
+      </div>
+
+      <div class="container topbar">
+        <span class="topbar__mark">Go Solo</span>
+        <p
+          class="status-chip"
+          id="health-status"
+          data-state="loading"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="health-label">Checking service…</span>
+        </p>
+      </div>
+
+      <div class="container hero__content">
+        <p class="hero__brand">Go Solo</p>
+        <h1 class="hero__headline">Go solo, not alone.</h1>
+        <p class="hero__lede">
+          Your calm base for independent travel — connect, learn, and show up
+          when you want company.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary" href="#pathways">Explore pathways</a>
+          <a class="btn btn--secondary" href="#api">Service status</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="hero__curve" aria-hidden="true"></div>
+
+    <main>
+      <section id="pathways" class="pathways" aria-labelledby="pathways-heading">
+        <div class="container">
+          <header class="pathways__header">
+            <h2 id="pathways-heading">Three calm pathways</h2>
+            <p>
+              Start where you need support most — community, learning, or a
+              quiet gathering.
+            </p>
+          </header>
+
+          <ul class="pathways__list">
+            <li class="pathway">
+              <span class="pathway__accent" aria-hidden="true"></span>
+              <h3>Community</h3>
+              <p>Circles and members who understand the solo stretch.</p>
+            </li>
+            <li class="pathway">
+              <span class="pathway__accent" aria-hidden="true"></span>
+              <h3>Resources</h3>
+              <p>Guides, checklists, and packing rituals that stay gentle.</p>
+            </li>
+            <li class="pathway">
+              <span class="pathway__accent" aria-hidden="true"></span>
+              <h3>Events</h3>
+              <p>Walks, meetups, and quiet nights planned for one—or a few.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="api" class="api" aria-labelledby="api-heading">
+        <div class="container">
+          <div class="api__panel">
+            <h2 id="api-heading">Node health endpoint</h2>
+            <p>
+              This Express service serves the HTML/CSS interface and a simple
+              JSON health check for uptime monitoring.
+            </p>
+            <code class="api__code">GET /health → { "ok": true }</code>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Go Solo · independent travel, shared warmth</p>
+        <p>
+          Full app:
+          <a href="http://localhost:5173">npm start</a>
+          · API UI:
+          <a href="/">npm run start:api</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      (async function checkHealth() {
+        const chip = document.getElementById("health-status");
+        const label = document.getElementById("health-label");
+        try {
+          const res = await fetch("/health");
+          const data = await res.json();
+          if (res.ok && data.ok) {
+            chip.dataset.state = "ok";
+            label.textContent = "Service online";
+          } else {
+            chip.dataset.state = "down";
+            label.textContent = "Service issue";
+          }
+        } catch {
+          chip.dataset.state = "down";
+          label.textContent = "Service offline";
+        }
+      })();
+    </script>
+  </body>
+</html>

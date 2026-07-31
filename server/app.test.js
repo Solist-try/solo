@@ -9,3 +9,22 @@ describe("GET /health", () => {
     expect(res.body).toEqual({ ok: true });
   });
 });
+
+describe("GET /", () => {
+  it("serves the HTML landing page", async () => {
+    const res = await request(app).get("/");
+    expect(res.statusCode).toBe(200);
+    expect(res.headers["content-type"]).toMatch(/html/);
+    expect(res.text).toContain("Go Solo");
+    expect(res.text).toContain("Go solo, not alone.");
+  });
+});
+
+describe("GET /styles.css", () => {
+  it("serves the stylesheet", async () => {
+    const res = await request(app).get("/styles.css");
+    expect(res.statusCode).toBe(200);
+    expect(res.headers["content-type"]).toMatch(/css/);
+    expect(res.text).toContain("--font-display");
+  });
+});
