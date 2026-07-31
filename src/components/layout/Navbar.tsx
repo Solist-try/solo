@@ -2,25 +2,24 @@ import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
 const links = [
-  { to: "/", label: "Home", end: true, mobile: false },
-  { to: "/community", label: "Community", mobile: false },
-  { to: "/resources", label: "Resources", mobile: false },
-  { to: "/events", label: "Events", mobile: false },
-  { to: "/messages", label: "Messages", mobile: true },
-  { to: "/toolkit", label: "Toolkit", mobile: true },
-  { to: "/mission", label: "Mission", mobile: true },
-  { to: "/profile", label: "Profile", mobile: false },
-  { to: "/safety", label: "Safety", mobile: true },
-  { to: "/settings", label: "Settings", mobile: true },
+  { to: "/community", label: "Community" },
+  { to: "/resources", label: "Resources" },
+  { to: "/events", label: "Events" },
+  { to: "/profile", label: "Profile" },
 ] as const;
 
 export function Navbar() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
-        <NavLink to="/" className={styles.brand} end>
-          <span className={styles.mark} aria-hidden="true" />
-          <span className={styles.brandName}>Go Solo</span>
+        <NavLink to="/" className={styles.brand} end aria-label="GoSolo home">
+          <span className={styles.logoMark} aria-hidden="true">
+            <span className={styles.logoSun} />
+            <span className={styles.logoPath} />
+          </span>
+          <span className={styles.brandName}>
+            Go<span className={styles.brandAccent}>Solo</span>
+          </span>
         </NavLink>
 
         <nav className={styles.nav} aria-label="Primary">
@@ -28,15 +27,8 @@ export function Navbar() {
             <NavLink
               key={link.to}
               to={link.to}
-              end={"end" in link ? link.end : false}
               className={({ isActive }) =>
-                [
-                  styles.link,
-                  isActive ? styles.active : "",
-                  link.mobile ? styles.mobileVisible : styles.desktopOnly,
-                ]
-                  .filter(Boolean)
-                  .join(" ")
+                `${styles.link} ${isActive ? styles.active : ""}`.trim()
               }
             >
               {link.label}

@@ -1,39 +1,43 @@
+import type { ComponentType } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../auth";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  SoftCurve,
-} from "../../components/ui";
+import { Button } from "../../components/ui";
+import { CommunityIcon, ResourcesIcon, ToolkitIcon } from "./HomeIcons";
 import styles from "./Home.module.css";
 
-const quickAccess = [
+type QuickCard = {
+  to: string;
+  title: string;
+  description: string;
+  action: string;
+  tone: "peach" | "gold" | "taupe";
+  Icon: ComponentType<{ className?: string }>;
+};
+
+const quickAccess: QuickCard[] = [
   {
     to: "/community",
-    eyebrow: "Connect",
     title: "Community",
-    description: "Circles and members who get the solo stretch.",
+    description: "Circles and members who understand the solo stretch.",
     action: "Enter community",
-    tone: "soft" as const,
+    tone: "peach",
+    Icon: CommunityIcon,
   },
   {
     to: "/resources",
-    eyebrow: "Learn",
     title: "Resources",
     description: "Guides, checklists, and calm packing rituals.",
     action: "Browse resources",
-    tone: "elevated" as const,
+    tone: "gold",
+    Icon: ResourcesIcon,
   },
   {
-    to: "/events",
-    eyebrow: "Gather",
-    title: "Events",
-    description: "Walks, meetups, and quiet nights planned for one—or a few.",
-    action: "See events",
-    tone: "outline" as const,
+    to: "/toolkit",
+    title: "Toolkit",
+    description: "Daily anchors for independence with support nearby.",
+    action: "Open toolkit",
+    tone: "taupe",
+    Icon: ToolkitIcon,
   },
 ];
 
@@ -43,19 +47,19 @@ export function Home() {
 
   return (
     <div className={styles.page}>
-      <section className={styles.banner} aria-label="Welcome banner">
-        <div className={styles.bannerMedia} aria-hidden="true">
+      <section className={styles.hero} aria-label="GoSolo home hero">
+        <div className={styles.heroMedia} aria-hidden="true">
           <div className={styles.horizon} />
           <div className={styles.sun} />
-          <SoftCurve variant="blob" tone="gold" className={styles.motifBlob} />
-          <div className={styles.path} />
           <div className={styles.glow} />
+          <div className={styles.path} />
+          <div className={styles.dune} />
         </div>
 
-        <div className={`container ${styles.bannerContent}`}>
-          <p className={styles.brand}>Go Solo</p>
+        <div className={`container ${styles.heroContent}`}>
+          <p className={styles.brand}>GoSolo</p>
           <p className={styles.welcome}>Welcome home, {firstName}</p>
-          <h1 className={styles.tagline}>Go solo, not alone.</h1>
+          <h1 className={styles.tagline}>Go solo, not alone</h1>
           <p className={styles.lede}>
             Your calm base for independent travel — connect, learn, and show up
             when you want company.
@@ -64,16 +68,16 @@ export function Home() {
             <a href="#quick-access">
               <Button size="lg">Explore quick access</Button>
             </a>
-            <Link to="/mission">
+            <Link to="/community">
               <Button size="lg" variant="secondary">
-                Our mission
+                Meet the community
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      <SoftCurve tone="cream" className={styles.bannerCurve} />
+      <div className={styles.heroCurve} aria-hidden="true" />
 
       <section
         id="quick-access"
@@ -82,7 +86,7 @@ export function Home() {
       >
         <header className={styles.quickHeader}>
           <h2 id="quick-access-heading">Quick access</h2>
-          <p>Jump into the places you need most — ready when you are.</p>
+          <p>Three warm doorways into the GoSolo experience.</p>
         </header>
 
         <div className={styles.quickGrid}>
@@ -91,21 +95,21 @@ export function Home() {
               key={item.to}
               to={item.to}
               className={styles.quickLink}
-              style={{ animationDelay: `${0.12 + index * 0.1}s` }}
+              style={{ animationDelay: `${0.1 + index * 0.08}s` }}
             >
-              <Card variant="interactive" className={styles.quickCard}>
-                <CardHeader
-                  eyebrow={item.eyebrow}
-                  title={item.title}
-                  description={item.description}
-                />
-                <CardBody>
-                  <span className={styles.cardAccent} data-tone={item.tone} />
-                </CardBody>
-                <CardFooter>
-                  <span className={styles.cardAction}>{item.action}</span>
-                </CardFooter>
-              </Card>
+              <article className={styles.quickCard} data-tone={item.tone}>
+                <span className={styles.iconWell} aria-hidden="true">
+                  <item.Icon className={styles.icon} />
+                </span>
+                <div className={styles.cardCopy}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+                <span className={styles.cardAction}>
+                  {item.action}
+                  <span aria-hidden="true">→</span>
+                </span>
+              </article>
             </Link>
           ))}
         </div>
