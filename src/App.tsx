@@ -6,8 +6,8 @@ import {
 } from "./auth";
 import { AppLayout } from "./components/AppLayout";
 import { SafetyProvider } from "./modules/safety";
-import { Login } from "./pages/Auth/Login";
-import { Onboarding } from "./pages/Auth/Onboarding";
+import { Login } from "./pages/Login";
+import { Onboarding } from "./pages/Onboarding";
 import { Signup } from "./pages/Auth/Signup";
 import {
   Community,
