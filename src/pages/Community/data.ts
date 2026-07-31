@@ -2,7 +2,7 @@ export const TOPICS = [
   "Solo Living",
   "Emotional Support",
   "Practical Tips",
-  "Money-Saving Hacks",
+  "Money & Housing",
 ] as const;
 
 export type Topic = (typeof TOPICS)[number];
@@ -58,7 +58,7 @@ export const initialPosts: Post[] = [
     time: "5h ago",
     title: "Grocery rhythm that cut my weekly spend",
     body: "Two big shops + one market top-up beat daily convenience runs. I batch oats, roast a tray of veg, and freeze half. Saved about 20% without feeling deprived.",
-    tags: ["Money-Saving Hacks", "Practical Tips"],
+    tags: ["Money & Housing", "Practical Tips"],
     likes: 72,
     comments: [
       {
@@ -109,15 +109,15 @@ export const initialPosts: Post[] = [
     authorId: "u-alex",
     author: "Alex Rivera",
     time: "2d ago",
-    title: "Transit day meals under $12",
-    body: "Bakery loaf + fruit + a shared kitchen tea bag travels well. Skip airport markups when you can. Happy to swap city-specific cheap bites below.",
-    tags: ["Money-Saving Hacks", "Practical Tips"],
+    title: "Finding a calm first apartment alone",
+    body: "I toured mid-morning, asked about laundry access, and budgeted deposits before falling for the light. Housing alone feels braver when the numbers are clear.",
+    tags: ["Money & Housing", "Solo Living"],
     likes: 54,
     comments: [
       {
         id: "c6",
         author: "Jordan Hale",
-        body: "Lisbon: pastelaria rice cakes near the station are clutch.",
+        body: "Budgeting deposits first saved me from a charming but costly place.",
         time: "1d ago",
       },
     ],

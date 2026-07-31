@@ -1,17 +1,16 @@
 import { useMemo, useState } from "react";
 import { useAuth } from "../../auth";
-import { Button } from "../../components/ui";
 import { GuidelinesReminder, useSafety } from "../../modules/safety";
 import { TOPICS, initialPosts, type Post, type Topic } from "./data";
 import { PostCard } from "./PostCard";
 import styles from "./Community.module.css";
 
-type Filter = "All" | Topic;
+type Filter = Topic;
 
 export function Community() {
   const { user } = useAuth();
   const { isBlocked } = useSafety();
-  const [filter, setFilter] = useState<Filter>("All");
+  const [filter, setFilter] = useState<Filter | "All">("All");
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [likedIds, setLikedIds] = useState<Set<string>>(() => new Set());
 
@@ -65,54 +64,53 @@ export function Community() {
 
   return (
     <div className={`container page ${styles.page}`}>
-      <header className="page__header">
-        <h1>Community Feed</h1>
+      <header className={styles.header}>
+        <h1>Community</h1>
         <p>
-          Posts, encouragement, and practical notes from people walking solo —
-          with room to reply when you want company.
+          Encouragement and practical notes from people walking solo — reply
+          when you want company.
         </p>
       </header>
 
       <GuidelinesReminder />
 
-      <div className={styles.toolbar}>
-        <div
-          className={styles.filters}
-          role="toolbar"
-          aria-label="Filter posts by topic"
-        >
+      <div
+        className={styles.filterBar}
+        role="toolbar"
+        aria-label="Filter posts by topic"
+      >
+        <FilterChip
+          label="All"
+          active={filter === "All"}
+          onClick={() => setFilter("All")}
+        />
+        {TOPICS.map((topic) => (
           <FilterChip
-            label="All"
-            active={filter === "All"}
-            onClick={() => setFilter("All")}
+            key={topic}
+            label={topic}
+            active={filter === topic}
+            onClick={() => setFilter(topic)}
           />
-          {TOPICS.map((topic) => (
-            <FilterChip
-              key={topic}
-              label={topic}
-              active={filter === topic}
-              onClick={() => setFilter(topic)}
-            />
-          ))}
-        </div>
-        <Button variant="secondary" size="sm">
-          New post
-        </Button>
+        ))}
       </div>
 
       <p className={styles.count} aria-live="polite">
         {visiblePosts.length}{" "}
         {visiblePosts.length === 1 ? "post" : "posts"}
-        {filter !== "All" ? ` in ${filter}` : ""}
+        {filter !== "All" ? ` · ${filter}` : ""}
       </p>
 
       <div className={styles.feed}>
         {visiblePosts.length === 0 ? (
           <div className={styles.empty}>
-            <p>No posts in this topic yet. Try another filter or start one.</p>
-            <Button variant="soft" onClick={() => setFilter("All")}>
+            <p>No posts in this topic yet. Try another filter.</p>
+            <button
+              type="button"
+              className={styles.emptyAction}
+              onClick={() => setFilter("All")}
+            >
               Show all posts
-            </Button>
+            </button>
           </div>
         ) : (
           visiblePosts.map((post, index) => (

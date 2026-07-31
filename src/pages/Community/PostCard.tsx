@@ -1,5 +1,5 @@
 import { useId, useState, type FormEvent } from "react";
-import { Avatar, Button, Card, CardBody, CardFooter } from "../../components/ui";
+import { Avatar, Button } from "../../components/ui";
 import {
   BlockUserButton,
   ReportButton,
@@ -41,12 +41,14 @@ export function PostCard({
   };
 
   return (
-    <Card variant="elevated" className={styles.card} padding="lg">
+    <article className={styles.card}>
       <header className={styles.header}>
         <Avatar name={post.author} />
         <div className={styles.meta}>
-          <strong>{post.author}</strong>
-          <span>{post.time}</span>
+          <strong className={styles.username}>{post.author}</strong>
+          <time className={styles.timestamp} dateTime={post.time}>
+            {post.time}
+          </time>
         </div>
         <div className={styles.safetyActions}>
           <ReportButton
@@ -59,11 +61,11 @@ export function PostCard({
       </header>
 
       <div className={styles.content}>
-        <h3>{post.title}</h3>
-        <p>{post.body}</p>
+        <h3 className={styles.title}>{post.title}</h3>
+        <p className={styles.body}>{post.body}</p>
       </div>
 
-      <ul className={styles.tags} aria-label="Post tags">
+      <ul className={styles.tags} aria-label="Post topics">
         {post.tags.map((tag) => (
           <li key={tag}>
             <span className={styles.tag}>{tag}</span>
@@ -71,34 +73,36 @@ export function PostCard({
         ))}
       </ul>
 
-      <CardFooter className={styles.actions}>
+      <footer className={styles.actions}>
         <button
           type="button"
           className={`${styles.action} ${liked ? styles.liked : ""}`}
           aria-pressed={liked}
+          aria-label={liked ? "Unlike post" : "Like post"}
           onClick={onToggleLike}
         >
           <HeartIcon filled={liked} />
           <span>
-            {post.likes} {post.likes === 1 ? "like" : "likes"}
+            {post.likes} {post.likes === 1 ? "Like" : "Likes"}
           </span>
         </button>
         <button
           type="button"
           className={styles.action}
           aria-expanded={showComments}
+          aria-label="Toggle comments"
           onClick={() => setShowComments((open) => !open)}
         >
           <CommentIcon />
           <span>
             {post.comments.length}{" "}
-            {post.comments.length === 1 ? "comment" : "comments"}
+            {post.comments.length === 1 ? "Comment" : "Comments"}
           </span>
         </button>
-      </CardFooter>
+      </footer>
 
       {showComments ? (
-        <CardBody className={styles.comments}>
+        <div className={styles.comments}>
           {post.comments.length === 0 ? (
             <p className={styles.empty}>Be the first to leave a kind note.</p>
           ) : (
@@ -109,7 +113,7 @@ export function PostCard({
                   <div>
                     <div className={styles.commentMeta}>
                       <strong>{comment.author}</strong>
-                      <span>{comment.time}</span>
+                      <time dateTime={comment.time}>{comment.time}</time>
                       <ReportButton
                         targetType="comment"
                         targetId={comment.id}
@@ -142,9 +146,9 @@ export function PostCard({
               Reply
             </Button>
           </form>
-        </CardBody>
+        </div>
       ) : null}
-    </Card>
+    </article>
   );
 }
 
