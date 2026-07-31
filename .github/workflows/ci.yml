@@ -34,20 +34,13 @@ jobs:
       - name: Typecheck, lint, test, and build
         run: npm run check
 
-      - name: Start web app (manual runs)
+      - name: Start app UI (manual runs)
         if: github.event_name == 'workflow_dispatch'
         run: |
           npm run build
-          npm run preview &
-          sleep 3
-          curl -sf http://127.0.0.1:4173 >/dev/null
-          echo "Web preview responded on :4173"
-
-      - name: Start API health check (manual runs)
-        if: github.event_name == 'workflow_dispatch'
-        run: |
-          npm run start:api &
+          npm start &
           sleep 2
+          curl -sf http://127.0.0.1:3000/ | grep -q "Go Solo"
           curl -sf http://127.0.0.1:3000/health
           echo
-          echo "API health endpoint responded on :3000"
+          echo "Go Solo UI + health responded on :3000"

@@ -22,48 +22,27 @@ Install dependencies once:
 npm install
 ```
 
-### Development (hot reload)
+### Start the app (UI on port 3000)
 
 ```bash
 npm start
 ```
 
-This starts Vite on **http://localhost:5173** and opens your browser.
-
-Equivalent commands:
+Opens the Go Solo **user interface** at **http://localhost:3000/** — an interactive HTML/CSS app with Home, Community, Resources, Events, and Toolkit (not a JSON “Welcome to Solo” message).
 
 ```bash
-npm run dev        # same server, no auto-open
-npm run dev:open   # server + browser open
+npm run start:ui   # build + serve the full React app on :3000
+npm run dev        # React hot-reload on :5173
 ```
 
-### Production build preview
+API routes (JSON) remain available for monitoring/integrations:
 
-```bash
-npm run build
-npm run preview:open
-```
+| Path | Response |
+|------|----------|
+| `/health` | `{ "ok": true }` |
+| `/api/data` | sample features payload |
 
-Or in one step:
-
-```bash
-npm run serve
-```
-
-Preview runs on **http://localhost:4173**.
-
-### Optional Node API + HTML/CSS UI
-
-Express serves a polished HTML/CSS landing page and a JSON health endpoint:
-
-```bash
-npm run start:api
-```
-
-- UI: **http://localhost:3000/**
-- Health: **http://localhost:3000/health** → `{ "ok": true }`
-
-Static files live in `server/public/` (`index.html`, `styles.css`).
+Static UI files: `server/public/` (`index.html`, `styles.css`, `app.js`).
 
 ## Test with Node
 
