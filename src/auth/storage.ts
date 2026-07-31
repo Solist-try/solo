@@ -26,7 +26,7 @@ export const defaultSavedPosts: SavedPost[] = [
     id: "saved-3",
     title: "Grocery rhythm that cut my weekly spend",
     author: "Sam Okonkwo",
-    tag: "Money-Saving Hacks",
+    tag: "Money & Housing",
   },
 ];
 
