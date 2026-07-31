@@ -21,6 +21,7 @@ import {
   Resources,
   Safety,
   Settings,
+  Support,
   Toolkit,
 } from "./pages";
 
@@ -49,6 +50,7 @@ export default function App() {
                 <Route path="profile" element={<Profile />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="safety" element={<Safety />} />
+                <Route path="support" element={<Support />} />
                 <Route path="design-system" element={<DesignSystem />} />
               </Route>
             </Route>

@@ -1,0 +1,322 @@
+/* --------------------------------------------------------------------------
+   GoSolo Support
+   -------------------------------------------------------------------------- */
+
+.support-page {
+  display: grid;
+  gap: 2rem;
+  padding-block: 3rem 6.5rem;
+  max-width: 48rem;
+}
+
+.support-header {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.support-header h1 {
+  margin: 0;
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: clamp(2.35rem, 5vw, 3.25rem);
+  color: #2a241f;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+.support-header p {
+  margin: 0;
+  color: #6f6156;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 38rem;
+}
+
+.support-section {
+  display: grid;
+  gap: 1rem;
+}
+
+.support-section h2 {
+  margin: 0;
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: 1.5rem;
+  color: #2a241f;
+  letter-spacing: -0.02em;
+}
+
+.support-section__lede {
+  margin: 0;
+  color: #6f6156;
+  font-size: 0.975rem;
+  line-height: 1.65;
+}
+
+/* FAQ accordion */
+.support-faq {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-faq__item {
+  border-radius: 1.2rem;
+  background: rgba(255, 250, 246, 0.96);
+  border: 1px solid rgba(142, 141, 138, 0.14);
+  box-shadow: 0 8px 22px rgba(42, 36, 31, 0.05);
+  overflow: hidden;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.support-faq__item.is-open {
+  border-color: rgba(247, 200, 165, 0.55);
+  box-shadow: 0 12px 28px rgba(42, 36, 31, 0.08);
+}
+
+.support-faq__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 1.2rem;
+  border: none;
+  background: transparent;
+  color: #2a241f;
+  font-size: 1.02rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.support-faq__trigger:hover {
+  color: #975533;
+}
+
+.support-faq__icon {
+  flex-shrink: 0;
+  width: 1.85rem;
+  height: 1.85rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(247, 200, 165, 0.4);
+  color: #975533;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.support-faq__item.is-open .support-faq__icon {
+  transform: rotate(45deg);
+  background: rgba(247, 200, 165, 0.7);
+}
+
+.support-faq__panel {
+  padding: 0 1.2rem 1.15rem;
+  color: #6f6156;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  animation: fade-rise 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.support-faq__panel p {
+  margin: 0;
+}
+
+/* Contact form */
+.support-form-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.4rem 1.35rem;
+  border-radius: 1.4rem;
+  background: rgba(255, 250, 246, 0.96);
+  border: 1px solid rgba(142, 141, 138, 0.14);
+  box-shadow: 0 10px 28px rgba(42, 36, 31, 0.06);
+}
+
+.support-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.support-field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.support-field span {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #574c43;
+}
+
+.support-field input,
+.support-field select,
+.support-field textarea {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(142, 141, 138, 0.22);
+  border-radius: 0.95rem;
+  background: #fffaf6;
+  color: #2a241f;
+  font: inherit;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.support-field input,
+.support-field select {
+  min-height: 2.7rem;
+}
+
+.support-field textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.support-field input:focus,
+.support-field select:focus,
+.support-field textarea:focus {
+  outline: none;
+  border-color: #f7c8a5;
+  box-shadow: 0 0 0 3px rgba(247, 200, 165, 0.35);
+}
+
+.support-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 2.65rem;
+  padding: 0.55rem 1.25rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e08a52, #d4a84b);
+  color: #fffaf6;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(201, 123, 75, 0.22);
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease,
+    opacity 180ms ease;
+}
+
+.support-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(201, 123, 75, 0.28);
+}
+
+.support-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.support-success {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.95rem;
+  background: #e4efe6;
+  color: #4f7a55;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.support-error {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.95rem;
+  background: #f6e4e0;
+  color: #b54a3a;
+  font-size: 0.9rem;
+}
+
+/* Safety resources */
+.support-resources {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-resource {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 1.2rem;
+  background: linear-gradient(
+    155deg,
+    rgba(247, 200, 165, 0.22),
+    rgba(255, 250, 246, 0.96) 50%,
+    rgba(247, 236, 208, 0.28)
+  );
+  border: 1px solid rgba(247, 200, 165, 0.4);
+  box-shadow: 0 8px 22px rgba(42, 36, 31, 0.05);
+}
+
+.support-resource h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  color: #2a241f;
+}
+
+.support-resource p {
+  margin: 0;
+  color: #6f6156;
+  font-size: 0.925rem;
+  line-height: 1.65;
+}
+
+.support-resource a {
+  width: fit-content;
+  color: #975533;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.support-resource a:hover {
+  text-decoration: underline;
+}
+
+.support-footer {
+  margin: 0;
+  color: #8e8d8a;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.support-footer a {
+  color: #975533;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.support-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .support-submit {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .support-faq__panel,
+  .support-faq__icon,
+  .support-submit {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .support-submit:hover:not(:disabled) {
+    transform: none;
+  }
+}

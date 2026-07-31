@@ -20,6 +20,7 @@ export function Footer() {
           <Link to="/messages">Messages</Link>
           <Link to="/toolkit">Toolkit</Link>
           <Link to="/safety">Safety</Link>
+          <Link to="/support">Support</Link>
           <Link to="/settings">Settings</Link>
           <Link to="/design-system">Design system</Link>
         </div>

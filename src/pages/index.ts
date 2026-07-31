@@ -8,5 +8,6 @@ export { Toolkit } from "./Toolkit";
 export { Messages } from "./Messages/Messages";
 export { Safety } from "./Safety";
 export { Blog } from "./Blog";
+export { Support } from "./Support";
 export { Mission } from "./Mission/Mission";
 export { DesignSystem } from "./DesignSystem/DesignSystem";
