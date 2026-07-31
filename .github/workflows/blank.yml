@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+# This is a workflow that sets up Node, installs dependencies, builds, tests, and can start the app manually
 
 name: CI
 
@@ -25,12 +25,31 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      # Set up Node.js (LTS). Change node-version if you need a different version.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # Install dependencies (uses package-lock.json/ npm ci for consistent installs)
+      - name: Install dependencies
+        run: npm ci
+
+      # Build (if a build script exists, --if-present prevents failure if absent)
+      - name: Build
+        run: npm run build --if-present
+
+      # Run tests (if a test script is defined)
+      - name: Run tests
+        run: npm test --if-present
+
+      # For manual runs: start the app. This runs only when you trigger the workflow manually.
+      # It tries npm start, falls back to node index.js, and prints a message if neither exists.
+      - name: Start app (manual runs)
+        if: github.event_name == 'workflow_dispatch'
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          npm start --if-present || node index.js || echo "No start command found. Update this step to run your app."
+
+      # Helpful quick output step
+      - name: Done
+        run: echo "Node workflow completed"
