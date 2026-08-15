@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
-   GoSolo Home — soft gold banner · taupe cards · mist grey ground
+   GoSolo Home — sage · mist · clay opening · taupe cards
    -------------------------------------------------------------------------- */
 
 .home-page {
@@ -121,20 +121,32 @@
   outline-offset: 3px;
 }
 
-/* Welcome banner — warm soft gold */
+/* Welcome banner — sage → mist → clay, matte light */
 .home-banner {
   position: relative;
   min-height: min(82vh, 42rem);
   display: grid;
   align-items: end;
   overflow: hidden;
-  background: linear-gradient(
-    148deg,
-    #f3e6d0 0%,
-    var(--brand-soft-gold, #e7cfa9) 32%,
-    #dfc4a4 62%,
-    #d4b896 100%
-  );
+  background:
+    radial-gradient(
+      ellipse 95% 85% at 8% 6%,
+      #b7c4b2 0%,
+      rgba(183, 196, 178, 0.55) 28%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 90% 80% at 92% 96%,
+      #c7b8ae 0%,
+      rgba(199, 184, 174, 0.5) 34%,
+      transparent 68%
+    ),
+    linear-gradient(
+      155deg,
+      #b7c4b2 0%,
+      #e9e6e3 46%,
+      #c7b8ae 100%
+    );
 }
 
 .home-banner__wash {
@@ -146,34 +158,35 @@
 .home-banner__blob {
   position: absolute;
   border-radius: var(--radius-blob);
-  filter: blur(2px);
+  filter: blur(6px);
+  opacity: 0.55;
 }
 
 .home-banner__blob--one {
-  top: -8%;
-  left: -6%;
+  top: -10%;
+  left: -8%;
   width: min(48vw, 26rem);
   height: min(48vw, 22rem);
   background: radial-gradient(
     circle at 40% 40%,
-    rgba(255, 252, 250, 0.55),
-    rgba(217, 165, 160, 0.22) 55%,
-    transparent 72%
+    rgba(183, 196, 178, 0.55),
+    rgba(233, 230, 227, 0.2) 58%,
+    transparent 74%
   );
-  animation: glow-pulse 7s var(--ease-soft) infinite;
+  animation: soft-float 9s var(--ease-soft) infinite;
 }
 
 .home-banner__blob--two {
   right: -4%;
-  bottom: 8%;
+  bottom: 6%;
   width: min(40vw, 20rem);
   height: min(40vw, 18rem);
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(143, 166, 184, 0.28),
-    transparent 70%
+    rgba(199, 184, 174, 0.45),
+    transparent 72%
   );
-  animation: soft-float 9s var(--ease-soft) infinite;
+  animation: soft-float 11s var(--ease-soft) infinite;
 }
 
 .home-banner__arc {
@@ -186,11 +199,12 @@
   border-radius: 50% 50% 0 0;
   background: linear-gradient(
     180deg,
-    rgba(199, 184, 174, 0.12),
-    rgba(58, 58, 60, 0.18)
+    rgba(199, 184, 174, 0.1),
+    rgba(58, 58, 60, 0.12)
   );
 }
 
+/* Spherical element — light clay, soft matte shadow */
 .home-banner__sun {
   position: absolute;
   top: 14%;
@@ -199,14 +213,17 @@
   height: clamp(7rem, 16vw, 11rem);
   border-radius: 50%;
   background: radial-gradient(
-    circle at 35% 35%,
-    #fff8ee,
-    var(--brand-soft-gold) 42%,
-    var(--gold-400) 70%,
-    transparent 74%
+    circle at 38% 34%,
+    #d9cec5 0%,
+    #c7b8ae 48%,
+    #b5a69c 78%,
+    #a89990 100%
   );
-  box-shadow: 0 0 64px rgba(231, 207, 169, 0.5);
-  animation: soft-float 7s var(--ease-soft) infinite;
+  box-shadow:
+    0 18px 36px rgba(58, 58, 60, 0.12),
+    0 6px 14px rgba(58, 58, 60, 0.06),
+    inset 0 1px 0 rgba(255, 252, 250, 0.18);
+  animation: soft-float 8s var(--ease-soft) infinite;
 }
 
 .home-banner__content {
