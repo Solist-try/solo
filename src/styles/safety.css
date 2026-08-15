@@ -131,24 +131,27 @@
   justify-content: center;
   min-height: 2.6rem;
   padding: 0.55rem 1.2rem !important;
-  border: none !important;
-  border-radius: 999px !important;
-  background: var(--gradient-cta) !important;
-  color: var(--neutral-0) !important;
+  border: 1px solid rgba(154, 174, 150, 0.45) !important;
+  border-radius: var(--radius-md, 12px) !important;
+  background: var(--btn-primary-bg, var(--brand-sage-green)) !important;
+  color: var(--btn-primary-fg, var(--neutral-0)) !important;
+  font-family: var(--font-gosolo-sans, var(--font-body)) !important;
   font-size: 0.95rem !important;
   font-weight: 600 !important;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(217, 165, 160, 0.22);
+  box-shadow: var(--shadow-xs);
   transition:
     transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms ease;
+    box-shadow 220ms ease,
+    background 220ms ease,
+    color 220ms ease;
 }
 
 .safety-report-card > button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(217, 165, 160, 0.28);
-  color: var(--neutral-0) !important;
-  background: var(--gradient-cta) !important;
+  box-shadow: var(--shadow-soft);
+  color: var(--brand-deep-charcoal) !important;
+  background: var(--btn-hover-tint, var(--brand-clay-beige)) !important;
 }
 
 .safety-blocked {

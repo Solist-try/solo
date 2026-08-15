@@ -13,10 +13,12 @@ const colorGroups = [
   {
     title: "Brand palette",
     swatches: [
+      ["sage-green", "var(--brand-sage-green)"],
+      ["mist-grey", "var(--brand-mist-grey)"],
+      ["clay-beige", "var(--brand-clay-beige)"],
+      ["deep-charcoal", "var(--brand-deep-charcoal)"],
       ["soft-gold", "var(--brand-soft-gold)"],
       ["warm-taupe", "var(--brand-warm-taupe)"],
-      ["mist-grey", "var(--brand-mist-grey)"],
-      ["deep-charcoal", "var(--brand-deep-charcoal)"],
       ["summer-blue", "var(--brand-soft-summer-blue)"],
       ["accent-rose", "var(--brand-accent-rose)"],
     ],
@@ -44,14 +46,16 @@ const colorGroups = [
     ],
   },
   {
-    title: "Soft gold & blue",
+    title: "Sage, gold & blue",
     swatches: [
+      ["sage-100", "var(--sage-100)"],
+      ["sage-200", "var(--sage-200)"],
+      ["sage-400", "var(--sage-400)"],
       ["gold-100", "var(--gold-100)"],
       ["gold-200", "var(--gold-200)"],
       ["gold-400", "var(--gold-400)"],
       ["blue-100", "var(--blue-100)"],
       ["blue-300", "var(--blue-300)"],
-      ["blue-500", "var(--blue-500)"],
     ],
   },
 ] as const;
@@ -86,7 +90,7 @@ export function DesignSystem() {
       <header className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
           <p className="type-label">Go Solo design system</p>
-          <h1 className="type-h1">Warm gold, mist, and soft rose</h1>
+          <h1 className="type-h1">Sage, mist, and clay</h1>
           <p className="type-body-lg">
             Tokens, type, spacing, and gentle curves that keep Go Solo calm and
             welcoming.
@@ -100,7 +104,7 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Color tokens</h2>
             <p className="type-body-lg">
-              Soft gold, warm taupe, mist grey, charcoal, summer blue, and
+              Sage green, mist grey, clay beige, charcoal, summer blue, and
               accent rose — a calm, grounded palette.
             </p>
           </div>
@@ -200,8 +204,9 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Button variants</h2>
             <p className="type-body-lg">
-              Primary gold, secondary taupe, and subtle mist grey — plus soft
-              rose highlights. Focus rings use Soft Summer Blue.
+              Primary sage with white text, secondary mist with charcoal text,
+              and soft clay hover tints. Curved corners and GoSoloSans stay
+              consistent. Focus rings use Soft Summer Blue.
             </p>
           </div>
           <div className={styles.buttonGrid}>

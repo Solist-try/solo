@@ -54,47 +54,50 @@
   font-size: var(--text-lg);
 }
 
-/* Primary gold */
+/* Primary sage — white text */
 .primary {
-  color: var(--brand-deep-charcoal);
-  background: var(--brand-soft-gold);
-  border-color: rgba(201, 176, 138, 0.55);
-  box-shadow: var(--shadow-glow);
+  color: var(--btn-primary-fg, var(--neutral-0));
+  background: var(--btn-primary-bg, var(--brand-sage-green));
+  border-color: rgba(154, 174, 150, 0.45);
+  box-shadow: var(--shadow-xs);
 }
 
 .primary:not(:disabled):hover {
-  background: var(--gold-300);
-  box-shadow: 0 12px 28px rgba(231, 207, 169, 0.55);
+  background: var(--btn-hover-tint, var(--brand-clay-beige));
+  color: var(--brand-deep-charcoal);
+  border-color: rgba(168, 153, 144, 0.45);
+  box-shadow: var(--shadow-soft);
 }
 
 .primary:not(:disabled):active {
-  background: var(--gold-400);
+  background: #b9aaa0;
+  color: var(--brand-deep-charcoal);
 }
 
-/* Secondary taupe */
+/* Secondary mist — charcoal text */
 .secondary {
-  color: var(--brand-deep-charcoal);
-  background: var(--brand-warm-taupe);
-  border-color: rgba(168, 153, 144, 0.55);
+  color: var(--btn-secondary-fg, var(--brand-deep-charcoal));
+  background: var(--btn-secondary-bg, var(--brand-mist-grey));
+  border-color: rgba(199, 184, 174, 0.45);
   box-shadow: var(--shadow-xs);
 }
 
 .secondary:not(:disabled):hover {
-  background: #b9aaa0;
-  border-color: rgba(143, 166, 184, 0.45);
+  background: var(--btn-hover-tint, var(--brand-clay-beige));
+  border-color: rgba(168, 153, 144, 0.55);
 }
 
-/* Subtle mist grey */
+/* Subtle cream */
 .subtle {
   color: var(--brand-deep-charcoal);
-  background: var(--brand-mist-grey);
-  border-color: rgba(199, 184, 174, 0.55);
+  background: var(--neutral-0);
+  border-color: rgba(199, 184, 174, 0.45);
   box-shadow: none;
 }
 
 .subtle:not(:disabled):hover {
-  background: var(--neutral-100);
-  border-color: var(--brand-soft-summer-blue);
+  background: var(--btn-hover-tint, var(--brand-clay-beige));
+  border-color: rgba(168, 153, 144, 0.55);
 }
 
 /* Soft / highlight — Accent Rose wash */
@@ -105,29 +108,29 @@
 }
 
 .soft:not(:disabled):hover {
-  background: rgba(217, 165, 160, 0.35);
+  background: var(--btn-hover-tint, var(--brand-clay-beige));
   color: var(--brand-deep-charcoal);
 }
 
 .outline {
   color: var(--brand-deep-charcoal);
   background: transparent;
-  border-color: var(--brand-warm-taupe);
+  border-color: var(--brand-sage-green);
 }
 
 .outline:not(:disabled):hover {
-  background: var(--color-highlight-soft);
-  border-color: var(--brand-accent-rose);
+  background: var(--btn-hover-tint, var(--brand-clay-beige));
+  border-color: var(--brand-clay-beige);
 }
 
 .ghost {
-  color: var(--neutral-700);
+  color: var(--brand-deep-charcoal);
   background: transparent;
 }
 
 .ghost:not(:disabled):hover {
   color: var(--brand-deep-charcoal);
-  background: var(--color-highlight-soft);
+  background: var(--btn-hover-tint, var(--brand-clay-beige));
 }
 
 .danger {

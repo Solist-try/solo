@@ -6,6 +6,9 @@
 export const colors = {
   softGold: "#E7CFA9",
   warmTaupe: "#C7B8AE",
+  /** Clay beige — same as warm taupe; used for soft hover tints */
+  clayBeige: "#C7B8AE",
+  sageGreen: "#B7C4B2",
   mistGrey: "#E9E6E3",
   deepCharcoal: "#3A3A3C",
   softSummerBlue: "#8FA6B8",
@@ -18,6 +21,8 @@ export const colors = {
   taupeMuted: "#A89990",
   charcoalSoft: "#5C5C5E",
   charcoalMuted: "#6E6E70",
+  sageDeep: "#9AAE96",
+  sageSoft: "#D5DDD1",
 
   roseSoft: "#F3E4E1",
   roseDeep: "#C48984",
@@ -140,19 +145,22 @@ export const interaction = {
 
 export const buttons = {
   primary: {
-    label: "Primary gold",
-    background: colors.softGold,
-    color: colors.deepCharcoal,
+    label: "Primary sage",
+    background: colors.sageGreen,
+    color: colors.white,
+    hover: colors.clayBeige,
   },
   secondary: {
-    label: "Secondary taupe",
-    background: colors.warmTaupe,
-    color: colors.deepCharcoal,
-  },
-  subtle: {
-    label: "Subtle grey",
+    label: "Secondary mist",
     background: colors.mistGrey,
     color: colors.deepCharcoal,
+    hover: colors.clayBeige,
+  },
+  subtle: {
+    label: "Subtle cream",
+    background: colors.white,
+    color: colors.deepCharcoal,
+    hover: colors.clayBeige,
   },
 } as const;
 
