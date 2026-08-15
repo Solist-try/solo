@@ -47,10 +47,10 @@ export function Signup() {
   return (
     <AuthLayout
       title="Create your space"
-      subtitle="Email and password to start — or continue with a social account."
+      subtitle="Start with email, or continue with a social account — you choose how you arrive."
       footer={
         <>
-          Already a member? <Link to="/login">Sign in</Link>
+          Already have a space? <Link to="/login">Sign in</Link>
         </>
       }
     >

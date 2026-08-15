@@ -49,7 +49,8 @@ export function Login() {
         </Link>
         <h1 className="auth-title">Welcome back</h1>
         <p className="auth-subtitle">
-          Sign in to continue your solo living path — go solo, not alone.
+          Sign in when you are ready — your space stays yours. Go solo, not
+          alone.
         </p>
 
         <form className="auth-form" onSubmit={onSubmit}>
@@ -110,7 +111,7 @@ export function Login() {
         </div>
 
         <p className="auth-footer">
-          New here? <Link to="/signup">Create an account</Link>
+          New here? <Link to="/signup">Create your space</Link>
         </p>
       </div>
     </div>

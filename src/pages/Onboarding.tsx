@@ -5,14 +5,16 @@ import { GOAL_OPTIONS, INTEREST_OPTIONS, useAuth } from "../auth";
 const steps = [
   {
     key: "goals" as const,
-    title: "What are your solo living goals?",
-    subtitle: "Pick what you want more of — you can change these later.",
+    title: "What would support your solo path?",
+    subtitle:
+      "Choose what matters to you right now — you set the pace, and you can change this later.",
     options: GOAL_OPTIONS,
   },
   {
     key: "interests" as const,
-    title: "What interests should we highlight?",
-    subtitle: "We’ll tune your feed, resources, and toolkit around these.",
+    title: "What should we keep nearby?",
+    subtitle:
+      "We’ll quietly tune your feed, resources, and toolkit around these — nothing required.",
     options: INTEREST_OPTIONS,
   },
 ];
@@ -82,7 +84,8 @@ export function Onboarding() {
           Go<span>Solo</span>
         </Link>
         <p className="auth-welcome">
-          Hi {user?.name?.split(" ")[0] ?? "there"} — let’s personalize your path.
+          Hi {user?.name?.split(" ")[0] ?? "there"} — shape a path that fits
+          you.
         </p>
 
         <div
@@ -147,7 +150,7 @@ export function Onboarding() {
             {stepIndex === steps.length - 1
               ? pending
                 ? "Saving…"
-                : "Finish setup"
+                : "Enter your space"
               : "Continue"}
           </button>
         </div>
