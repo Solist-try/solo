@@ -161,15 +161,16 @@
   );
 
   /* --------------------------------------------------------------------------
-     Typography — GoSoloSerif (headings) · GoSoloSans (body)
+     Typography — IBM Plex Sans throughout
      -------------------------------------------------------------------------- */
-  --font-gosolo-serif: "GoSoloSerif", "Source Serif 4", "Iowan Old Style",
-    "Palatino Linotype", Georgia, serif;
-  --font-gosolo-sans: "GoSoloSans", "Nunito", "Segoe UI", system-ui, sans-serif;
-  --font-display: var(--font-gosolo-serif);
-  --font-body: var(--font-gosolo-sans);
-  --font-serif: var(--font-gosolo-serif);
-  --font-sans: var(--font-gosolo-sans);
+  --font-ibm-plex-sans: "IBM Plex Sans", "Helvetica Neue", Arial, system-ui,
+    sans-serif;
+  --font-gosolo-serif: var(--font-ibm-plex-sans);
+  --font-gosolo-sans: var(--font-ibm-plex-sans);
+  --font-display: var(--font-ibm-plex-sans);
+  --font-body: var(--font-ibm-plex-sans);
+  --font-serif: var(--font-ibm-plex-sans);
+  --font-sans: var(--font-ibm-plex-sans);
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;

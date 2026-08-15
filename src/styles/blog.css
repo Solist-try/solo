@@ -16,7 +16,7 @@
 
 .blog-header h1 {
   margin: 0;
-  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
+  font-family: var(--font-display, "IBM Plex Sans", system-ui, sans-serif);
   font-size: clamp(2.35rem, 5vw, 3.25rem);
   color: #2a241f;
   letter-spacing: -0.025em;
@@ -79,7 +79,7 @@
   z-index: 1;
   margin: 0;
   max-width: 16ch;
-  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
+  font-family: var(--font-display, "IBM Plex Sans", system-ui, sans-serif);
   font-size: clamp(1.9rem, 4.5vw, 2.75rem);
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -221,7 +221,7 @@
 
 .blog-card__title {
   margin: 0;
-  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
+  font-family: var(--font-display, "IBM Plex Sans", system-ui, sans-serif);
   font-size: 1.3rem;
   color: #2a241f;
   line-height: 1.3;

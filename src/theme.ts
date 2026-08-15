@@ -33,16 +33,14 @@ export const colors = {
 } as const;
 
 /**
- * Typography tokens — brand names with web-font fallbacks.
- * GoSoloSerif → headings; GoSoloSans → body/UI.
+ * Typography tokens — IBM Plex Sans throughout the Go Solo app.
  */
 export const typography = {
-  fontSerif: '"GoSoloSerif", "Source Serif 4", "Iowan Old Style", Georgia, serif',
-  fontSans: '"GoSoloSans", "Nunito", "Segoe UI", system-ui, sans-serif',
-  /** @deprecated use fontSerif */
-  fontDisplay: '"GoSoloSerif", "Source Serif 4", "Iowan Old Style", Georgia, serif',
-  /** @deprecated use fontSans */
-  fontBody: '"GoSoloSans", "Nunito", "Segoe UI", system-ui, sans-serif',
+  fontFamily: '"IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif',
+  fontSerif: '"IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif',
+  fontSans: '"IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif',
+  fontDisplay: '"IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif',
+  fontBody: '"IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif',
   size: {
     xs: "0.75rem",
     sm: "0.875rem",

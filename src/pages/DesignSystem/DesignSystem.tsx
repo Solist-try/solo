@@ -127,7 +127,7 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Typography scale</h2>
             <p className="type-body-lg">
-              GoSoloSerif for headings, GoSoloSans for body and UI.
+              IBM Plex Sans for headings, body, and UI throughout.
             </p>
           </div>
           <div className={styles.typeList}>
