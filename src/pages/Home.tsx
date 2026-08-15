@@ -1,6 +1,5 @@
 import type { ComponentType } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useAuth } from "../auth";
 
 type QuickCard = {
   to: string;
@@ -42,9 +41,6 @@ const navLinks = [
 ] as const;
 
 export function Home() {
-  const { user } = useAuth();
-  const firstName = user?.name?.split(" ")[0] ?? "friend";
-
   return (
     <div className="home-page">
       <header className="home-topnav">
@@ -85,10 +81,9 @@ export function Home() {
 
         <div className="container home-banner__content">
           <p className="home-banner__brand">GoSolo</p>
-          <p className="home-banner__welcome">Welcome home, {firstName}</p>
           <h1 className="home-banner__tagline">Go solo, not alone.</h1>
           <p className="home-banner__lede">
-            A warm base for independent travel — connect, learn, and show up
+            A calm space for independent living — connect, learn, and show up
             when you want company.
           </p>
           <div className="home-banner__ctas">

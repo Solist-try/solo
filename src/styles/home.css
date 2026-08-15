@@ -229,57 +229,50 @@
 .home-banner__content {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-brand-32, 32px) var(--space-8, 64px);
-  max-width: 40rem;
+  padding-block: var(--space-8, 64px) var(--space-9, 80px);
+  max-width: 42rem;
   margin-inline: 0 auto 0;
+  display: grid;
+  gap: var(--space-brand-20, 20px);
   animation: fade-rise 0.9s var(--ease-out) both;
 }
 
 .home-banner__brand {
-  font-family: var(--font-gosolo-serif, var(--font-display));
-  font-size: clamp(2.6rem, 6.5vw, 3.9rem);
+  font-family: "GoSoloSerif", var(--font-gosolo-serif, var(--font-display));
+  font-size: clamp(2.75rem, 6.5vw, 4rem);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.05;
-  color: var(--brand-deep-charcoal, #3a3a3c);
-  margin: 0 0 var(--space-brand-12, 12px);
-  text-shadow: 0 1px 0 rgba(255, 252, 250, 0.35);
-}
-
-.home-banner__welcome {
-  font-family: var(--font-gosolo-sans, var(--font-body));
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--rose-600, #9e635e);
-  margin: 0 0 var(--space-brand-8, 8px);
+  color: #3a3a3c;
+  margin: 0;
 }
 
 .home-banner__tagline {
-  font-family: var(--font-gosolo-serif, var(--font-display));
-  font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+  font-family: "GoSoloSerif", var(--font-gosolo-serif, var(--font-display));
+  font-size: clamp(2.2rem, 5.2vw, 3.5rem);
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.18;
   letter-spacing: -0.025em;
-  color: var(--brand-deep-charcoal, #3a3a3c);
-  margin: 0 0 var(--space-brand-12, 12px);
+  color: #3a3a3c;
+  margin: 0;
   max-width: 14ch;
 }
 
 .home-banner__lede {
-  font-family: var(--font-gosolo-sans, var(--font-body));
-  font-size: 1.125rem;
-  color: var(--neutral-800, #48484a);
-  max-width: 36ch;
-  margin: 0 0 var(--space-brand-20, 20px);
-  line-height: 1.7;
+  font-family: "GoSoloSans", var(--font-gosolo-sans, var(--font-body));
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  color: #c7b8ae;
+  max-width: 38ch;
+  margin: 0;
+  line-height: 1.75;
 }
 
 .home-banner__ctas {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-brand-12, 12px);
+  margin-top: var(--space-brand-12, 12px);
 }
 
 .home-btn {
