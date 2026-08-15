@@ -1,3 +1,4 @@
+@import "./fonts.css";
 @import "./tokens.css";
 @import "./typography.css";
 @import "./motif.css";
@@ -27,7 +28,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: var(--font-body);
+  font-family: var(--font-gosolo-sans);
   font-size: var(--text-base);
   font-weight: var(--weight-regular);
   line-height: var(--leading-normal);
@@ -65,7 +66,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-gosolo-serif);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-display);
@@ -86,6 +87,11 @@ ol {
 :focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-highlight-soft);
+  color: var(--color-text);
 }
 
 .sr-only {
@@ -132,7 +138,7 @@ ol {
   display: grid;
   place-items: center;
   color: var(--color-text-muted);
-  font-family: var(--font-display);
+  font-family: var(--font-gosolo-serif);
   font-size: var(--text-xl);
   background: var(--gradient-wash);
 }

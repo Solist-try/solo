@@ -1,9 +1,11 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./Button.module.css";
 
+/** Brand button variants + retained utility variants */
 export type ButtonVariant =
   | "primary"
   | "secondary"
+  | "subtle"
   | "soft"
   | "outline"
   | "ghost"

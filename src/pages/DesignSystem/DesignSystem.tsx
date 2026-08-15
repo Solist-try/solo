@@ -68,11 +68,12 @@ const typeRows = [
   ["Caption", "type-caption", "Updated for the next stretch"],
 ] as const;
 
-const spaceSteps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const;
+const brandSpaceSteps = [4, 8, 12, 20, 32] as const;
 
 const buttonVariants: ButtonVariant[] = [
   "primary",
   "secondary",
+  "subtle",
   "soft",
   "outline",
   "ghost",
@@ -126,7 +127,7 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Typography scale</h2>
             <p className="type-body-lg">
-              Source Serif 4 for display moments, Nunito for UI and reading.
+              GoSoloSerif for headings, GoSoloSans for body and UI.
             </p>
           </div>
           <div className={styles.typeList}>
@@ -141,55 +142,21 @@ export function DesignSystem() {
 
         <section className={styles.section}>
           <div className={styles.sectionHead}>
-            <h2 className="type-h2">Spacing system</h2>
+            <h2 className="type-h2">Brand spacing scale</h2>
             <p className="type-body-lg">
-              A 4px base scale from <code>--space-1</code> through{" "}
-              <code>--space-12</code>.
+              Core rhythm: <code>4 · 8 · 12 · 20 · 32</code> (
+              <code>--space-brand-*</code>).
             </p>
           </div>
           <div className={styles.spaceList}>
-            {spaceSteps.map((step) => (
+            {brandSpaceSteps.map((step) => (
               <div key={step} className={styles.spaceRow}>
-                <code>--space-{step}</code>
-                <span
-                  className={styles.spaceBar}
-                  style={{ width: `var(--space-${step})` }}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <div className={styles.sectionHead}>
-            <h2 className="type-h2">Corner radius</h2>
-            <p className="type-body-lg">
-              Curved corners stay in a calm 10–14px range for surfaces and
-              controls (<code>--radius-sm</code> through <code>--radius-lg</code>
-              ).
-            </p>
-          </div>
-          <div className={styles.spaceList}>
-            {(
-              [
-                ["sm", "10px"],
-                ["md", "12px"],
-                ["lg", "14px"],
-                ["xl", "14px"],
-                ["2xl", "16px"],
-              ] as const
-            ).map(([name, px]) => (
-              <div key={name} className={styles.spaceRow}>
                 <code>
-                  --radius-{name} · {px}
+                  --space-brand-{step} · {step}px
                 </code>
                 <span
                   className={styles.spaceBar}
-                  style={{
-                    width: "4.5rem",
-                    height: "2.25rem",
-                    borderRadius: `var(--radius-${name})`,
-                  }}
+                  style={{ width: `var(--space-brand-${step})` }}
                 />
               </div>
             ))}
@@ -200,7 +167,8 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Button variants</h2>
             <p className="type-body-lg">
-              Pill-shaped actions for primary work and quieter paths.
+              Primary gold, secondary taupe, and subtle mist grey — plus soft
+              rose highlights. Focus rings use Soft Summer Blue.
             </p>
           </div>
           <div className={styles.buttonGrid}>
@@ -227,7 +195,8 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Card components</h2>
             <p className="type-body-lg">
-              Rounded containers for interactive clusters and content groups.
+              Soft shadows and 12–14px curved corners for calm, tactile
+              surfaces. Highlights use Accent Rose; focus uses Soft Summer Blue.
             </p>
           </div>
           <div className={styles.cardGrid}>
@@ -252,7 +221,7 @@ export function DesignSystem() {
               <CardHeader
                 eyebrow="Soft"
                 title="Morning stretch kit"
-                description="A peach-tinted wash for emphasis."
+                description="A rose-tinted wash for emphasis."
               />
               <CardBody>
                 Ideal for highlights and onboarding moments.

@@ -1,21 +1,23 @@
 .field {
   display: grid;
-  gap: var(--space-2);
+  gap: var(--space-brand-8);
 }
 
 .label {
+  font-family: var(--font-gosolo-sans);
   font-size: var(--text-sm);
   font-weight: 550;
-  color: var(--taupe-600);
+  color: var(--color-text-muted);
 }
 
 .input {
   width: 100%;
   min-height: 2.75rem;
-  padding: 0.65rem 0.9rem;
+  padding: var(--space-brand-12) var(--space-brand-20);
   border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   background: var(--color-bg-elevated);
+  font-family: var(--font-gosolo-sans);
   transition:
     border-color var(--duration-med) var(--ease-soft),
     box-shadow var(--duration-med) var(--ease-soft);
@@ -26,13 +28,13 @@
 }
 
 .input:hover {
-  border-color: var(--taupe-300);
+  border-color: var(--brand-warm-taupe);
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--peach-400);
-  box-shadow: 0 0 0 3px rgba(224, 138, 82, 0.2);
+  border-color: var(--color-focus);
+  box-shadow: var(--color-focus-ring);
 }
 
 .hint {

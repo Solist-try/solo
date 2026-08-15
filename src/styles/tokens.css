@@ -109,6 +109,9 @@
   --color-border: rgba(58, 58, 60, 0.1);
   --color-border-strong: rgba(199, 184, 174, 0.65);
   --color-focus: var(--brand-soft-summer-blue);
+  --color-focus-ring: 0 0 0 3px rgba(143, 166, 184, 0.4);
+  --color-highlight: var(--brand-accent-rose);
+  --color-highlight-soft: rgba(217, 165, 160, 0.22);
   --color-danger: #b54a3a;
   --color-danger-soft: #f3e2df;
   --color-success: #5a7a62;
@@ -158,11 +161,15 @@
   );
 
   /* --------------------------------------------------------------------------
-     Typography — warm humanist serif + rounded sans
+     Typography — GoSoloSerif (headings) · GoSoloSans (body)
      -------------------------------------------------------------------------- */
-  --font-display: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia,
-    serif;
-  --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font-gosolo-serif: "GoSoloSerif", "Source Serif 4", "Iowan Old Style",
+    "Palatino Linotype", Georgia, serif;
+  --font-gosolo-sans: "GoSoloSans", "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-gosolo-serif);
+  --font-body: var(--font-gosolo-sans);
+  --font-serif: var(--font-gosolo-serif);
+  --font-sans: var(--font-gosolo-sans);
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -193,21 +200,28 @@
   --weight-bold: 700;
 
   /* --------------------------------------------------------------------------
-     Spacing system (4px base)
+     Brand spacing scale — 4 · 8 · 12 · 20 · 32
      -------------------------------------------------------------------------- */
+  --space-brand-4: 4px;
+  --space-brand-8: 8px;
+  --space-brand-12: 12px;
+  --space-brand-20: 20px;
+  --space-brand-32: 32px;
+
+  /* Numbered steps mapped to the brand scale + page rhythm */
   --space-0: 0;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-7: 2rem;
-  --space-8: 2.5rem;
-  --space-9: 3rem;
-  --space-10: 4rem;
-  --space-11: 5rem;
-  --space-12: 6.5rem;
+  --space-1: var(--space-brand-4);
+  --space-2: var(--space-brand-8);
+  --space-3: var(--space-brand-12);
+  --space-4: var(--space-brand-20);
+  --space-5: var(--space-brand-32);
+  --space-6: 40px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 96px;
+  --space-11: 112px;
+  --space-12: 128px;
 
   /* --------------------------------------------------------------------------
      Soft curves — primary corners 10–14px
@@ -239,7 +253,8 @@
 
   /* Elevation */
   --shadow-xs: 0 2px 8px rgba(58, 58, 60, 0.05);
-  --shadow-soft: 0 10px 28px rgba(58, 58, 60, 0.07);
-  --shadow-lift: 0 18px 44px rgba(58, 58, 60, 0.1);
-  --shadow-glow: 0 10px 30px rgba(217, 165, 160, 0.28);
+  --shadow-soft: 0 8px 24px rgba(58, 58, 60, 0.06);
+  --shadow-lift: 0 14px 36px rgba(58, 58, 60, 0.1);
+  --shadow-glow: 0 10px 28px rgba(231, 207, 169, 0.45);
+  --shadow-card: 0 6px 20px rgba(58, 58, 60, 0.06), 0 1px 3px rgba(58, 58, 60, 0.04);
 }

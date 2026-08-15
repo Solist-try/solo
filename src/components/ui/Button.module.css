@@ -2,10 +2,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
+  gap: var(--space-brand-8);
   border: 1px solid transparent;
-  border-radius: var(--radius-pill);
-  font-family: var(--font-body);
+  border-radius: var(--radius-md);
+  font-family: var(--font-gosolo-sans);
   font-weight: var(--weight-semibold);
   letter-spacing: 0.01em;
   cursor: pointer;
@@ -26,71 +26,98 @@
   transform: translateY(1px) scale(0.99);
 }
 
+.button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  box-shadow: var(--color-focus-ring);
+}
+
 .fullWidth {
   width: 100%;
 }
 
 .sm {
   min-height: 2.25rem;
-  padding: 0.4rem 0.95rem;
+  padding: var(--space-brand-8) var(--space-brand-12);
   font-size: var(--text-sm);
 }
 
 .md {
   min-height: 2.75rem;
-  padding: 0.55rem 1.25rem;
+  padding: var(--space-brand-12) var(--space-brand-20);
   font-size: var(--text-base);
 }
 
 .lg {
   min-height: 3.25rem;
-  padding: 0.8rem 1.55rem;
+  padding: var(--space-brand-12) var(--space-brand-32);
   font-size: var(--text-lg);
 }
 
+/* Primary gold */
 .primary {
-  color: var(--color-text-inverse);
-  background: var(--gradient-cta);
-  background-size: 160% 160%;
+  color: var(--brand-deep-charcoal);
+  background: var(--brand-soft-gold);
+  border-color: rgba(201, 176, 138, 0.55);
   box-shadow: var(--shadow-glow);
 }
 
 .primary:not(:disabled):hover {
-  background-position: 100% 50%;
-  box-shadow: 0 14px 34px rgba(217, 165, 160, 0.34);
+  background: var(--gold-300);
+  box-shadow: 0 12px 28px rgba(231, 207, 169, 0.55);
 }
 
+.primary:not(:disabled):active {
+  background: var(--gold-400);
+}
+
+/* Secondary taupe */
 .secondary {
-  color: var(--neutral-800);
-  background: var(--color-bg-elevated);
-  border-color: var(--color-border-strong);
+  color: var(--brand-deep-charcoal);
+  background: var(--brand-warm-taupe);
+  border-color: rgba(168, 153, 144, 0.55);
   box-shadow: var(--shadow-xs);
 }
 
 .secondary:not(:disabled):hover {
-  background: var(--peach-50);
-  border-color: var(--peach-300);
+  background: #b9aaa0;
+  border-color: rgba(143, 166, 184, 0.45);
 }
 
+/* Subtle mist grey */
+.subtle {
+  color: var(--brand-deep-charcoal);
+  background: var(--brand-mist-grey);
+  border-color: rgba(199, 184, 174, 0.55);
+  box-shadow: none;
+}
+
+.subtle:not(:disabled):hover {
+  background: var(--neutral-100);
+  border-color: var(--brand-soft-summer-blue);
+}
+
+/* Soft / highlight — Accent Rose wash */
 .soft {
-  color: var(--peach-700);
-  background: var(--color-accent-soft);
+  color: var(--rose-700);
+  background: var(--color-highlight-soft);
   border-color: transparent;
 }
 
 .soft:not(:disabled):hover {
-  background: var(--peach-200);
+  background: rgba(217, 165, 160, 0.35);
+  color: var(--brand-deep-charcoal);
 }
 
 .outline {
-  color: var(--peach-600);
+  color: var(--brand-deep-charcoal);
   background: transparent;
-  border-color: var(--peach-300);
+  border-color: var(--brand-warm-taupe);
 }
 
 .outline:not(:disabled):hover {
-  background: var(--color-accent-muted);
-  border-color: var(--peach-400);
+  background: var(--color-highlight-soft);
+  border-color: var(--brand-accent-rose);
 }
 
 .ghost {
@@ -99,8 +126,8 @@
 }
 
 .ghost:not(:disabled):hover {
-  color: var(--neutral-900);
-  background: var(--color-accent-muted);
+  color: var(--brand-deep-charcoal);
+  background: var(--color-highlight-soft);
 }
 
 .danger {

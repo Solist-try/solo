@@ -32,9 +32,17 @@ export const colors = {
   successSoft: "#E3EDE6",
 } as const;
 
+/**
+ * Typography tokens — brand names with web-font fallbacks.
+ * GoSoloSerif → headings; GoSoloSans → body/UI.
+ */
 export const typography = {
-  fontDisplay: '"Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia, serif',
-  fontBody: '"Nunito", "Segoe UI", system-ui, sans-serif',
+  fontSerif: '"GoSoloSerif", "Source Serif 4", "Iowan Old Style", Georgia, serif',
+  fontSans: '"GoSoloSans", "Nunito", "Segoe UI", system-ui, sans-serif',
+  /** @deprecated use fontSerif */
+  fontDisplay: '"GoSoloSerif", "Source Serif 4", "Iowan Old Style", Georgia, serif',
+  /** @deprecated use fontSans */
+  fontBody: '"GoSoloSans", "Nunito", "Segoe UI", system-ui, sans-serif',
   size: {
     xs: "0.75rem",
     sm: "0.875rem",
@@ -69,21 +77,30 @@ export const typography = {
   },
 } as const;
 
-/** Spacing system — 4px base */
+/** Brand spacing scale — 4 · 8 · 12 · 20 · 32 */
 export const spacing = {
+  4: "4px",
+  8: "8px",
+  12: "12px",
+  20: "20px",
+  32: "32px",
+} as const;
+
+/** Extended steps mapped onto the brand scale + page rhythm */
+export const spacingSteps = {
   0: "0",
-  1: "0.25rem",
-  2: "0.5rem",
-  3: "0.75rem",
-  4: "1rem",
-  5: "1.25rem",
-  6: "1.5rem",
-  7: "2rem",
-  8: "2.5rem",
-  9: "3rem",
-  10: "4rem",
-  11: "5rem",
-  12: "6.5rem",
+  1: spacing[4],
+  2: spacing[8],
+  3: spacing[12],
+  4: spacing[20],
+  5: spacing[32],
+  6: "40px",
+  7: "48px",
+  8: "64px",
+  9: "80px",
+  10: "96px",
+  11: "112px",
+  12: "128px",
 } as const;
 
 /** Curved corners — primary interactive radius lives in 10–14px */
@@ -109,9 +126,36 @@ export const motion = {
 
 export const shadows = {
   xs: "0 2px 8px rgba(58, 58, 60, 0.05)",
-  soft: "0 10px 28px rgba(58, 58, 60, 0.07)",
-  lift: "0 18px 44px rgba(58, 58, 60, 0.1)",
-  glow: "0 10px 30px rgba(217, 165, 160, 0.28)",
+  soft: "0 8px 24px rgba(58, 58, 60, 0.06)",
+  lift: "0 14px 36px rgba(58, 58, 60, 0.1)",
+  glow: "0 10px 28px rgba(231, 207, 169, 0.45)",
+  card: "0 6px 20px rgba(58, 58, 60, 0.06), 0 1px 3px rgba(58, 58, 60, 0.04)",
+} as const;
+
+/** Interaction — Soft Summer Blue focus, Accent Rose highlight */
+export const interaction = {
+  focus: colors.softSummerBlue,
+  focusRing: "0 0 0 3px rgba(143, 166, 184, 0.4)",
+  highlight: colors.accentRose,
+  highlightSoft: "rgba(217, 165, 160, 0.22)",
+} as const;
+
+export const buttons = {
+  primary: {
+    label: "Primary gold",
+    background: colors.softGold,
+    color: colors.deepCharcoal,
+  },
+  secondary: {
+    label: "Secondary taupe",
+    background: colors.warmTaupe,
+    color: colors.deepCharcoal,
+  },
+  subtle: {
+    label: "Subtle grey",
+    background: colors.mistGrey,
+    color: colors.deepCharcoal,
+  },
 } as const;
 
 export const layout = {
@@ -125,13 +169,17 @@ export const theme = {
   colors,
   typography,
   spacing,
+  spacingSteps,
   radius,
   motion,
   shadows,
+  interaction,
+  buttons,
   layout,
 } as const;
 
 export type Theme = typeof theme;
 export type BrandColor = keyof typeof colors;
+export type ButtonBrandVariant = keyof typeof buttons;
 
 export default theme;
