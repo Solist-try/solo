@@ -7,7 +7,6 @@ type QuickCard = {
   title: string;
   description: string;
   action: string;
-  tone: "peach" | "gold" | "taupe";
   Icon: ComponentType<{ className?: string }>;
 };
 
@@ -17,7 +16,6 @@ const quickAccess: QuickCard[] = [
     title: "Community",
     description: "Circles and members who understand the solo stretch.",
     action: "Enter community",
-    tone: "peach",
     Icon: CommunityIcon,
   },
   {
@@ -25,7 +23,6 @@ const quickAccess: QuickCard[] = [
     title: "Resources",
     description: "Guides, checklists, and calm packing rituals.",
     action: "Browse resources",
-    tone: "gold",
     Icon: ResourcesIcon,
   },
   {
@@ -33,7 +30,6 @@ const quickAccess: QuickCard[] = [
     title: "Toolkit",
     description: "Daily anchors for independence with support nearby.",
     action: "Open toolkit",
-    tone: "taupe",
     Icon: ToolkitIcon,
   },
 ];
@@ -79,23 +75,23 @@ export function Home() {
         </div>
       </header>
 
-      <section className="home-hero" aria-label="GoSolo home hero">
-        <div className="home-hero__media" aria-hidden="true">
-          <div className="home-hero__horizon" />
-          <div className="home-hero__sun" />
-          <div className="home-hero__glow" />
-          <div className="home-hero__path" />
+      <section className="home-banner" aria-label="GoSolo welcome banner">
+        <div className="home-banner__wash" aria-hidden="true">
+          <span className="home-banner__blob home-banner__blob--one" />
+          <span className="home-banner__blob home-banner__blob--two" />
+          <span className="home-banner__arc" />
+          <span className="home-banner__sun" />
         </div>
 
-        <div className="container home-hero__content">
-          <p className="home-hero__brand">GoSolo</p>
-          <p className="home-hero__welcome">Welcome home, {firstName}</p>
-          <h1 className="home-hero__tagline">Go solo, not alone</h1>
-          <p className="home-hero__lede">
-            Your calm base for independent travel — connect, learn, and show up
+        <div className="container home-banner__content">
+          <p className="home-banner__brand">GoSolo</p>
+          <p className="home-banner__welcome">Welcome home, {firstName}</p>
+          <h1 className="home-banner__tagline">Go solo, not alone.</h1>
+          <p className="home-banner__lede">
+            A warm base for independent travel — connect, learn, and show up
             when you want company.
           </p>
-          <div className="home-hero__ctas">
+          <div className="home-banner__ctas">
             <a className="home-btn home-btn--primary" href="#quick-access">
               Explore quick access
             </a>
@@ -106,41 +102,43 @@ export function Home() {
         </div>
       </section>
 
-      <div className="home-hero__curve" aria-hidden="true" />
+      <div className="home-banner__curve" aria-hidden="true" />
 
       <section
         id="quick-access"
-        className="container home-quick"
+        className="home-quick"
         aria-labelledby="quick-access-heading"
       >
-        <header className="home-quick__header">
-          <h2 id="quick-access-heading">Quick access</h2>
-          <p>Three warm doorways into the GoSolo experience.</p>
-        </header>
+        <div className="container home-quick__inner">
+          <header className="home-quick__header">
+            <h2 id="quick-access-heading">Quick access</h2>
+            <p>Three calm doorways into the GoSolo experience.</p>
+          </header>
 
-        <div className="home-quick__grid">
-          {quickAccess.map((item, index) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="home-card-link"
-              style={{ animationDelay: `${0.1 + index * 0.08}s` }}
-            >
-              <article className="home-card" data-tone={item.tone}>
-                <span className="home-card__icon" aria-hidden="true">
-                  <item.Icon />
-                </span>
-                <div className="home-card__copy">
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-                <span className="home-card__action">
-                  {item.action}
-                  <span aria-hidden="true">→</span>
-                </span>
-              </article>
-            </Link>
-          ))}
+          <div className="home-quick__grid">
+            {quickAccess.map((item, index) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="home-card-link"
+                style={{ animationDelay: `${0.12 + index * 0.1}s` }}
+              >
+                <article className="home-card">
+                  <span className="home-card__icon" aria-hidden="true">
+                    <item.Icon />
+                  </span>
+                  <div className="home-card__copy">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                  <span className="home-card__action">
+                    {item.action}
+                    <span aria-hidden="true">→</span>
+                  </span>
+                </article>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </div>
