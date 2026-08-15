@@ -13,6 +13,11 @@ export const colors = {
   clay: "#C7B8AE",
   charcoal: "#3A3A3C",
 
+  /** Button-related color accents */
+  button: {
+    hoverTint: "#C7B8AE",
+  },
+
   /** Extended / derived */
   white: "#FFFCFA",
   softGold: "#E7CFA9",
@@ -161,19 +166,19 @@ export const buttons = {
     label: "Primary sage",
     background: colors.sage,
     color: colors.white,
-    hover: colors.clay,
+    hover: colors.button.hoverTint,
   },
   secondary: {
     label: "Secondary mist",
     background: colors.mist,
     color: colors.charcoal,
-    hover: colors.clay,
+    hover: colors.button.hoverTint,
   },
   subtle: {
     label: "Subtle cream",
     background: colors.white,
     color: colors.charcoal,
-    hover: colors.clay,
+    hover: colors.button.hoverTint,
   },
 } as const;
 
