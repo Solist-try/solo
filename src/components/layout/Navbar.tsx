@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { colors, typography } from "../../styles/brand-tokens";
 import styles from "./Navbar.module.css";
 
 const links = [
@@ -17,7 +18,10 @@ export function Navbar() {
             <span className={styles.logoSun} />
             <span className={styles.logoPath} />
           </span>
-          <span className={styles.brandName}>
+          <span
+            className={styles.brandName}
+            style={{ fontFamily: typography.fontHeading, color: colors.charcoal }}
+          >
             Go<span className={styles.brandAccent}>Solo</span>
           </span>
         </NavLink>
@@ -30,6 +34,7 @@ export function Navbar() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`.trim()
               }
+              style={{ color: colors.charcoal, fontFamily: typography.fontBody }}
             >
               {link.label}
             </NavLink>

@@ -1,3 +1,4 @@
+import { colors, radius } from "../../styles/brand-tokens";
 import styles from "./Avatar.module.css";
 
 export type AvatarProps = {
@@ -21,6 +22,11 @@ export function Avatar({ name, size = "md", src }: AvatarProps) {
       className={`${styles.avatar} ${styles[size]}`}
       aria-hidden={src ? undefined : true}
       title={name}
+      style={{
+        borderRadius: radius.md,
+        background: colors.sageSoft,
+        color: colors.charcoal,
+      }}
     >
       {src ? <img src={src} alt="" /> : <span>{initials(name)}</span>}
     </div>

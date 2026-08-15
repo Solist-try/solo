@@ -1,4 +1,5 @@
 import { Button, Card, CardBody, CardFooter, CardHeader } from "../../components/ui";
+import { colors, radius } from "../../styles/brand-tokens";
 import {
   eventTypeLabels,
   formatEventWhen,
@@ -19,7 +20,12 @@ export function EventCard({ event, rsvped, onToggleRsvp }: EventCardProps) {
   const full = !rsvped && spotsLeft === 0;
 
   return (
-    <Card variant="elevated" className={styles.card} padding="lg">
+    <Card
+      variant="elevated"
+      className={styles.card}
+      padding="lg"
+      style={{ borderRadius: radius.lg, borderColor: colors.clay }}
+    >
       <CardHeader
         eyebrow={eventTypeLabels[event.type]}
         title={event.title}

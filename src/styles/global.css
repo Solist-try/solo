@@ -1,5 +1,5 @@
 @import "./fonts.css";
-@import "./tokens.css";
+@import "./theme.css";
 @import "./typography.css";
 @import "./motif.css";
 @import "./animations.css";
@@ -28,7 +28,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: var(--font-gosolo-sans);
+  font-family: var(--font-body);
   font-size: var(--text-base);
   font-weight: var(--weight-regular);
   line-height: var(--leading-normal);
@@ -65,16 +65,21 @@ select {
 h1,
 h2,
 h3,
-h4 {
-  font-family: var(--font-gosolo-serif);
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-display);
+  color: var(--color-charcoal);
   margin: 0;
 }
 
 p {
   margin: 0;
+  font-family: var(--font-body);
+  line-height: var(--leading-normal);
 }
 
 ul,
@@ -90,7 +95,7 @@ ol {
 }
 
 ::selection {
-  background: var(--color-highlight-soft);
+  background: color-mix(in srgb, var(--brand-sage) 35%, transparent);
   color: var(--color-text);
 }
 
@@ -122,12 +127,14 @@ ol {
 }
 
 .page__header h1 {
+  font-family: var(--font-heading);
   font-size: var(--text-4xl);
-  color: var(--color-text);
+  color: var(--color-charcoal);
   margin-bottom: var(--space-3);
 }
 
 .page__header p {
+  font-family: var(--font-body);
   color: var(--color-text-muted);
   font-size: var(--text-lg);
   line-height: var(--leading-relaxed);
@@ -138,7 +145,7 @@ ol {
   display: grid;
   place-items: center;
   color: var(--color-text-muted);
-  font-family: var(--font-gosolo-serif);
+  font-family: var(--font-heading);
   font-size: var(--text-xl);
   background: var(--gradient-wash);
 }

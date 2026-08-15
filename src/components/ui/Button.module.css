@@ -56,14 +56,14 @@
 
 /* Primary sage — white text */
 .primary {
-  color: var(--btn-primary-fg, var(--neutral-0));
-  background: var(--btn-primary-bg, var(--brand-sage-green));
+  color: var(--brand-btn-fg, var(--btn-primary-fg, var(--neutral-0)));
+  background: var(--brand-btn-bg, var(--btn-primary-bg, var(--brand-sage-green)));
   border-color: rgba(154, 174, 150, 0.45);
   box-shadow: var(--shadow-xs);
 }
 
 .primary:not(:disabled):hover {
-  background: var(--btn-hover-tint, var(--brand-clay-beige));
+  background: var(--brand-btn-hover, var(--btn-hover-tint, var(--brand-clay-beige)));
   color: var(--brand-deep-charcoal);
   border-color: rgba(168, 153, 144, 0.45);
   box-shadow: var(--shadow-soft);
@@ -76,27 +76,27 @@
 
 /* Secondary mist — charcoal text */
 .secondary {
-  color: var(--btn-secondary-fg, var(--brand-deep-charcoal));
-  background: var(--btn-secondary-bg, var(--brand-mist-grey));
+  color: var(--brand-btn-fg, var(--btn-secondary-fg, var(--brand-deep-charcoal)));
+  background: var(--brand-btn-bg, var(--btn-secondary-bg, var(--brand-mist-grey)));
   border-color: rgba(199, 184, 174, 0.45);
   box-shadow: var(--shadow-xs);
 }
 
 .secondary:not(:disabled):hover {
-  background: var(--btn-hover-tint, var(--brand-clay-beige));
+  background: var(--brand-btn-hover, var(--btn-hover-tint, var(--brand-clay-beige)));
   border-color: rgba(168, 153, 144, 0.55);
 }
 
 /* Subtle cream */
 .subtle {
-  color: var(--brand-deep-charcoal);
-  background: var(--neutral-0);
+  color: var(--brand-btn-fg, var(--brand-deep-charcoal));
+  background: var(--brand-btn-bg, var(--neutral-0));
   border-color: rgba(199, 184, 174, 0.45);
   box-shadow: none;
 }
 
 .subtle:not(:disabled):hover {
-  background: var(--btn-hover-tint, var(--brand-clay-beige));
+  background: var(--brand-btn-hover, var(--btn-hover-tint, var(--brand-clay-beige)));
   border-color: rgba(168, 153, 144, 0.55);
 }
 

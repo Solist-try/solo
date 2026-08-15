@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
+import { colors, heroGradient } from "../styles/brand-tokens";
 import { BottomNav } from "./layout/BottomNav";
 import { Footer } from "./layout/Footer";
 import { Navbar } from "./layout/Navbar";
@@ -23,7 +24,13 @@ export function AppLayout({
   const isHome = pathname === "/";
 
   return (
-    <div className="app-shell">
+    <div
+      className="app-shell"
+      style={{
+        backgroundColor: colors.mist,
+        ["--app-hero-gradient" as string]: heroGradient,
+      }}
+    >
       {isHome ? null : <Navbar />}
       <main className="app-main">
         <Outlet />

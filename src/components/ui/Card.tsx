@@ -1,4 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
+import { radius, shadows } from "../../styles/brand-tokens";
 import styles from "./Card.module.css";
 
 export type CardVariant = "elevated" | "soft" | "outline" | "interactive";
@@ -16,6 +17,7 @@ export function Card({
   padding = "md",
   as: Tag = "article",
   className = "",
+  style,
   children,
   ...props
 }: CardProps) {
@@ -29,6 +31,11 @@ export function Card({
       ]
         .filter(Boolean)
         .join(" ")}
+      style={{
+        borderRadius: radius.lg,
+        boxShadow: variant === "elevated" ? shadows.card : shadows.soft,
+        ...style,
+      }}
       {...props}
     >
       {children}

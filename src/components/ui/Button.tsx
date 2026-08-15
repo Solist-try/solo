@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { buttons as brandButtons, radius } from "../../styles/brand-tokens";
 import styles from "./Button.module.css";
 
 /** Brand button variants + retained utility variants */
@@ -25,10 +26,16 @@ export function Button({
   size = "md",
   fullWidth = false,
   className = "",
+  style,
   children,
   type = "button",
   ...props
 }: ButtonProps) {
+  const brand =
+    variant === "primary" || variant === "secondary" || variant === "subtle"
+      ? brandButtons[variant]
+      : null;
+
   return (
     <button
       type={type}
@@ -41,6 +48,14 @@ export function Button({
       ]
         .filter(Boolean)
         .join(" ")}
+      style={{
+        borderRadius: radius.md,
+        ["--brand-btn-bg" as string]: brand?.background,
+        ["--brand-btn-fg" as string]: brand?.color,
+        ["--brand-btn-hover" as string]: brand?.hover,
+        ...style,
+      }}
+      data-brand-button={brand ? variant : undefined}
       {...props}
     >
       {children}

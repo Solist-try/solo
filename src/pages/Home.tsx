@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { colors, heroGradient, typography } from "../styles/brand-tokens";
 
 type QuickCard = {
   to: string;
@@ -71,7 +72,11 @@ export function Home() {
         </div>
       </header>
 
-      <section className="home-banner" aria-label="GoSolo welcome banner">
+      <section
+        className="home-banner"
+        aria-label="GoSolo welcome banner"
+        style={{ background: heroGradient }}
+      >
         <div className="home-banner__wash" aria-hidden="true">
           <span className="home-banner__blob home-banner__blob--one" />
           <span className="home-banner__blob home-banner__blob--two" />
@@ -80,9 +85,22 @@ export function Home() {
         </div>
 
         <div className="container home-banner__content">
-          <p className="home-banner__brand">GoSolo</p>
-          <h1 className="home-banner__tagline">Go solo, not alone.</h1>
-          <p className="home-banner__lede">
+          <p
+            className="home-banner__brand"
+            style={{ fontFamily: typography.fontHeading, color: colors.charcoal }}
+          >
+            GoSolo
+          </p>
+          <h1
+            className="home-banner__tagline"
+            style={{ fontFamily: typography.fontHeading, color: colors.charcoal }}
+          >
+            Go solo, not alone.
+          </h1>
+          <p
+            className="home-banner__lede"
+            style={{ fontFamily: typography.fontBody }}
+          >
             A calm space for independent living — connect, learn, and show up
             when you want company.
           </p>

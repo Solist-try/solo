@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { typography } from "../../styles/brand-tokens";
 import styles from "./Section.module.css";
 
 export type SectionProps = {
@@ -20,8 +21,10 @@ export function Section({
     <section className={`${styles.section} ${className}`.trim()}>
       <div className={styles.header}>
         <div>
-          <h2>{title}</h2>
-          {description ? <p>{description}</p> : null}
+          <h2 style={{ fontFamily: typography.fontHeading }}>{title}</h2>
+          {description ? (
+            <p style={{ fontFamily: typography.fontBody }}>{description}</p>
+          ) : null}
         </div>
         {action}
       </div>

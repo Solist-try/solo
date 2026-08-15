@@ -1,13 +1,22 @@
 import { Link } from "react-router-dom";
+import { colors, typography } from "../../styles/brand-tokens";
 import styles from "./Footer.module.css";
 
 export function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer
+      className={styles.footer}
+      style={{ background: colors.mist, color: colors.charcoal }}
+    >
       <div className={`container ${styles.inner}`}>
         <div>
-          <p className={styles.brand}>Go Solo</p>
-          <p className={styles.tagline}>
+          <p
+            className={styles.brand}
+            style={{ fontFamily: typography.fontHeading }}
+          >
+            Go Solo
+          </p>
+          <p className={styles.tagline} style={{ fontFamily: typography.fontBody }}>
             Independent paths, shared wisdom.
           </p>
         </div>
