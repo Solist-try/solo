@@ -184,12 +184,19 @@ export const layout = {
   bottomNavHeight: "5.15rem",
 } as const;
 
-export const brandTokens = {
+/** Nested brand API used by pages/components (`brand.gradients.hero`, etc.) */
+export const brand = {
   colors,
-  heroGradient,
-  typography,
+  gradients: {
+    hero: heroGradient,
+  },
   spacing,
   spacingSteps,
+  typography: {
+    heading: fontStack,
+    body: fontStack,
+    ...typography,
+  },
   radius,
   shadows,
   motion,
@@ -198,8 +205,15 @@ export const brandTokens = {
   layout,
 } as const;
 
+export const brandTokens = {
+  ...brand,
+  heroGradient,
+  typography,
+} as const;
+
+export type Brand = typeof brand;
 export type BrandTokens = typeof brandTokens;
 export type BrandColor = keyof typeof colors;
 export type ButtonBrandVariant = keyof typeof buttons;
 
-export default brandTokens;
+export default brand;

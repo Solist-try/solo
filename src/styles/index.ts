@@ -1,4 +1,5 @@
 export {
+  brand,
   brandTokens,
   colors,
   heroGradient,
@@ -15,6 +16,7 @@ export {
 } from "./brand-tokens";
 
 export type {
+  Brand,
   BrandTokens,
   BrandColor,
   ButtonBrandVariant,

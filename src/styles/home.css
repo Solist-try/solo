@@ -162,31 +162,12 @@
   display: grid;
   align-items: end;
   overflow: hidden;
-  background:
-    radial-gradient(
-      ellipse 95% 85% at 8% 6%,
-      var(--home-sage) 0%,
-      color-mix(in srgb, var(--home-sage) 55%, transparent) 28%,
-      transparent 62%
-    ),
-    radial-gradient(
-      ellipse 70% 55% at 78% 18%,
-      color-mix(in srgb, var(--home-mist-mid) 80%, transparent) 0%,
-      transparent 58%
-    ),
-    radial-gradient(
-      ellipse 90% 80% at 92% 96%,
-      var(--home-clay-soft) 0%,
-      color-mix(in srgb, var(--home-clay-soft) 45%, transparent) 34%,
-      transparent 68%
-    ),
-    linear-gradient(
-      155deg,
-      var(--home-sage) 0%,
-      var(--home-mist) 42%,
-      var(--home-mist-mid) 68%,
-      var(--home-clay-soft) 100%
-    );
+}
+
+.home-banner--centered {
+  align-items: center;
+  justify-items: center;
+  min-height: min(88vh, 46rem);
 }
 
 .home-banner__wash {
@@ -274,12 +255,21 @@
   max-width: 42rem;
   margin-inline: 0 auto 0;
   display: grid;
-  gap: var(--space-brand-20, 20px);
+  gap: 0;
   animation: fade-rise 0.9s var(--ease-out) both;
 }
 
+.home-banner__content--centered {
+  width: min(100%, 40rem);
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+  padding-inline: var(--home-space-20, var(--space-brand-20, 20px));
+  padding-block: var(--home-space-32, var(--space-brand-32, 32px));
+}
+
 .home-banner__brand {
-  font-family: "GoSoloSerif", var(--font-gosolo-serif, var(--font-display));
+  font-family: var(--font-heading, var(--font-display));
   font-size: clamp(2.75rem, 6.5vw, 4rem);
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -288,23 +278,36 @@
   margin: 0;
 }
 
+.home-banner__welcome {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--home-text-muted);
+  margin: 0;
+}
+
 .home-banner__tagline {
-  font-family: "GoSoloSerif", var(--font-gosolo-serif, var(--font-display));
-  font-size: clamp(2.2rem, 5.2vw, 3.5rem);
+  font-family: var(--font-heading, var(--font-display));
+  font-size: clamp(1.85rem, 4.8vw, 3.15rem);
   font-weight: 600;
   line-height: 1.18;
   letter-spacing: -0.025em;
   color: var(--home-charcoal);
   margin: 0;
-  max-width: 14ch;
+  max-width: 16ch;
+}
+
+.home-banner__content--centered .home-banner__tagline {
+  max-width: 18ch;
 }
 
 .home-banner__lede {
-  font-family: "GoSoloSans", var(--font-gosolo-sans, var(--font-body));
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
   font-weight: 400;
   color: var(--home-text-muted);
-  max-width: 38ch;
+  max-width: 36ch;
   margin: 0;
   line-height: 1.75;
 }
@@ -312,8 +315,11 @@
 .home-banner__ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-brand-12, 12px);
-  margin-top: var(--space-brand-12, 12px);
+  align-items: center;
+  justify-content: center;
+  gap: var(--home-space-12, var(--space-brand-12, 12px));
+  margin-top: var(--home-space-32, var(--space-brand-32, 32px));
+  width: 100%;
 }
 
 .home-btn {
@@ -321,11 +327,13 @@
   align-items: center;
   justify-content: center;
   min-height: 3rem;
-  padding: var(--space-brand-12, 12px) var(--space-brand-20, 20px);
+  padding: var(--home-space-12, var(--space-brand-12, 12px))
+    var(--home-space-20, var(--space-brand-20, 20px));
   border-radius: var(--radius-md, 12px);
-  font-family: var(--font-gosolo-sans, var(--font-body));
+  font-family: var(--font-body);
   font-weight: 600;
   border: 1px solid transparent;
+  text-decoration: none;
   transition:
     transform var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-med) var(--ease-soft),
@@ -528,6 +536,19 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-brand-20, 20px);
   }
+
+  .home-banner--centered {
+    min-height: min(90vh, 48rem);
+  }
+
+  .home-banner__content--centered {
+    width: min(100%, 44rem);
+    padding-block: var(--space-9, 80px);
+  }
+
+  .home-banner__ctas {
+    flex-wrap: nowrap;
+  }
 }
 
 @media (max-width: 720px) {
@@ -535,12 +556,36 @@
     display: none;
   }
 
-  .home-banner {
-    min-height: min(78vh, 34rem);
+  .home-banner,
+  .home-banner--centered {
+    min-height: min(84vh, 36rem);
+  }
+
+  .home-banner__content--centered {
+    padding-inline: var(--home-space-12, 12px);
+    padding-block: var(--home-space-32, 32px);
+  }
+
+  .home-banner__brand {
+    font-size: clamp(2.25rem, 11vw, 3rem);
   }
 
   .home-banner__tagline {
-    max-width: 12ch;
+    max-width: 14ch;
+    font-size: clamp(1.55rem, 7.5vw, 2.15rem);
+  }
+
+  .home-banner__lede {
+    max-width: 30ch;
+  }
+
+  .home-banner__ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home-banner__ctas .home-btn {
+    width: 100%;
   }
 
   .home-logo__text {

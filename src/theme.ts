@@ -4,6 +4,7 @@
  */
 
 export {
+  brand,
   brandTokens,
   colors,
   heroGradient,
@@ -19,14 +20,15 @@ export {
 } from "./styles/brand-tokens";
 
 export type {
+  Brand,
   BrandTokens,
   BrandColor,
   ButtonBrandVariant,
 } from "./styles/brand-tokens";
 
-import brandTokens from "./styles/brand-tokens";
+import brand from "./styles/brand-tokens";
 
-/** @deprecated Prefer `brandTokens` from `src/styles/brand-tokens` */
-export const theme = brandTokens;
+/** @deprecated Prefer `brand` from `src/styles/brand-tokens` */
+export const theme = brand;
 
-export default brandTokens;
+export default brand;
