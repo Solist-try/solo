@@ -165,6 +165,39 @@ export function DesignSystem() {
 
         <section className={styles.section}>
           <div className={styles.sectionHead}>
+            <h2 className="type-h2">Corner radius</h2>
+            <p className="type-body-lg">
+              Curved corners stay in a calm 10–14px range for surfaces and
+              controls.
+            </p>
+          </div>
+          <div className={styles.spaceList}>
+            {(
+              [
+                ["sm", "10px"],
+                ["md", "12px"],
+                ["lg", "14px"],
+              ] as const
+            ).map(([name, px]) => (
+              <div key={name} className={styles.spaceRow}>
+                <code>
+                  --radius-{name} · {px}
+                </code>
+                <span
+                  className={styles.spaceBar}
+                  style={{
+                    width: "4.5rem",
+                    height: "2.25rem",
+                    borderRadius: `var(--radius-${name})`,
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.sectionHead}>
             <h2 className="type-h2">Button variants</h2>
             <p className="type-body-lg">
               Primary gold, secondary taupe, and subtle mist grey — plus soft
