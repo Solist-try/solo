@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes } from "react";
+import { colors, radius } from "../../styles/brand-tokens";
 import styles from "./Toggle.module.css";
 
 export type ToggleProps = Omit<
@@ -15,6 +16,7 @@ export function Toggle({
   label,
   onChange,
   className = "",
+  style,
   ...props
 }: ToggleProps) {
   return (
@@ -25,6 +27,11 @@ export function Toggle({
       aria-label={label}
       className={`${styles.toggle} ${checked ? styles.on : ""} ${className}`.trim()}
       onClick={() => onChange(!checked)}
+      style={{
+        borderRadius: radius.pill,
+        background: checked ? colors.sage : colors.mistDeep,
+        ...style,
+      }}
       {...props}
     >
       <span className={styles.thumb} />

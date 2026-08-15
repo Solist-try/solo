@@ -1,22 +1,55 @@
-import type { HTMLAttributes } from "react";
+import type { CSSProperties, HTMLAttributes } from "react";
+import { colors, radius, shadows } from "../../styles/brand-tokens";
 import styles from "./SoftCurve.module.css";
+
+export type SoftCurveTone =
+  | "cream"
+  | "peach"
+  | "gold"
+  | "taupe"
+  | "blue"
+  | "rose"
+  | "sage"
+  | "mist"
+  | "clay";
 
 export type SoftCurveProps = HTMLAttributes<HTMLDivElement> & {
   variant?: "wave" | "blob" | "arc" | "pill";
-  tone?: "cream" | "peach" | "gold" | "taupe" | "blue" | "rose";
+  tone?: SoftCurveTone;
   flip?: boolean;
+};
+
+const toneFill: Record<SoftCurveTone, string> = {
+  cream: colors.white,
+  mist: colors.mist,
+  sage: colors.sage,
+  clay: colors.clay,
+  peach: colors.sageSoft,
+  gold: colors.mistSoft,
+  taupe: colors.clay,
+  blue: colors.blueSoft,
+  rose: colors.roseSoft,
 };
 
 /**
  * Soft curved motif used as section dividers and decorative anchors.
+ * Fills resolve from `brand-tokens.ts`.
  */
 export function SoftCurve({
   variant = "wave",
   tone = "cream",
   flip = false,
   className = "",
+  style,
   ...props
 }: SoftCurveProps) {
+  const toneStyle = {
+    ...style,
+    ["--soft-curve-fill" as string]: toneFill[tone],
+    borderRadius: variant === "pill" ? radius.pill : undefined,
+    boxShadow: variant === "blob" ? shadows.soft : undefined,
+  } as CSSProperties;
+
   if (variant === "wave") {
     return (
       <div
@@ -28,6 +61,7 @@ export function SoftCurve({
         ]
           .filter(Boolean)
           .join(" ")}
+        style={toneStyle}
         aria-hidden="true"
         {...props}
       >
@@ -44,6 +78,7 @@ export function SoftCurve({
         className={[styles.arc, styles[`tone-${tone}`], className]
           .filter(Boolean)
           .join(" ")}
+        style={toneStyle}
         aria-hidden="true"
         {...props}
       />
@@ -56,6 +91,7 @@ export function SoftCurve({
         className={[styles.pill, styles[`tone-${tone}`], className]
           .filter(Boolean)
           .join(" ")}
+        style={toneStyle}
         aria-hidden="true"
         {...props}
       />
@@ -67,6 +103,7 @@ export function SoftCurve({
       className={[styles.blob, styles[`tone-${tone}`], className]
         .filter(Boolean)
         .join(" ")}
+      style={toneStyle}
       aria-hidden="true"
       {...props}
     />

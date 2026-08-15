@@ -5,9 +5,9 @@
 .hero {
   background: linear-gradient(
     165deg,
-    var(--peach-100) 0%,
-    var(--neutral-50) 48%,
-    var(--gold-100) 100%
+    var(--sage-100) 0%,
+    var(--brand-mist) 48%,
+    var(--brand-clay) 100%
   );
   padding-top: var(--space-10);
 }

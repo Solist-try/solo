@@ -1,4 +1,5 @@
 import { Button } from "../ui";
+import { colors, spacing } from "../../styles/brand-tokens";
 import styles from "./SocialLogin.module.css";
 
 export function SocialLogin({
@@ -11,8 +12,8 @@ export function SocialLogin({
   pending?: boolean;
 }) {
   return (
-    <div className={styles.wrap}>
-      <div className={styles.divider}>
+    <div className={styles.wrap} style={{ gap: spacing[12] }}>
+      <div className={styles.divider} style={{ color: colors.charcoalMuted }}>
         <span>Or continue with</span>
       </div>
       <div className={styles.row}>

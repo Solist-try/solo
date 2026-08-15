@@ -1,6 +1,8 @@
-import type { ComponentType } from "react";
+import type { ComponentType, CSSProperties } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../auth";
+import { Button } from "../components/ui";
+import { brand } from "../styles/brand-tokens";
 
 type QuickCard = {
   to: string;
@@ -41,21 +43,44 @@ const navLinks = [
   { to: "/profile", label: "Profile" },
 ] as const;
 
+function firstName(name: string | undefined): string {
+  const part = name?.trim().split(/\s+/)[0];
+  return part || "Marge";
+}
+
 export function Home() {
   const { user } = useAuth();
-  const firstName = user?.name?.split(" ")[0] ?? "friend";
+  const welcomeName = firstName(user?.name);
+
+  const heroStyle = {
+    background: brand.gradients.hero,
+    ["--home-space-8" as string]: brand.spacing[8],
+    ["--home-space-12" as string]: brand.spacing[12],
+    ["--home-space-20" as string]: brand.spacing[20],
+    ["--home-space-32" as string]: brand.spacing[32],
+  } as CSSProperties;
+
+  const headingStyle: CSSProperties = {
+    fontFamily: brand.typography.heading,
+    color: brand.colors.charcoal,
+  };
+
+  const bodyStyle: CSSProperties = {
+    fontFamily: brand.typography.body,
+    color: brand.colors.charcoalSoft,
+  };
 
   return (
     <div className="home-page">
       <header className="home-topnav">
         <div className="container home-topnav__inner">
-          <Link to="/" className="home-logo" aria-label="GoSolo home">
+          <Link to="/" className="home-logo" aria-label="Go Solo home">
             <span className="home-logo__mark" aria-hidden="true">
               <span className="home-logo__sun" />
               <span className="home-logo__path" />
             </span>
-            <span className="home-logo__text">
-              Go<span>Solo</span>
+            <span className="home-logo__text" style={headingStyle}>
+              Go Solo
             </span>
           </Link>
 
@@ -67,6 +92,7 @@ export function Home() {
                 className={({ isActive }) =>
                   `home-nav__link${isActive ? " is-active" : ""}`
                 }
+                style={bodyStyle}
               >
                 {link.label}
               </NavLink>
@@ -75,7 +101,11 @@ export function Home() {
         </div>
       </header>
 
-      <section className="home-banner" aria-label="GoSolo welcome banner">
+      <section
+        className="home-banner home-banner--centered"
+        aria-label="Go Solo welcome banner"
+        style={heroStyle}
+      >
         <div className="home-banner__wash" aria-hidden="true">
           <span className="home-banner__blob home-banner__blob--one" />
           <span className="home-banner__blob home-banner__blob--two" />
@@ -83,19 +113,67 @@ export function Home() {
           <span className="home-banner__sun" />
         </div>
 
-        <div className="container home-banner__content">
-          <p className="home-banner__brand">GoSolo</p>
-          <p className="home-banner__welcome">Welcome home, {firstName}</p>
-          <h1 className="home-banner__tagline">Go solo, not alone.</h1>
-          <p className="home-banner__lede">
-            A warm base for independent travel — connect, learn, and show up
+        <div className="container home-banner__content home-banner__content--centered">
+          <p className="home-banner__brand" style={headingStyle}>
+            Go Solo
+          </p>
+          <p
+            className="home-banner__welcome"
+            style={{
+              ...bodyStyle,
+              marginTop: brand.spacing[12],
+            }}
+          >
+            Welcome home, {welcomeName}
+          </p>
+          <h1
+            className="home-banner__tagline"
+            style={{
+              ...headingStyle,
+              marginTop: brand.spacing[20],
+            }}
+          >
+            Go solo, not alone.
+          </h1>
+          <p
+            className="home-banner__lede"
+            style={{
+              ...bodyStyle,
+              marginTop: brand.spacing[12],
+            }}
+          >
+            A calm space for independent living — connect, learn, and show up
             when you want company.
           </p>
-          <div className="home-banner__ctas">
-            <a className="home-btn home-btn--primary" href="#quick-access">
+          <div
+            className="home-banner__ctas"
+            style={{
+              marginTop: brand.spacing[32],
+              gap: brand.spacing[12],
+            }}
+          >
+            <Button
+              variant="primary"
+              size="lg"
+              className="home-btn home-btn--primary"
+              onClick={() => {
+                document
+                  .getElementById("quick-access")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               Explore quick access
-            </a>
-            <Link className="home-btn home-btn--secondary" to="/community">
+            </Button>
+            <Link
+              to="/community"
+              className="home-btn home-btn--secondary"
+              style={{
+                background: brand.buttons.secondary.background,
+                color: brand.buttons.secondary.color,
+                borderRadius: brand.radius.md,
+                fontFamily: brand.typography.body,
+              }}
+            >
               Meet the community
             </Link>
           </div>
@@ -108,14 +186,28 @@ export function Home() {
         id="quick-access"
         className="home-quick"
         aria-labelledby="quick-access-heading"
+        style={{ paddingBlock: brand.spacing[32] }}
       >
-        <div className="container home-quick__inner">
-          <header className="home-quick__header">
-            <h2 id="quick-access-heading">Quick access</h2>
-            <p>Three calm doorways into the GoSolo experience.</p>
+        <div
+          className="container home-quick__inner"
+          style={{ gap: brand.spacing[32] }}
+        >
+          <header
+            className="home-quick__header"
+            style={{ gap: brand.spacing[8] }}
+          >
+            <h2 id="quick-access-heading" style={headingStyle}>
+              Quick access
+            </h2>
+            <p style={bodyStyle}>
+              Three calm doorways into the Go Solo experience.
+            </p>
           </header>
 
-          <div className="home-quick__grid">
+          <div
+            className="home-quick__grid"
+            style={{ gap: brand.spacing[20] }}
+          >
             {quickAccess.map((item, index) => (
               <Link
                 key={item.to}
@@ -123,13 +215,19 @@ export function Home() {
                 className="home-card-link"
                 style={{ animationDelay: `${0.12 + index * 0.1}s` }}
               >
-                <article className="home-card">
+                <article
+                  className="home-card"
+                  style={{ gap: brand.spacing[20], padding: brand.spacing[20] }}
+                >
                   <span className="home-card__icon" aria-hidden="true">
                     <item.Icon />
                   </span>
-                  <div className="home-card__copy">
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
+                  <div
+                    className="home-card__copy"
+                    style={{ gap: brand.spacing[8] }}
+                  >
+                    <h3 style={headingStyle}>{item.title}</h3>
+                    <p style={bodyStyle}>{item.description}</p>
                   </div>
                   <span className="home-card__action">
                     {item.action}

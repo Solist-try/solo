@@ -1,70 +1,68 @@
 /* --------------------------------------------------------------------------
-   GoSolo Profile
+   GoSolo Profile — mist cards · clay accents · charcoal text
    -------------------------------------------------------------------------- */
 
 .profile-page {
   display: grid;
-  gap: 1.25rem;
-  padding-block: 3rem 6.5rem;
+  gap: var(--profile-space-32, var(--space-brand-32, 32px));
+  padding-block: var(--space-8, 64px) var(--space-12, 128px);
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
 }
 
 .profile-card {
   display: grid;
-  gap: 1.15rem;
-  padding: 1.5rem;
-  border-radius: 1.5rem;
-  background: rgba(255, 250, 246, 0.96);
-  border: 1px solid rgba(199, 184, 174, 0.16);
-  box-shadow: 0 10px 28px rgba(42, 36, 31, 0.07);
-  animation: fade-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  gap: var(--profile-space-20, var(--space-brand-20, 20px));
+  padding: var(--profile-space-20, var(--space-brand-20, 20px));
+  border-radius: var(--profile-radius, var(--radius-lg, 14px));
+  background: var(--profile-mist, var(--brand-mist-grey, #e9e6e3));
+  border: 1px solid rgba(199, 184, 174, 0.3);
+  box-shadow: var(--profile-shadow, var(--shadow-soft));
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
+  animation: fade-rise 0.7s var(--ease-out) both;
   transition:
-    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 280ms ease,
-    border-color 280ms ease;
+    transform var(--duration-med) var(--ease-out),
+    box-shadow var(--duration-med) var(--ease-soft),
+    border-color var(--duration-med) var(--ease-soft);
 }
 
 .profile-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(42, 36, 31, 0.1);
-  border-color: rgba(231, 207, 169, 0.5);
+  box-shadow: var(--shadow-lift);
+  border-color: rgba(199, 184, 174, 0.55);
 }
 
-.profile-card--soft {
-  background: linear-gradient(
-    160deg,
-    rgba(231, 207, 169, 0.28),
-    rgba(255, 250, 246, 0.96) 45%,
-    rgba(247, 236, 208, 0.4)
-  );
+.profile-card--hero {
+  border-top: 3px solid var(--profile-clay, var(--brand-clay-beige, #c7b8ae));
 }
 
 .profile-hero {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem;
+  gap: var(--profile-space-20, var(--space-brand-20, 20px));
 }
 
 .profile-kicker {
-  margin: 0 0 0.35rem;
+  margin: 0;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #975533;
+  color: var(--profile-clay, var(--brand-clay-beige, #c7b8ae));
 }
 
 .profile-name {
-  margin: 0 0 0.45rem;
-  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
+  margin: 0;
+  font-family: var(--font-heading, var(--font-body));
   font-size: clamp(1.9rem, 4vw, 2.4rem);
-  color: #2a241f;
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
   line-height: 1.15;
+  letter-spacing: -0.012em;
 }
 
 .profile-bio-preview {
-  margin: 0 0 0.45rem;
-  color: #6f6156;
+  margin: 0;
+  color: var(--color-text-muted);
   line-height: 1.65;
   max-width: 40rem;
 }
@@ -77,51 +75,52 @@
 
 .profile-section-title {
   margin: 0;
-  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
+  font-family: var(--font-heading, var(--font-body));
   font-size: 1.35rem;
-  color: #2a241f;
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
 }
 
 .profile-section-lede {
   margin: 0;
-  color: #6f6156;
+  color: var(--color-text-muted);
   font-size: 0.95rem;
   line-height: 1.6;
 }
 
 .profile-form {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--profile-space-20, var(--space-brand-20, 20px));
 }
 
 .profile-fields {
   display: grid;
-  gap: 0.9rem;
+  gap: var(--profile-space-12, var(--space-brand-12, 12px));
 }
 
 .profile-field {
   display: grid;
-  gap: 0.4rem;
+  gap: var(--profile-space-8, var(--space-brand-8, 8px));
 }
 
 .profile-field span {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #574c43;
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
 }
 
 .profile-field input,
 .profile-field textarea {
   width: 100%;
-  padding: 0.65rem 1rem;
-  border: 1px solid rgba(199, 184, 174, 0.22);
-  border-radius: 0.95rem;
-  background: var(--neutral-0);
-  color: #2a241f;
+  padding: var(--profile-space-12, var(--space-brand-12, 12px))
+    var(--profile-space-20, var(--space-brand-20, 20px));
+  border: 1px solid rgba(199, 184, 174, 0.4);
+  border-radius: var(--profile-radius-md, var(--radius-md, 12px));
+  background: var(--neutral-0, #fffcfa);
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
   font: inherit;
   transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease;
+    border-color var(--duration-med) var(--ease-soft),
+    box-shadow var(--duration-med) var(--ease-soft);
 }
 
 .profile-field input {
@@ -133,58 +132,64 @@
   resize: vertical;
 }
 
+.profile-field input:hover,
+.profile-field textarea:hover {
+  border-color: var(--profile-clay, var(--brand-clay-beige, #c7b8ae));
+}
+
 .profile-field input:focus,
 .profile-field textarea:focus {
   outline: none;
-  border-color: var(--brand-soft-gold);
-  box-shadow: 0 0 0 3px rgba(231, 207, 169, 0.35);
+  border-color: var(--color-focus);
+  box-shadow: var(--color-focus-ring);
 }
 
 .profile-prefs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: var(--profile-space-12, var(--space-brand-12, 12px));
 }
 
 .profile-pref {
   min-height: 2.4rem;
-  padding: 0.45rem 0.95rem;
-  border: 1px solid rgba(199, 184, 174, 0.2);
-  border-radius: 999px;
-  background: rgba(248, 235, 225, 0.45);
-  color: #574c43;
+  padding: var(--profile-space-12, var(--space-brand-12, 12px))
+    var(--profile-space-20, var(--space-brand-20, 20px));
+  border: 1px solid rgba(199, 184, 174, 0.35);
+  border-radius: var(--profile-radius-md, var(--radius-md, 12px));
+  background: var(--neutral-0, #fffcfa);
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
   transition:
-    background 220ms ease,
-    border-color 220ms ease,
-    color 220ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms ease;
+    background var(--duration-med) var(--ease-soft),
+    border-color var(--duration-med) var(--ease-soft),
+    color var(--duration-med) var(--ease-soft),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-med) var(--ease-soft);
 }
 
 .profile-pref:hover {
   transform: translateY(-1px);
-  border-color: rgba(231, 207, 169, 0.7);
-  color: #2a241f;
+  border-color: var(--profile-clay, var(--brand-clay-beige, #c7b8ae));
+  background: rgba(199, 184, 174, 0.35);
 }
 
 .profile-pref.is-selected {
-  background: rgba(231, 207, 169, 0.55);
-  border-color: rgba(224, 138, 82, 0.4);
-  color: #2a241f;
-  box-shadow: 0 8px 18px rgba(231, 207, 169, 0.28);
+  background: var(--profile-clay, var(--brand-clay-beige, #c7b8ae));
+  border-color: rgba(168, 153, 144, 0.55);
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
+  box-shadow: var(--profile-shadow, var(--shadow-soft));
 }
 
 .profile-split {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--profile-space-20, var(--space-brand-20, 20px));
 }
 
 .profile-list {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--profile-space-12, var(--space-brand-12, 12px));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -194,26 +199,27 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.85rem;
-  padding: 0.95rem 1rem;
-  border-radius: 1.1rem;
-  background: rgba(248, 235, 225, 0.45);
-  border: 1px solid rgba(199, 184, 174, 0.12);
+  gap: var(--profile-space-12, var(--space-brand-12, 12px));
+  padding: var(--profile-space-12, var(--space-brand-12, 12px));
+  border-radius: var(--profile-radius-md, var(--radius-md, 12px));
+  background: var(--neutral-0, #fffcfa);
+  border: 1px solid rgba(199, 184, 174, 0.25);
+  border-left: 3px solid var(--profile-clay, var(--brand-clay-beige, #c7b8ae));
 }
 
 .profile-item-tag {
-  margin: 0 0 0.25rem;
+  margin: 0 0 var(--profile-space-4, 4px);
   font-size: 0.72rem;
   font-weight: 650;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #975533;
+  color: var(--profile-clay, var(--brand-clay-beige, #c7b8ae));
 }
 
 .profile-list-item h3 {
   margin: 0 0 0.2rem;
   font-size: 1.05rem;
-  color: #2a241f;
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
 }
 
 .profile-item-meta {
@@ -224,12 +230,12 @@
 
 .profile-empty {
   margin: 0;
-  color: #6f6156;
+  color: var(--color-text-muted);
   line-height: 1.6;
 }
 
 .profile-empty a {
-  color: #975533;
+  color: var(--brand-sage-deep, #65795d);
   font-weight: 600;
   text-decoration: none;
 }
@@ -241,43 +247,45 @@
 .profile-ghost {
   flex-shrink: 0;
   min-height: 2.2rem;
-  padding: 0.35rem 0.8rem;
+  padding: var(--profile-space-8, 8px) var(--profile-space-12, 12px);
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: var(--profile-radius-md, var(--radius-md, 12px));
   background: transparent;
   color: var(--color-text-soft);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition:
-    background 200ms ease,
-    color 200ms ease;
+    background var(--duration-fast) var(--ease-soft),
+    color var(--duration-fast) var(--ease-soft);
 }
 
 .profile-ghost:hover {
-  background: rgba(199, 184, 174, 0.12);
-  color: #2a241f;
+  background: rgba(199, 184, 174, 0.35);
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
 }
 
 .profile-link {
   display: inline-flex;
   align-items: center;
   min-height: 2.35rem;
-  padding: 0.4rem 0.95rem;
-  border-radius: 999px;
-  background: rgba(231, 207, 169, 0.4);
-  color: #975533;
+  padding: var(--profile-space-8, 8px) var(--profile-space-20, 20px);
+  border-radius: var(--profile-radius-md, var(--radius-md, 12px));
+  background: var(--profile-clay, var(--brand-clay-beige, #c7b8ae));
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
   width: fit-content;
+  box-shadow: var(--shadow-xs);
   transition:
-    background 220ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    background var(--duration-med) var(--ease-soft),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 .profile-link:hover {
-  background: var(--brand-soft-gold);
+  background: var(--profile-hover, var(--btn-hover-tint, #c7b8ae));
+  filter: brightness(0.96);
   transform: translateY(-1px);
 }
 
@@ -286,18 +294,18 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.85rem;
-  padding: 1rem 1.25rem;
-  border-radius: 1.25rem;
-  background: rgba(255, 250, 246, 0.9);
-  border: 1px solid rgba(199, 184, 174, 0.14);
-  box-shadow: 0 8px 22px rgba(42, 36, 31, 0.06);
+  gap: var(--profile-space-12, var(--space-brand-12, 12px));
+  padding: var(--profile-space-12, 12px) var(--profile-space-20, 20px);
+  border-radius: var(--profile-radius, var(--radius-lg, 14px));
+  background: var(--profile-mist, var(--brand-mist-grey, #e9e6e3));
+  border: 1px solid rgba(199, 184, 174, 0.3);
+  box-shadow: var(--profile-shadow, var(--shadow-soft));
 }
 
 .profile-message {
   margin: 0;
   font-size: 0.9rem;
-  color: #574c43;
+  color: var(--profile-charcoal, var(--brand-deep-charcoal, #3a3a3c));
 }
 
 .profile-save {
@@ -305,23 +313,28 @@
   align-items: center;
   justify-content: center;
   min-height: 2.6rem;
-  padding: 0.55rem 1.25rem;
-  border: none;
-  border-radius: 999px;
-  background: var(--gradient-cta);
-  color: var(--neutral-0);
+  padding: var(--profile-space-12, 12px) var(--profile-space-20, 20px);
+  border: 1px solid rgba(154, 174, 150, 0.45);
+  border-radius: var(--profile-radius-md, var(--radius-md, 12px));
+  background: var(--profile-sage, var(--btn-primary-bg, var(--brand-sage-green)));
+  color: var(--btn-primary-fg, var(--neutral-0));
+  font-family: var(--font-body);
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(217, 165, 160, 0.22);
+  box-shadow: var(--shadow-xs);
   transition:
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms ease,
-    opacity 180ms ease;
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-med) var(--ease-soft),
+    background var(--duration-med) var(--ease-soft),
+    color var(--duration-med) var(--ease-soft),
+    opacity var(--duration-fast) var(--ease-soft);
 }
 
 .profile-save:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(217, 165, 160, 0.28);
+  background: var(--profile-hover, var(--btn-hover-tint, var(--brand-clay-beige)));
+  color: var(--profile-charcoal, var(--brand-deep-charcoal));
+  box-shadow: var(--shadow-soft);
 }
 
 .profile-save:disabled {
@@ -337,7 +350,7 @@
 
 @media (max-width: 720px) {
   .profile-card {
-    padding: 1.25rem;
+    padding: var(--profile-space-20, var(--space-brand-20, 20px));
   }
 
   .profile-list-item {

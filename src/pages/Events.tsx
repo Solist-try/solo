@@ -1,5 +1,6 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import { useAuth } from "../auth";
+import { Button } from "../components/ui";
 import {
   EVENT_TYPES,
   eventsCatalog,
@@ -7,6 +8,7 @@ import {
   type EventType,
   type SoloEvent,
 } from "../modules/events";
+import { brand } from "../styles/brand-tokens";
 
 type Filter = "All" | EventType;
 
@@ -104,11 +106,37 @@ export function Events() {
     }
   };
 
+  const pageStyle = {
+    gap: brand.spacing[32],
+    paddingBlock: `${brand.spacingSteps[8]} ${brand.spacingSteps[12]}`,
+    ["--events-radius" as string]: brand.radius.lg,
+    ["--events-radius-md" as string]: brand.radius.md,
+    ["--events-space-8" as string]: brand.spacing[8],
+    ["--events-space-12" as string]: brand.spacing[12],
+    ["--events-space-20" as string]: brand.spacing[20],
+    ["--events-space-32" as string]: brand.spacing[32],
+    ["--events-sage" as string]: brand.colors.sage,
+    ["--events-clay" as string]: brand.colors.clay,
+    ["--events-mist" as string]: brand.colors.mist,
+    ["--events-charcoal" as string]: brand.colors.charcoal,
+    ["--events-hover" as string]: brand.colors.button.hoverTint,
+  } as CSSProperties;
+
+  const headingStyle: CSSProperties = {
+    fontFamily: brand.typography.heading,
+    color: brand.colors.charcoal,
+  };
+
+  const bodyStyle: CSSProperties = {
+    fontFamily: brand.typography.body,
+    color: brand.colors.charcoalSoft,
+  };
+
   return (
-    <div className="container events-page">
-      <header className="events-header">
-        <h1>Events</h1>
-        <p>
+    <div className="container events-page" style={pageStyle}>
+      <header className="events-header" style={{ gap: brand.spacing[12] }}>
+        <h1 style={headingStyle}>Events</h1>
+        <p style={bodyStyle}>
           Workshops, discussions, and meetups for solo living — RSVP when you
           want company on the calendar.
         </p>
@@ -118,6 +146,13 @@ export function Events() {
         className="events-filters"
         role="toolbar"
         aria-label="Filter events by type"
+        style={{
+          gap: brand.spacing[8],
+          padding: brand.spacing[12],
+          borderRadius: brand.radius.lg,
+          background: brand.colors.mist,
+          boxShadow: brand.shadows.soft,
+        }}
       >
         <FilterChip
           label="All"
@@ -134,11 +169,22 @@ export function Events() {
         ))}
       </div>
 
-      <div className="events-layout">
-        <aside className="events-calendar" aria-label="Calendar preview">
+      <div className="events-layout" style={{ gap: brand.spacing[20] }}>
+        <aside
+          className="events-calendar"
+          aria-label="Calendar preview"
+          style={{
+            gap: brand.spacing[20],
+            padding: brand.spacing[20],
+            borderRadius: brand.radius.lg,
+            background: brand.colors.mist,
+            boxShadow: brand.shadows.soft,
+            color: brand.colors.charcoal,
+          }}
+        >
           <div className="events-calendar__header">
-            <h2>{monthLabel}</h2>
-            <div className="events-calendar__nav">
+            <h2 style={headingStyle}>{monthLabel}</h2>
+            <div className="events-calendar__nav" style={{ gap: brand.spacing[8] }}>
               <button
                 type="button"
                 aria-label="Previous month"
@@ -151,6 +197,12 @@ export function Events() {
                     ),
                   )
                 }
+                style={{
+                  borderRadius: brand.radius.md,
+                  background: brand.colors.sage,
+                  color: brand.colors.charcoal,
+                  boxShadow: brand.shadows.xs,
+                }}
               >
                 ‹
               </button>
@@ -166,6 +218,12 @@ export function Events() {
                     ),
                   )
                 }
+                style={{
+                  borderRadius: brand.radius.md,
+                  background: brand.colors.sage,
+                  color: brand.colors.charcoal,
+                  boxShadow: brand.shadows.xs,
+                }}
               >
                 ›
               </button>
@@ -174,11 +232,13 @@ export function Events() {
 
           <div className="events-calendar__weekdays" aria-hidden="true">
             {WEEKDAYS.map((day) => (
-              <span key={day}>{day}</span>
+              <span key={day} style={{ color: brand.colors.charcoalMuted }}>
+                {day}
+              </span>
             ))}
           </div>
 
-          <div className="events-calendar__grid">
+          <div className="events-calendar__grid" style={{ gap: brand.spacing[8] }}>
             {calendarCells.map((cell) => {
               if (!cell.date) {
                 return (
@@ -217,6 +277,17 @@ export function Events() {
                         : cell.date,
                     )
                   }
+                  style={{
+                    borderRadius: brand.radius.md,
+                    background: selected
+                      ? brand.colors.sage
+                      : hasEvent
+                        ? brand.colors.clay
+                        : brand.colors.white,
+                    color: brand.colors.charcoal,
+                    fontFamily: brand.typography.body,
+                    boxShadow: hasEvent ? brand.shadows.xs : "none",
+                  }}
                 >
                   {cell.date.getDate()}
                 </button>
@@ -224,8 +295,8 @@ export function Events() {
             })}
           </div>
 
-          <p className="events-calendar__legend">
-            Highlighted days have upcoming GoSolo events. Tap again to clear the
+          <p className="events-calendar__legend" style={bodyStyle}>
+            Highlighted days have upcoming Go Solo events. Tap again to clear the
             day filter.
             {rsvpIds.length > 0
               ? ` You’re going to ${rsvpIds.length}.`
@@ -233,8 +304,15 @@ export function Events() {
           </p>
         </aside>
 
-        <div>
-          <p className="events-count" aria-live="polite">
+        <div style={{ display: "grid", gap: brand.spacing[20] }}>
+          <p
+            className="events-count"
+            aria-live="polite"
+            style={{
+              fontFamily: brand.typography.body,
+              color: brand.colors.charcoalMuted,
+            }}
+          >
             {visible.length} {visible.length === 1 ? "event" : "events"}
             {filter !== "All" ? ` · ${FILTER_LABELS[filter]}` : ""}
             {selectedDay
@@ -246,20 +324,31 @@ export function Events() {
           </p>
 
           {visible.length === 0 ? (
-            <div className="events-empty">
-              <p>No events in this view yet.</p>
-              <button
+            <div
+              className="events-empty"
+              style={{
+                gap: brand.spacing[20],
+                padding: brand.spacing[32],
+                borderRadius: brand.radius.lg,
+                background: brand.colors.mist,
+                boxShadow: brand.shadows.soft,
+                color: brand.colors.charcoal,
+              }}
+            >
+              <p style={bodyStyle}>No events in this view yet.</p>
+              <Button
                 type="button"
+                variant="secondary"
                 onClick={() => {
                   setFilter("All");
                   setSelectedDay(null);
                 }}
               >
                 Show all events
-              </button>
+              </Button>
             </div>
           ) : (
-            <div className="events-grid">
+            <div className="events-grid" style={{ gap: brand.spacing[20] }}>
               {visible.map((event, index) => (
                 <EventCardView
                   key={event.id}
@@ -295,24 +384,83 @@ function EventCardView({
   style?: CSSProperties;
 }) {
   return (
-    <article className="events-card" style={style}>
-      <span className="events-card__type">{FILTER_LABELS[event.type]}</span>
-      <h3 className="events-card__title">{event.title}</h3>
-      <p className="events-card__date">{formatEventWhen(event.start, event.end)}</p>
-      <p className="events-card__description">{event.description}</p>
-      <p className="events-card__meta">
+    <article
+      className="events-card"
+      style={{
+        ...style,
+        gap: brand.spacing[12],
+        padding: brand.spacing[20],
+        borderRadius: brand.radius.lg,
+        background: brand.colors.clay,
+        boxShadow: brand.shadows.soft,
+        color: brand.colors.charcoal,
+      }}
+    >
+      <span
+        className="events-card__type"
+        style={{
+          borderRadius: brand.radius.md,
+          background: brand.colors.sage,
+          color: brand.colors.charcoal,
+          padding: `${brand.spacing[4]} ${brand.spacing[12]}`,
+          fontFamily: brand.typography.body,
+        }}
+      >
+        {FILTER_LABELS[event.type]}
+      </span>
+      <h3
+        className="events-card__title"
+        style={{
+          fontFamily: brand.typography.heading,
+          color: brand.colors.charcoal,
+        }}
+      >
+        {event.title}
+      </h3>
+      <p
+        className="events-card__date"
+        style={{
+          fontFamily: brand.typography.body,
+          color: brand.colors.charcoal,
+        }}
+      >
+        {formatEventWhen(event.start, event.end)}
+      </p>
+      <p
+        className="events-card__description"
+        style={{
+          fontFamily: brand.typography.body,
+          color: brand.colors.charcoal,
+        }}
+      >
+        {event.description}
+      </p>
+      <p
+        className="events-card__meta"
+        style={{
+          fontFamily: brand.typography.body,
+          color: brand.colors.charcoalSoft,
+        }}
+      >
         Hosted by {event.host} · {event.location}
       </p>
       <div className="events-card__actions">
-        <button
+        <Button
           type="button"
-          className={`events-rsvp${rsvped ? " is-going" : ""}`}
+          variant="primary"
           disabled={pending}
           aria-pressed={rsvped}
           onClick={onToggleRsvp}
+          className={`events-rsvp${rsvped ? " is-going" : ""}`}
+          style={{
+            borderRadius: brand.radius.md,
+            background: brand.colors.sage,
+            color: brand.colors.charcoal,
+            boxShadow: brand.shadows.xs,
+          }}
         >
           {pending ? "Saving…" : rsvped ? "Going ✓" : "RSVP"}
-        </button>
+        </Button>
       </div>
     </article>
   );
@@ -333,6 +481,15 @@ function FilterChip({
       className={`events-chip${active ? " is-active" : ""}`}
       aria-pressed={active}
       onClick={onClick}
+      style={{
+        borderRadius: brand.radius.md,
+        padding: `${brand.spacing[8]} ${brand.spacing[20]}`,
+        background: active ? brand.colors.sage : brand.colors.white,
+        color: brand.colors.charcoal,
+        fontFamily: brand.typography.body,
+        boxShadow: active ? brand.shadows.xs : "none",
+        borderColor: active ? brand.colors.sage : brand.colors.clay,
+      }}
     >
       {label}
     </button>

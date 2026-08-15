@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { colors, radius } from "../../styles/brand-tokens";
 import styles from "./BottomNav.module.css";
 
 const items = [
@@ -13,7 +14,14 @@ type IconName = (typeof items)[number]["icon"];
 
 export function BottomNav() {
   return (
-    <nav className={styles.nav} aria-label="Bottom">
+    <nav
+      className={styles.nav}
+      aria-label="Bottom"
+      style={{
+        background: colors.clay,
+        color: colors.charcoal,
+      }}
+    >
       <div className={styles.inner}>
         {items.map((item) => (
           <NavLink
@@ -23,6 +31,7 @@ export function BottomNav() {
             className={({ isActive }) =>
               `${styles.item} ${isActive ? styles.active : ""}`.trim()
             }
+            style={{ borderRadius: radius.md }}
           >
             {({ isActive }) => (
               <>

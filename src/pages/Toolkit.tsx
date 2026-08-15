@@ -1,4 +1,6 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useMemo, useState, type CSSProperties, type FormEvent } from "react";
+import { Button } from "../components/ui";
+import { brand } from "../styles/brand-tokens";
 
 type MoodOption = {
   id: string;
@@ -113,34 +115,85 @@ export function Toolkit() {
     );
   };
 
+  const pageStyle = {
+    gap: brand.spacing[32],
+    paddingBlock: `${brand.spacingSteps[8]} ${brand.spacingSteps[12]}`,
+    ["--toolkit-radius" as string]: brand.radius.lg,
+    ["--toolkit-radius-md" as string]: brand.radius.md,
+    ["--toolkit-space-8" as string]: brand.spacing[8],
+    ["--toolkit-space-12" as string]: brand.spacing[12],
+    ["--toolkit-space-20" as string]: brand.spacing[20],
+    ["--toolkit-space-32" as string]: brand.spacing[32],
+    ["--toolkit-sage" as string]: brand.colors.sage,
+    ["--toolkit-clay" as string]: brand.colors.clay,
+    ["--toolkit-mist" as string]: brand.colors.mist,
+    ["--toolkit-charcoal" as string]: brand.colors.charcoal,
+    ["--toolkit-hover" as string]: brand.colors.button.hoverTint,
+  } as CSSProperties;
+
+  const headingStyle: CSSProperties = {
+    fontFamily: brand.typography.heading,
+    color: brand.colors.charcoal,
+  };
+
+  const bodyStyle: CSSProperties = {
+    fontFamily: brand.typography.body,
+    color: brand.colors.charcoalSoft,
+  };
+
+  const mistCardStyle: CSSProperties = {
+    borderRadius: brand.radius.lg,
+    background: brand.colors.mist,
+    boxShadow: brand.shadows.soft,
+    color: brand.colors.charcoal,
+    gap: brand.spacing[20],
+    padding: brand.spacing[20],
+  };
+
   return (
-    <div className="container toolkit-page">
-      <header className="toolkit-header">
-        <h1>Solo Living Toolkit</h1>
-        <p>
+    <div className="container toolkit-page" style={pageStyle}>
+      <header className="toolkit-header" style={{ gap: brand.spacing[12] }}>
+        <h1 style={headingStyle}>Solo Living Toolkit</h1>
+        <p style={bodyStyle}>
           Gentle structure for the day: notice how you feel, keep small habits
           moving, and see your budget with clear eyes.
         </p>
       </header>
 
-      <div className="toolkit-grid">
-        {/* Emotional check-in */}
+      <div className="toolkit-grid" style={{ gap: brand.spacing[20] }}>
+        {/* Daily emotional check-in */}
         <section
           className="toolkit-card"
-          style={{ animationDelay: "0.05s" }}
+          style={{ ...mistCardStyle, animationDelay: "0.05s" }}
           aria-labelledby="checkin-heading"
         >
-          <header className="toolkit-card__header">
-            <span className="toolkit-card__icon" aria-hidden="true">
+          <header
+            className="toolkit-card__header"
+            style={{ gap: brand.spacing[12] }}
+          >
+            <span
+              className="toolkit-card__icon"
+              aria-hidden="true"
+              style={{
+                borderRadius: brand.radius.md,
+                background: brand.colors.sageSoft,
+                color: brand.colors.sageDeep,
+                boxShadow: brand.shadows.xs,
+              }}
+            >
               <HeartIcon />
             </span>
             <div>
-              <h2 id="checkin-heading" className="toolkit-card__title">
+              <h2
+                id="checkin-heading"
+                className="toolkit-card__title"
+                style={headingStyle}
+              >
                 Daily emotional check-in
               </h2>
-              <p className="toolkit-card__lede">
-                Name how you are landing. A short note is optional — support
-                without pressure to fix anything.
+              <p className="toolkit-card__lede" style={bodyStyle}>
+                Name how you are landing. Pick an emoji, add a short note if you
+                want — support without pressure to fix anything.
               </p>
             </div>
           </header>
@@ -150,52 +203,110 @@ export function Toolkit() {
               className="toolkit-moods"
               role="group"
               aria-label="How are you feeling?"
+              style={{ gap: brand.spacing[12] }}
             >
-              {moodOptions.map((option) => (
-                <button
-                  key={option.id}
-                  type="button"
-                  className={`toolkit-mood${mood?.id === option.id ? " is-selected" : ""}`}
-                  aria-pressed={mood?.id === option.id}
-                  onClick={() => setMood(option)}
-                >
-                  <span className="toolkit-mood__emoji" aria-hidden="true">
-                    {option.emoji}
-                  </span>
-                  <span className="toolkit-mood__label">{option.label}</span>
-                </button>
-              ))}
+              {moodOptions.map((option) => {
+                const selected = mood?.id === option.id;
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    className={`toolkit-mood${selected ? " is-selected" : ""}`}
+                    aria-pressed={selected}
+                    onClick={() => setMood(option)}
+                    style={{
+                      borderRadius: brand.radius.md,
+                      padding: brand.spacing[12],
+                      gap: brand.spacing[4],
+                      background: selected
+                        ? brand.colors.sage
+                        : brand.colors.white,
+                      color: brand.colors.charcoal,
+                      borderColor: selected
+                        ? brand.colors.sage
+                        : brand.colors.clay,
+                      boxShadow: selected
+                        ? brand.shadows.soft
+                        : brand.shadows.xs,
+                      fontFamily: brand.typography.body,
+                    }}
+                  >
+                    <span className="toolkit-mood__emoji" aria-hidden="true">
+                      {option.emoji}
+                    </span>
+                    <span className="toolkit-mood__label">{option.label}</span>
+                  </button>
+                );
+              })}
             </div>
 
-            <label className="toolkit-note" style={{ marginTop: "1rem" }}>
-              <span>Notes (optional)</span>
+            <label
+              className="toolkit-note"
+              style={{ marginTop: brand.spacing[20], gap: brand.spacing[8] }}
+            >
+              <span style={{ ...headingStyle, fontSize: "0.875rem" }}>
+                Notes (optional)
+              </span>
               <textarea
                 value={note}
                 onChange={(event) => setNote(event.target.value)}
                 placeholder="One gentle line about how you are arriving today…"
+                style={{
+                  borderRadius: brand.radius.md,
+                  padding: `${brand.spacing[12]} ${brand.spacing[20]}`,
+                  background: brand.colors.white,
+                  color: brand.colors.charcoal,
+                  borderColor: brand.colors.clay,
+                  fontFamily: brand.typography.body,
+                  boxShadow: brand.shadows.xs,
+                }}
               />
             </label>
 
-            <button
-              type="submit"
-              className="toolkit-btn"
-              style={{ marginTop: "1rem" }}
-              disabled={!mood}
-            >
-              Save check-in
-            </button>
+            <div style={{ marginTop: brand.spacing[20] }}>
+              <Button
+                type="submit"
+                variant="primary"
+                disabled={!mood}
+                style={{ borderRadius: brand.radius.md }}
+              >
+                Save check-in
+              </Button>
+            </div>
           </form>
 
           {entries.length > 0 ? (
-            <ul className="toolkit-entries" aria-label="Recent check-ins">
+            <ul
+              className="toolkit-entries"
+              aria-label="Recent check-ins"
+              style={{ gap: brand.spacing[12] }}
+            >
               {entries.map((entry) => (
-                <li key={entry.id} className="toolkit-entry">
-                  <div className="toolkit-entry__meta">
+                <li
+                  key={entry.id}
+                  className="toolkit-entry"
+                  style={{
+                    gap: brand.spacing[4],
+                    padding: `${brand.spacing[12]} ${brand.spacing[20]}`,
+                    borderRadius: brand.radius.md,
+                    background: brand.colors.white,
+                    boxShadow: brand.shadows.xs,
+                    color: brand.colors.charcoal,
+                  }}
+                >
+                  <div
+                    className="toolkit-entry__meta"
+                    style={{ gap: brand.spacing[8] }}
+                  >
                     <span aria-hidden="true">{entry.mood.emoji}</span>
-                    <strong>{entry.mood.label}</strong>
-                    <span>{entry.time}</span>
+                    <strong style={headingStyle}>{entry.mood.label}</strong>
+                    <span style={bodyStyle}>{entry.time}</span>
                   </div>
-                  {entry.note ? <p>{entry.note}</p> : null}
+                  {entry.note ? (
+                    <p style={{ ...bodyStyle, color: brand.colors.charcoal }}>
+                      {entry.note}
+                    </p>
+                  ) : null}
                 </li>
               ))}
             </ul>
@@ -205,37 +316,69 @@ export function Toolkit() {
         {/* Habit tracker */}
         <section
           className="toolkit-card"
-          style={{ animationDelay: "0.12s" }}
+          style={{ ...mistCardStyle, animationDelay: "0.12s" }}
           aria-labelledby="habits-heading"
         >
-          <header className="toolkit-card__header">
+          <header
+            className="toolkit-card__header"
+            style={{ gap: brand.spacing[12] }}
+          >
             <span
               className="toolkit-card__icon"
-              data-tone="gold"
               aria-hidden="true"
+              style={{
+                borderRadius: brand.radius.md,
+                background: brand.colors.clay,
+                color: brand.colors.charcoal,
+                boxShadow: brand.shadows.xs,
+              }}
             >
               <SparkIcon />
             </span>
             <div>
-              <h2 id="habits-heading" className="toolkit-card__title">
+              <h2
+                id="habits-heading"
+                className="toolkit-card__title"
+                style={headingStyle}
+              >
                 Habit tracker
               </h2>
-              <p className="toolkit-card__lede">
-                Mark the days you show up — the bar reflects a calm weekly
-                rhythm, not a streak to protect.
+              <p className="toolkit-card__lede" style={bodyStyle}>
+                Mark the days you show up — sage and clay progress bars reflect
+                a calm weekly rhythm, not a streak to protect.
               </p>
             </div>
           </header>
 
-          <ul className="toolkit-habits">
+          <ul className="toolkit-habits" style={{ gap: brand.spacing[20] }}>
             {habits.map((habit) => {
               const doneCount = habit.week.filter(Boolean).length;
               const pct = Math.round((doneCount / habit.week.length) * 100);
               return (
-                <li key={habit.id} className="toolkit-habit">
+                <li
+                  key={habit.id}
+                  className="toolkit-habit"
+                  style={{ gap: brand.spacing[12] }}
+                >
                   <div className="toolkit-habit__top">
-                    <p className="toolkit-habit__label">{habit.label}</p>
-                    <span className="toolkit-habit__pct">{pct}%</span>
+                    <p
+                      className="toolkit-habit__label"
+                      style={{
+                        fontFamily: brand.typography.body,
+                        color: brand.colors.charcoal,
+                      }}
+                    >
+                      {habit.label}
+                    </p>
+                    <span
+                      className="toolkit-habit__pct"
+                      style={{
+                        fontFamily: brand.typography.body,
+                        color: brand.colors.charcoal,
+                      }}
+                    >
+                      {pct}%
+                    </span>
                   </div>
                   <div
                     className="toolkit-progress"
@@ -244,24 +387,53 @@ export function Toolkit() {
                     aria-valuemax={100}
                     aria-valuenow={pct}
                     aria-label={`${habit.label} weekly progress`}
+                    style={{
+                      borderRadius: brand.radius.pill,
+                      background: brand.colors.clay,
+                      boxShadow: brand.shadows.xs,
+                    }}
                   >
                     <div
                       className="toolkit-progress__fill"
-                      style={{ width: `${pct}%` }}
+                      style={{
+                        width: `${pct}%`,
+                        borderRadius: brand.radius.pill,
+                        background: `linear-gradient(90deg, ${brand.colors.sage}, ${brand.colors.clay})`,
+                      }}
                     />
                   </div>
-                  <div className="toolkit-days" role="group" aria-label={habit.label}>
-                    {DAYS.map((day, index) => (
-                      <button
-                        key={day}
-                        type="button"
-                        className={`toolkit-day${habit.week[index] ? " is-on" : ""}`}
-                        aria-pressed={habit.week[index]}
-                        onClick={() => toggleHabitDay(habit.id, index)}
-                      >
-                        {day}
-                      </button>
-                    ))}
+                  <div
+                    className="toolkit-days"
+                    role="group"
+                    aria-label={habit.label}
+                    style={{ gap: brand.spacing[8] }}
+                  >
+                    {DAYS.map((day, index) => {
+                      const on = habit.week[index];
+                      return (
+                        <button
+                          key={day}
+                          type="button"
+                          className={`toolkit-day${on ? " is-on" : ""}`}
+                          aria-pressed={on}
+                          onClick={() => toggleHabitDay(habit.id, index)}
+                          style={{
+                            borderRadius: brand.radius.md,
+                            background: on
+                              ? brand.colors.sage
+                              : brand.colors.white,
+                            color: brand.colors.charcoal,
+                            borderColor: on
+                              ? brand.colors.sage
+                              : brand.colors.clay,
+                            fontFamily: brand.typography.body,
+                            boxShadow: brand.shadows.xs,
+                          }}
+                        >
+                          {day}
+                        </button>
+                      );
+                    })}
                   </div>
                 </li>
               );
@@ -269,103 +441,136 @@ export function Toolkit() {
           </ul>
         </section>
 
-        {/* Budgeting tool */}
+        {/* Budgeting tool — mist cards, charcoal text */}
         <section
           className="toolkit-card toolkit-card--wide"
-          style={{ animationDelay: "0.18s" }}
+          style={{ ...mistCardStyle, animationDelay: "0.18s" }}
           aria-labelledby="budget-heading"
         >
-          <header className="toolkit-card__header">
+          <header
+            className="toolkit-card__header"
+            style={{ gap: brand.spacing[12] }}
+          >
             <span
               className="toolkit-card__icon"
-              data-tone="taupe"
               aria-hidden="true"
+              style={{
+                borderRadius: brand.radius.md,
+                background: brand.colors.white,
+                color: brand.colors.charcoal,
+                boxShadow: brand.shadows.xs,
+              }}
             >
               <WalletIcon />
             </span>
             <div>
-              <h2 id="budget-heading" className="toolkit-card__title">
+              <h2
+                id="budget-heading"
+                className="toolkit-card__title"
+                style={headingStyle}
+              >
                 Budgeting tool
               </h2>
-              <p className="toolkit-card__lede">
-                Enter a few monthly numbers. The summary keeps your solo budget
-                structured and easy to read.
+              <p className="toolkit-card__lede" style={bodyStyle}>
+                Enter a few monthly numbers. Mist cards keep your solo budget
+                structured and easy to read in charcoal.
               </p>
             </div>
           </header>
 
-          <div className="toolkit-budget-grid">
-            <form className="toolkit-budget-form" onSubmit={(e) => e.preventDefault()}>
-              <label className="toolkit-field">
-                <span>Monthly income</span>
-                <input
-                  type="number"
-                  min="0"
-                  inputMode="decimal"
-                  value={income}
-                  onChange={(event) => setIncome(event.target.value)}
-                />
-              </label>
-              <label className="toolkit-field">
-                <span>Rent / housing</span>
-                <input
-                  type="number"
-                  min="0"
-                  inputMode="decimal"
-                  value={rent}
-                  onChange={(event) => setRent(event.target.value)}
-                />
-              </label>
-              <label className="toolkit-field">
-                <span>Groceries</span>
-                <input
-                  type="number"
-                  min="0"
-                  inputMode="decimal"
-                  value={groceries}
-                  onChange={(event) => setGroceries(event.target.value)}
-                />
-              </label>
-              <label className="toolkit-field">
-                <span>Transit</span>
-                <input
-                  type="number"
-                  min="0"
-                  inputMode="decimal"
-                  value={transit}
-                  onChange={(event) => setTransit(event.target.value)}
-                />
-              </label>
-              <label className="toolkit-field">
-                <span>Safety buffer</span>
-                <input
-                  type="number"
-                  min="0"
-                  inputMode="decimal"
-                  value={buffer}
-                  onChange={(event) => setBuffer(event.target.value)}
-                />
-              </label>
+          <div
+            className="toolkit-budget-grid"
+            style={{ gap: brand.spacing[20] }}
+          >
+            <form
+              className="toolkit-budget-form"
+              onSubmit={(e) => e.preventDefault()}
+              style={{
+                gap: brand.spacing[12],
+                padding: brand.spacing[20],
+                borderRadius: brand.radius.lg,
+                background: brand.colors.mist,
+                boxShadow: brand.shadows.soft,
+                color: brand.colors.charcoal,
+              }}
+            >
+              {(
+                [
+                  ["Monthly income", income, setIncome],
+                  ["Rent / housing", rent, setRent],
+                  ["Groceries", groceries, setGroceries],
+                  ["Transit", transit, setTransit],
+                  ["Safety buffer", buffer, setBuffer],
+                ] as const
+              ).map(([label, value, setter]) => (
+                <label
+                  key={label}
+                  className="toolkit-field"
+                  style={{ gap: brand.spacing[8] }}
+                >
+                  <span
+                    style={{
+                      fontFamily: brand.typography.body,
+                      color: brand.colors.charcoal,
+                    }}
+                  >
+                    {label}
+                  </span>
+                  <input
+                    type="number"
+                    min="0"
+                    inputMode="decimal"
+                    value={value}
+                    onChange={(event) => setter(event.target.value)}
+                    style={{
+                      borderRadius: brand.radius.md,
+                      padding: `${brand.spacing[8]} ${brand.spacing[12]}`,
+                      background: brand.colors.white,
+                      color: brand.colors.charcoal,
+                      borderColor: brand.colors.clay,
+                      fontFamily: brand.typography.body,
+                      boxShadow: brand.shadows.xs,
+                    }}
+                  />
+                </label>
+              ))}
             </form>
 
-            <aside className="toolkit-summary" aria-live="polite">
-              <h3>Monthly summary</h3>
+            <aside
+              className="toolkit-summary"
+              aria-live="polite"
+              style={{
+                gap: brand.spacing[12],
+                padding: brand.spacing[20],
+                borderRadius: brand.radius.lg,
+                background: brand.colors.mist,
+                boxShadow: brand.shadows.soft,
+                color: brand.colors.charcoal,
+              }}
+            >
+              <h3 style={headingStyle}>Monthly summary</h3>
               <div className="toolkit-summary__row">
-                <span>Income</span>
-                <strong>{formatMoney(budget.incomeValue)}</strong>
+                <span style={bodyStyle}>Income</span>
+                <strong style={headingStyle}>
+                  {formatMoney(budget.incomeValue)}
+                </strong>
               </div>
               <div className="toolkit-summary__row">
-                <span>Expenses + buffer</span>
-                <strong>{formatMoney(budget.expenses)}</strong>
+                <span style={bodyStyle}>Expenses + buffer</span>
+                <strong style={headingStyle}>
+                  {formatMoney(budget.expenses)}
+                </strong>
               </div>
               <div
                 className="toolkit-summary__row"
                 data-tone={budget.remaining >= 0 ? "good" : "warn"}
               >
-                <span>Remaining</span>
-                <strong>{formatMoney(budget.remaining)}</strong>
+                <span style={bodyStyle}>Remaining</span>
+                <strong style={headingStyle}>
+                  {formatMoney(budget.remaining)}
+                </strong>
               </div>
-              <p className="toolkit-summary__note">
+              <p className="toolkit-summary__note" style={bodyStyle}>
                 {budget.remaining >= 0
                   ? "You have room this month. If it helps, set a little aside as a quiet cushion."
                   : "You are a bit over. Adjust one flexible line or the buffer until the stretch eases."}

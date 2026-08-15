@@ -1,59 +1,64 @@
 /* --------------------------------------------------------------------------
    GoSolo Safety & Guidelines
+   Clean typography · mist background · soft spacing · sage report
    -------------------------------------------------------------------------- */
 
 .safety-page {
   display: grid;
-  gap: 2rem;
-  padding-block: 3rem 6.5rem;
+  gap: var(--safety-space-32, var(--space-brand-32, 32px));
+  padding-block: var(--space-8, 64px) var(--space-12, 128px);
   max-width: 48rem;
+  color: var(--safety-charcoal, var(--brand-deep-charcoal, #3a3a3c));
+  font-family: var(--font-body);
 }
 
 .safety-header {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--safety-space-12, var(--space-brand-12, 12px));
 }
 
 .safety-header h1 {
   margin: 0;
-  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
-  font-size: clamp(2.35rem, 5vw, 3.25rem);
-  color: #2a241f;
-  letter-spacing: -0.025em;
-  line-height: 1.12;
+  font-family: var(--font-heading, var(--font-body));
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-weight: 600;
+  color: var(--safety-charcoal, var(--brand-deep-charcoal, #3a3a3c));
+  letter-spacing: -0.012em;
+  line-height: 1.2;
 }
 
 .safety-header p {
   margin: 0;
-  color: #6f6156;
-  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  font-size: 1.0625rem;
   line-height: 1.7;
   max-width: 38rem;
 }
 
 .safety-section {
   display: grid;
-  gap: 1rem;
+  gap: var(--safety-space-20, var(--space-brand-20, 20px));
 }
 
 .safety-section h2 {
   margin: 0;
-  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
-  font-size: 1.5rem;
-  color: #2a241f;
-  letter-spacing: -0.02em;
+  font-family: var(--font-heading, var(--font-body));
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--safety-charcoal, var(--brand-deep-charcoal, #3a3a3c));
+  letter-spacing: -0.012em;
 }
 
 .safety-section__lede {
   margin: 0;
-  color: #6f6156;
+  color: var(--color-text-muted);
   font-size: 0.975rem;
   line-height: 1.65;
 }
 
 .safety-guidelines {
   display: grid;
-  gap: 0.85rem;
+  gap: var(--safety-space-12, var(--space-brand-12, 12px));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -64,13 +69,13 @@
   counter-increment: guideline;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0.9rem;
-  padding: 1.15rem 1.25rem;
-  border-radius: 1.25rem;
-  background: rgba(255, 250, 246, 0.94);
-  border: 1px solid rgba(199, 184, 174, 0.14);
-  box-shadow: 0 8px 22px rgba(42, 36, 31, 0.05);
-  animation: fade-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  gap: var(--safety-space-12, var(--space-brand-12, 12px));
+  padding: var(--safety-space-20, var(--space-brand-20, 20px));
+  border-radius: var(--safety-radius, var(--radius-lg, 14px));
+  background: var(--safety-mist, var(--brand-mist-grey, #e9e6e3));
+  border: 1px solid rgba(199, 184, 174, 0.28);
+  box-shadow: var(--safety-shadow, var(--shadow-soft));
+  animation: fade-rise 0.65s var(--ease-out) both;
 }
 
 .safety-guideline__index {
@@ -78,9 +83,9 @@
   height: 2.1rem;
   display: grid;
   place-items: center;
-  border-radius: 999px;
-  background: rgba(231, 207, 169, 0.45);
-  color: #975533;
+  border-radius: var(--safety-radius-md, var(--radius-md, 12px));
+  background: var(--brand-sage-soft, #d5ddd1);
+  color: var(--safety-charcoal, var(--brand-deep-charcoal, #3a3a3c));
   font-size: 0.85rem;
   font-weight: 700;
 }
@@ -90,70 +95,78 @@
 }
 
 .safety-guideline h3 {
-  margin: 0 0 0.35rem;
+  margin: 0;
   font-size: 1.1rem;
-  color: #2a241f;
-  font-weight: 650;
+  color: var(--safety-charcoal, var(--brand-deep-charcoal, #3a3a3c));
+  font-weight: 600;
+  font-family: var(--font-heading, var(--font-body));
 }
 
 .safety-guideline p {
   margin: 0;
-  color: #6f6156;
+  color: var(--color-text-muted);
   font-size: 0.95rem;
   line-height: 1.7;
 }
 
 .safety-report-card {
   display: grid;
-  gap: 1rem;
+  gap: var(--safety-space-20, var(--space-brand-20, 20px));
   justify-items: start;
-  padding: 1.4rem 1.35rem;
-  border-radius: 1.4rem;
-  background: linear-gradient(
-    155deg,
-    rgba(231, 207, 169, 0.35),
-    rgba(255, 250, 246, 0.96) 48%,
-    rgba(247, 236, 208, 0.35)
-  );
-  border: 1px solid rgba(231, 207, 169, 0.45);
-  box-shadow: 0 10px 28px rgba(42, 36, 31, 0.06);
+  padding: var(--safety-space-20, var(--space-brand-20, 20px));
+  border-radius: var(--safety-radius, var(--radius-lg, 14px));
+  background: var(--safety-mist, var(--brand-mist-grey, #e9e6e3));
+  border: 1px solid rgba(183, 196, 178, 0.4);
+  box-shadow: var(--safety-shadow, var(--shadow-soft));
 }
 
 .safety-report-card p {
   margin: 0;
-  color: #574c43;
+  color: var(--color-text-muted);
   line-height: 1.65;
 }
 
+/* Sage report button */
+.safety-report-card .safety-report-btn,
 .safety-report-card > button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 2.6rem;
-  padding: 0.55rem 1.2rem !important;
-  border: none !important;
-  border-radius: 999px !important;
-  background: var(--gradient-cta) !important;
-  color: var(--neutral-0) !important;
+  padding: var(--safety-space-12, 12px) var(--safety-space-20, 20px) !important;
+  border: 1px solid rgba(154, 174, 150, 0.45) !important;
+  border-radius: var(--safety-radius-md, var(--radius-md, 12px)) !important;
+  background: var(--safety-sage, var(--btn-primary-bg, var(--brand-sage-green, #b7c4b2))) !important;
+  color: var(--btn-primary-fg, var(--neutral-0, #fffcfa)) !important;
+  font-family: var(--font-body) !important;
   font-size: 0.95rem !important;
   font-weight: 600 !important;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(217, 165, 160, 0.22);
+  box-shadow: var(--shadow-xs);
   transition:
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms ease;
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-med) var(--ease-soft),
+    background var(--duration-med) var(--ease-soft),
+    color var(--duration-med) var(--ease-soft);
 }
 
+.safety-report-card .safety-report-btn:hover,
 .safety-report-card > button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(217, 165, 160, 0.28);
-  color: var(--neutral-0) !important;
-  background: var(--gradient-cta) !important;
+  box-shadow: var(--shadow-soft);
+  color: var(--safety-charcoal, var(--brand-deep-charcoal, #3a3a3c)) !important;
+  background: var(--safety-hover, var(--btn-hover-tint, var(--brand-clay-beige, #c7b8ae))) !important;
+}
+
+.safety-report-card .safety-report-btn:focus-visible,
+.safety-report-card > button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
 }
 
 .safety-blocked {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--safety-space-12, var(--space-brand-12, 12px));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -163,19 +176,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 1.15rem;
-  border-radius: 1.15rem;
-  background: rgba(255, 250, 246, 0.94);
-  border: 1px solid rgba(199, 184, 174, 0.14);
-  box-shadow: 0 8px 20px rgba(42, 36, 31, 0.05);
+  gap: var(--safety-space-12, var(--space-brand-12, 12px));
+  padding: var(--safety-space-20, var(--space-brand-20, 20px));
+  border-radius: var(--safety-radius, var(--radius-lg, 14px));
+  background: var(--safety-mist, var(--brand-mist-grey, #e9e6e3));
+  border: 1px solid rgba(199, 184, 174, 0.28);
+  box-shadow: var(--safety-shadow, var(--shadow-soft));
 }
 
 .safety-blocked__item strong {
   display: block;
-  color: #2a241f;
+  color: var(--safety-charcoal, var(--brand-deep-charcoal, #3a3a3c));
   font-size: 1.05rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: var(--safety-space-4, 4px);
+  font-family: var(--font-heading, var(--font-body));
 }
 
 .safety-blocked__item span {
@@ -186,31 +200,32 @@
 .safety-unblock {
   flex-shrink: 0;
   min-height: 2.3rem;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid rgba(199, 184, 174, 0.2);
-  border-radius: 999px;
-  background: rgba(248, 235, 225, 0.55);
-  color: #574c43;
+  padding: var(--safety-space-8, 8px) var(--safety-space-20, 20px);
+  border: 1px solid rgba(199, 184, 174, 0.4);
+  border-radius: var(--safety-radius-md, var(--radius-md, 12px));
+  background: var(--neutral-0, #fffcfa);
+  color: var(--safety-charcoal, var(--brand-deep-charcoal, #3a3a3c));
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
   transition:
-    background 200ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    background var(--duration-fast) var(--ease-soft),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 .safety-unblock:hover {
-  background: rgba(231, 207, 169, 0.45);
+  background: var(--safety-clay, var(--brand-clay-beige, #c7b8ae));
   transform: translateY(-1px);
 }
 
 .safety-empty {
   margin: 0;
-  padding: 1.15rem 1.25rem;
-  border-radius: 1.15rem;
-  background: rgba(248, 235, 225, 0.4);
-  border: 1px solid rgba(199, 184, 174, 0.12);
-  color: #6f6156;
+  padding: var(--safety-space-20, var(--space-brand-20, 20px));
+  border-radius: var(--safety-radius, var(--radius-lg, 14px));
+  background: var(--safety-mist, var(--brand-mist-grey, #e9e6e3));
+  border: 1px solid rgba(199, 184, 174, 0.28);
+  box-shadow: var(--safety-shadow, var(--shadow-soft));
+  color: var(--color-text-muted);
   line-height: 1.65;
 }
 
@@ -222,7 +237,7 @@
 }
 
 .safety-footer a {
-  color: #975533;
+  color: var(--brand-sage-deep, #65795d);
   font-weight: 600;
   text-decoration: none;
 }
@@ -237,19 +252,22 @@
     align-items: flex-start;
   }
 
-  .safety-unblock {
+  .safety-unblock,
+  .safety-blocked__item button {
     width: 100%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .safety-guideline,
+  .safety-report-card .safety-report-btn,
   .safety-report-card > button,
   .safety-unblock {
     animation: none !important;
     transition: none !important;
   }
 
+  .safety-report-card .safety-report-btn:hover,
   .safety-report-card > button:hover,
   .safety-unblock:hover {
     transform: none;

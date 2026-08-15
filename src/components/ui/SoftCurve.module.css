@@ -11,7 +11,7 @@
 }
 
 .wave path {
-  fill: var(--neutral-0);
+  fill: var(--soft-curve-fill, var(--neutral-0));
 }
 
 .flip {
@@ -39,68 +39,47 @@
   width: min(100%, 10rem);
   height: 2.5rem;
   border-radius: var(--radius-pill);
-  background: var(--color-accent-soft);
+  background: var(--brand-sage-soft, #d5ddd1);
 }
 
 .tone-cream path,
-.tone-cream.blob,
-.tone-cream.arc,
-.tone-cream.pill {
-  fill: var(--neutral-0);
+.tone-mist path,
+.tone-sage path,
+.tone-clay path,
+.tone-peach path,
+.tone-gold path,
+.tone-taupe path,
+.tone-blue path,
+.tone-rose path {
+  fill: var(--soft-curve-fill, var(--neutral-0));
 }
 
 .tone-cream.blob,
 .tone-cream.arc,
-.tone-cream.pill {
-  background: var(--neutral-0);
-}
-
-.tone-peach path {
-  fill: var(--peach-50);
-}
-
+.tone-cream.pill,
+.tone-mist.blob,
+.tone-mist.arc,
+.tone-mist.pill,
+.tone-sage.blob,
+.tone-sage.arc,
+.tone-sage.pill,
+.tone-clay.blob,
+.tone-clay.arc,
+.tone-clay.pill,
 .tone-peach.blob,
 .tone-peach.arc,
-.tone-peach.pill {
-  background: linear-gradient(145deg, var(--peach-100), var(--peach-200));
-}
-
-.tone-gold path {
-  fill: var(--gold-100);
-}
-
+.tone-peach.pill,
 .tone-gold.blob,
 .tone-gold.arc,
-.tone-gold.pill {
-  background: linear-gradient(145deg, var(--gold-100), var(--gold-300));
-}
-
-.tone-taupe path {
-  fill: var(--neutral-100);
-}
-
+.tone-gold.pill,
 .tone-taupe.blob,
 .tone-taupe.arc,
-.tone-taupe.pill {
-  background: linear-gradient(145deg, var(--neutral-100), var(--brand-warm-taupe));
-}
-
-.tone-blue path {
-  fill: var(--blue-100);
-}
-
+.tone-taupe.pill,
 .tone-blue.blob,
 .tone-blue.arc,
-.tone-blue.pill {
-  background: linear-gradient(145deg, var(--blue-100), var(--blue-300));
-}
-
-.tone-rose path {
-  fill: var(--rose-100);
-}
-
+.tone-blue.pill,
 .tone-rose.blob,
 .tone-rose.arc,
 .tone-rose.pill {
-  background: linear-gradient(145deg, var(--rose-100), var(--rose-200));
+  background: var(--soft-curve-fill, var(--neutral-0));
 }

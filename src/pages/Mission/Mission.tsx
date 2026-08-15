@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button, SoftCurve } from "../../components/ui";
+import { colors, heroGradient, typography } from "../../styles/brand-tokens";
 import {
   AutonomyIllustration,
   ConnectionIllustration,
@@ -41,17 +42,34 @@ const values = [
 
 export function Mission() {
   return (
-    <div className={styles.page}>
-      <section className={styles.hero} aria-label="Mission hero">
+    <div className={styles.page} style={{ background: colors.mist }}>
+      <section
+        className={styles.hero}
+        aria-label="Mission hero"
+        style={{ background: heroGradient }}
+      >
         <div className={styles.heroWash} aria-hidden="true">
-          <SoftCurve variant="blob" tone="gold" className={styles.heroBlob} />
-          <SoftCurve variant="blob" tone="blue" className={styles.heroBlobTwo} />
+          <SoftCurve variant="blob" tone="sage" className={styles.heroBlob} />
+          <SoftCurve variant="blob" tone="clay" className={styles.heroBlobTwo} />
           <div className={styles.heroArc} />
         </div>
         <div className={`container ${styles.heroContent}`}>
-          <p className={styles.brand}>Go Solo</p>
-          <h1 className={styles.headline}>Mission &amp; values</h1>
-          <p className={styles.lede}>
+          <p
+            className={styles.brand}
+            style={{ fontFamily: typography.fontHeading, color: colors.charcoal }}
+          >
+            Go Solo
+          </p>
+          <h1
+            className={styles.headline}
+            style={{ fontFamily: typography.fontHeading, color: colors.charcoal }}
+          >
+            Mission &amp; values
+          </h1>
+          <p
+            className={styles.lede}
+            style={{ fontFamily: typography.fontBody }}
+          >
             A warm home for independent living — where autonomy, connection,
             sustainability, and emotional resilience can grow side by side.
           </p>

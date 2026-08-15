@@ -1,3 +1,4 @@
+import { colors, radius, typography } from "../../styles/brand-tokens";
 import styles from "./MessageBubble.module.css";
 import type { ChatMessage } from "./data";
 
@@ -12,7 +13,15 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
 
   return (
     <div className={`${styles.row} ${mine ? styles.mine : styles.theirs}`}>
-      <div className={styles.bubble}>
+      <div
+        className={styles.bubble}
+        style={{
+          borderRadius: radius.lg,
+          background: mine ? colors.sage : colors.mist,
+          color: colors.charcoal,
+          fontFamily: typography.fontBody,
+        }}
+      >
         {!mine ? <p className={styles.author}>{message.senderName}</p> : null}
         <p className={styles.body}>{message.body}</p>
         <time className={styles.time} dateTime={message.createdAt}>

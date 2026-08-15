@@ -7,7 +7,7 @@
   padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-xl);
   background: var(--gradient-soft);
-  border: 1px solid rgba(217, 165, 160, 0.2);
+  border: 1px solid rgba(183, 196, 178, 0.35);
   box-shadow: var(--shadow-xs);
   animation: fade-rise var(--duration-slow) var(--ease-out) both;
 }

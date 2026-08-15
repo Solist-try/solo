@@ -1,18 +1,20 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GOAL_OPTIONS, INTEREST_OPTIONS, useAuth } from "../auth";
+import { Button } from "../components/ui";
+import { brand } from "../styles/brand-tokens";
 
 const steps = [
   {
     key: "goals" as const,
-    title: "What would support your solo path?",
+    title: "What are your solo living goals?",
     subtitle:
-      "Choose what matters to you right now — you set the pace, and you can change this later.",
+      "Choose what would support you right now — you set the pace, and you can change this later.",
     options: GOAL_OPTIONS,
   },
   {
     key: "interests" as const,
-    title: "What should we keep nearby?",
+    title: "Which interests should we keep nearby?",
     subtitle:
       "We’ll quietly tune your feed, resources, and toolkit around these — nothing required.",
     options: INTEREST_OPTIONS,
@@ -77,13 +79,67 @@ export function Onboarding() {
     }
   };
 
+  const pageStyle = {
+    ["--auth-radius" as string]: brand.radius.lg,
+    ["--auth-radius-md" as string]: brand.radius.md,
+    ["--auth-space-8" as string]: brand.spacing[8],
+    ["--auth-space-12" as string]: brand.spacing[12],
+    ["--auth-space-20" as string]: brand.spacing[20],
+    ["--auth-space-32" as string]: brand.spacing[32],
+    ["--auth-sage" as string]: brand.colors.sage,
+    ["--auth-mist" as string]: brand.colors.mist,
+    ["--auth-clay" as string]: brand.colors.clay,
+    ["--auth-charcoal" as string]: brand.colors.charcoal,
+    ["--auth-hover" as string]: brand.colors.button.hoverTint,
+    ["--auth-shadow" as string]: brand.shadows.lift,
+    ["--auth-shadow-soft" as string]: brand.shadows.soft,
+    padding: `${brand.spacing[32]} ${brand.spacing[20]} ${brand.spacingSteps[8]}`,
+    fontFamily: brand.typography.body,
+  } as CSSProperties;
+
+  const cardStyle: CSSProperties = {
+    gap: brand.spacing[20],
+    padding: `${brand.spacing[32]} ${brand.spacing[20]} ${brand.spacing[20]}`,
+    borderRadius: brand.radius.lg,
+    background: brand.colors.mist,
+    boxShadow: brand.shadows.lift,
+    color: brand.colors.charcoal,
+  };
+
+  const headingStyle: CSSProperties = {
+    fontFamily: brand.typography.heading,
+    color: brand.colors.charcoal,
+    fontWeight: brand.typography.weight.semibold,
+    letterSpacing: brand.typography.tracking.tight,
+    lineHeight: brand.typography.leading.snug,
+  };
+
+  const bodyStyle: CSSProperties = {
+    fontFamily: brand.typography.body,
+    color: brand.colors.charcoalSoft,
+    lineHeight: brand.typography.leading.relaxed,
+  };
+
   return (
-    <div className="auth-page">
-      <div className="auth-card auth-card--wide">
-        <Link to="/" className="auth-brand">
-          Go<span>Solo</span>
+    <div className="auth-page" style={pageStyle}>
+      <div className="auth-card auth-card--wide" style={cardStyle}>
+        <Link
+          to="/"
+          className="auth-brand"
+          style={{
+            fontFamily: brand.typography.heading,
+            color: brand.colors.charcoal,
+          }}
+        >
+          Go<span style={{ color: brand.colors.sage }}>Solo</span>
         </Link>
-        <p className="auth-welcome">
+        <p
+          className="auth-welcome"
+          style={{
+            fontFamily: brand.typography.body,
+            color: brand.colors.charcoalSoft,
+          }}
+        >
           Hi {user?.name?.split(" ")[0] ?? "there"} — shape a path that fits
           you.
         </p>
@@ -95,17 +151,44 @@ export function Onboarding() {
           aria-valuemax={100}
           aria-valuenow={progress}
           aria-label="Onboarding progress"
+          style={{
+            borderRadius: brand.radius.pill,
+            background: brand.colors.mistDeep,
+            boxShadow: brand.shadows.xs,
+          }}
         >
-          <span style={{ width: `${progress}%` }} />
+          <span
+            style={{
+              width: `${progress}%`,
+              borderRadius: brand.radius.pill,
+              background: brand.colors.sage,
+            }}
+          />
         </div>
-        <p className="auth-step">
+        <p
+          className="auth-step"
+          style={{
+            fontFamily: brand.typography.body,
+            color: brand.colors.sageDeep,
+            letterSpacing: brand.typography.tracking.wide,
+          }}
+        >
           Step {stepIndex + 1} of {steps.length}
         </p>
 
-        <h1 className="auth-title">{step.title}</h1>
-        <p className="auth-subtitle">{step.subtitle}</p>
+        <h1 className="auth-title" style={headingStyle}>
+          {step.title}
+        </h1>
+        <p className="auth-subtitle" style={bodyStyle}>
+          {step.subtitle}
+        </p>
 
-        <div className="auth-options" role="group" aria-label={step.title}>
+        <div
+          className="auth-options"
+          role="group"
+          aria-label={step.title}
+          style={{ gap: brand.spacing[12] }}
+        >
           {step.options.map((option) => {
             const active = selections[step.key].includes(option);
             return (
@@ -115,6 +198,14 @@ export function Onboarding() {
                 className={`auth-option${active ? " is-selected" : ""}`}
                 aria-pressed={active}
                 onClick={() => toggle(option)}
+                style={{
+                  borderRadius: brand.radius.md,
+                  padding: `${brand.spacing[12]} ${brand.spacing[20]}`,
+                  background: active ? brand.colors.sage : brand.colors.white,
+                  color: brand.colors.charcoal,
+                  boxShadow: active ? brand.shadows.soft : brand.shadows.xs,
+                  fontFamily: brand.typography.body,
+                }}
               >
                 {option}
               </button>
@@ -124,24 +215,26 @@ export function Onboarding() {
 
         {error ? <p className="auth-error">{error}</p> : null}
 
-        <div className="auth-actions">
+        <div
+          className="auth-actions"
+          style={{ gap: brand.spacing[12], marginTop: brand.spacing[4] }}
+        >
           {stepIndex > 0 ? (
-            <button
+            <Button
               type="button"
-              className="auth-ghost"
+              variant="secondary"
               onClick={() => {
                 setError(null);
                 setStepIndex((index) => index - 1);
               }}
             >
               Back
-            </button>
+            </Button>
           ) : (
             <span />
           )}
-          <button
+          <Button
             type="button"
-            className="auth-submit"
             onClick={() => {
               void continueNext();
             }}
@@ -152,7 +245,7 @@ export function Onboarding() {
                 ? "Saving…"
                 : "Enter your space"
               : "Continue"}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

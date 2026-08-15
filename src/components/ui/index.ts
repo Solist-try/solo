@@ -11,4 +11,4 @@ export type { SectionProps } from "./Section";
 export { Card, CardHeader, CardBody, CardFooter } from "./Card";
 export type { CardProps, CardHeaderProps, CardVariant, CardPadding } from "./Card";
 export { SoftCurve } from "./SoftCurve";
-export type { SoftCurveProps } from "./SoftCurve";
+export type { SoftCurveProps, SoftCurveTone } from "./SoftCurve";

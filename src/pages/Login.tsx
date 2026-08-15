@@ -1,6 +1,8 @@
-import { useState, type FormEvent } from "react";
+import { useState, type CSSProperties, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
+import { Button } from "../components/ui";
+import { brand } from "../styles/brand-tokens";
 
 export function Login() {
   const navigate = useNavigate();
@@ -41,23 +43,77 @@ export function Login() {
     }
   };
 
+  const pageStyle = {
+    ["--auth-radius" as string]: brand.radius.lg,
+    ["--auth-radius-md" as string]: brand.radius.md,
+    ["--auth-space-8" as string]: brand.spacing[8],
+    ["--auth-space-12" as string]: brand.spacing[12],
+    ["--auth-space-20" as string]: brand.spacing[20],
+    ["--auth-space-32" as string]: brand.spacing[32],
+    ["--auth-sage" as string]: brand.colors.sage,
+    ["--auth-mist" as string]: brand.colors.mist,
+    ["--auth-clay" as string]: brand.colors.clay,
+    ["--auth-charcoal" as string]: brand.colors.charcoal,
+    ["--auth-hover" as string]: brand.colors.button.hoverTint,
+    ["--auth-shadow" as string]: brand.shadows.lift,
+    ["--auth-shadow-soft" as string]: brand.shadows.soft,
+    padding: `${brand.spacing[32]} ${brand.spacing[20]} ${brand.spacingSteps[8]}`,
+    fontFamily: brand.typography.body,
+  } as CSSProperties;
+
+  const cardStyle: CSSProperties = {
+    gap: brand.spacing[20],
+    padding: `${brand.spacing[32]} ${brand.spacing[20]} ${brand.spacing[20]}`,
+    borderRadius: brand.radius.lg,
+    background: brand.colors.mist,
+    boxShadow: brand.shadows.lift,
+    color: brand.colors.charcoal,
+  };
+
+  const headingStyle: CSSProperties = {
+    fontFamily: brand.typography.heading,
+    color: brand.colors.charcoal,
+    fontWeight: brand.typography.weight.semibold,
+    letterSpacing: brand.typography.tracking.tight,
+    lineHeight: brand.typography.leading.snug,
+  };
+
+  const bodyStyle: CSSProperties = {
+    fontFamily: brand.typography.body,
+    color: brand.colors.charcoalSoft,
+    lineHeight: brand.typography.leading.relaxed,
+  };
+
   return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <Link to="/login" className="auth-brand">
-          Go<span>Solo</span>
+    <div className="auth-page" style={pageStyle}>
+      <div className="auth-card" style={cardStyle}>
+        <Link
+          to="/login"
+          className="auth-brand"
+          style={{
+            fontFamily: brand.typography.heading,
+            color: brand.colors.charcoal,
+          }}
+        >
+          Go<span style={{ color: brand.colors.sage }}>Solo</span>
         </Link>
-        <h1 className="auth-title">Welcome back</h1>
-        <p className="auth-subtitle">
+        <h1 className="auth-title" style={headingStyle}>
+          Welcome back
+        </h1>
+        <p className="auth-subtitle" style={bodyStyle}>
           Sign in when you are ready — your space stays yours. Go solo, not
           alone.
         </p>
 
-        <form className="auth-form" onSubmit={onSubmit}>
+        <form
+          className="auth-form"
+          onSubmit={onSubmit}
+          style={{ gap: brand.spacing[20] }}
+        >
           {error ? <p className="auth-error">{error}</p> : null}
 
-          <label className="auth-field">
-            <span>Email</span>
+          <label className="auth-field" style={{ gap: brand.spacing[8] }}>
+            <span style={{ color: brand.colors.charcoal }}>Email</span>
             <input
               type="email"
               name="email"
@@ -65,11 +121,17 @@ export function Login() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
+              style={{
+                borderRadius: brand.radius.md,
+                padding: `${brand.spacing[12]} ${brand.spacing[20]}`,
+                color: brand.colors.charcoal,
+                boxShadow: brand.shadows.xs,
+              }}
             />
           </label>
 
-          <label className="auth-field">
-            <span>Password</span>
+          <label className="auth-field" style={{ gap: brand.spacing[8] }}>
+            <span style={{ color: brand.colors.charcoal }}>Password</span>
             <input
               type="password"
               name="password"
@@ -77,24 +139,40 @@ export function Login() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               required
+              style={{
+                borderRadius: brand.radius.md,
+                padding: `${brand.spacing[12]} ${brand.spacing[20]}`,
+                color: brand.colors.charcoal,
+                boxShadow: brand.shadows.xs,
+              }}
             />
           </label>
 
-          <button type="submit" className="auth-submit" disabled={pending}>
+          <Button type="submit" fullWidth disabled={pending}>
             {pending ? "Signing in…" : "Sign in"}
-          </button>
+          </Button>
         </form>
 
-        <div className="auth-divider">
+        <div className="auth-divider" style={{ gap: brand.spacing[12] }}>
           <span>Or continue with</span>
         </div>
 
-        <div className="auth-social">
+        <div
+          className="auth-social"
+          style={{ gap: brand.spacing[12] }}
+        >
           <button
             type="button"
             className="auth-social__btn"
             disabled={pending}
             onClick={() => onSocial("google")}
+            style={{
+              borderRadius: brand.radius.md,
+              padding: `${brand.spacing[12]} ${brand.spacing[20]}`,
+              background: brand.colors.white,
+              color: brand.colors.charcoal,
+              boxShadow: brand.shadows.xs,
+            }}
           >
             <GoogleIcon />
             Google
@@ -104,14 +182,24 @@ export function Login() {
             className="auth-social__btn"
             disabled={pending}
             onClick={() => onSocial("apple")}
+            style={{
+              borderRadius: brand.radius.md,
+              padding: `${brand.spacing[12]} ${brand.spacing[20]}`,
+              background: brand.colors.white,
+              color: brand.colors.charcoal,
+              boxShadow: brand.shadows.xs,
+            }}
           >
             <AppleIcon />
             Apple
           </button>
         </div>
 
-        <p className="auth-footer">
-          New here? <Link to="/signup">Create your space</Link>
+        <p className="auth-footer" style={bodyStyle}>
+          New here?{" "}
+          <Link to="/signup" style={{ color: brand.colors.sageDeep }}>
+            Create your space
+          </Link>
         </p>
       </div>
     </div>

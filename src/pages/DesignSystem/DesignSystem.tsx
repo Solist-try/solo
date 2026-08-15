@@ -7,51 +7,56 @@ import {
   SoftCurve,
   type ButtonVariant,
 } from "../../components/ui";
+import {
+  buttons as brandButtons,
+  colors,
+  spacing,
+  typography,
+} from "../../styles/brand-tokens";
 import styles from "./DesignSystem.module.css";
 
 const colorGroups = [
   {
+    title: "Core brand",
+    swatches: [
+      ["sage", colors.sage],
+      ["mist", colors.mist],
+      ["clay", colors.clay],
+      ["charcoal", colors.charcoal],
+    ],
+  },
+  {
     title: "Brand palette",
     swatches: [
-      ["soft-gold", "var(--brand-soft-gold)"],
-      ["warm-taupe", "var(--brand-warm-taupe)"],
-      ["mist-grey", "var(--brand-mist-grey)"],
-      ["deep-charcoal", "var(--brand-deep-charcoal)"],
-      ["summer-blue", "var(--brand-soft-summer-blue)"],
-      ["accent-rose", "var(--brand-accent-rose)"],
+      ["sage-green", colors.sageGreen],
+      ["mist-grey", colors.mistGrey],
+      ["clay-beige", colors.clayBeige],
+      ["deep-charcoal", colors.deepCharcoal],
+      ["soft-gold", colors.softGold],
+      ["summer-blue", colors.softSummerBlue],
+      ["accent-rose", colors.accentRose],
     ],
   },
   {
     title: "Warm neutrals",
     swatches: [
-      ["neutral-0", "var(--neutral-0)"],
-      ["neutral-50", "var(--neutral-50)"],
-      ["neutral-100", "var(--neutral-100)"],
-      ["neutral-300", "var(--neutral-300)"],
-      ["neutral-500", "var(--neutral-500)"],
-      ["neutral-700", "var(--neutral-700)"],
-      ["neutral-900", "var(--neutral-900)"],
+      ["white", colors.white],
+      ["mist-soft", colors.mistSoft],
+      ["mist-deep", colors.mistDeep],
+      ["charcoal-soft", colors.charcoalSoft],
+      ["sage-soft", colors.sageSoft],
+      ["sage-deep", colors.sageDeep],
     ],
   },
   {
-    title: "Accent rose",
+    title: "Supporting accents",
     swatches: [
-      ["rose-50", "var(--rose-50)"],
-      ["rose-100", "var(--rose-100)"],
-      ["rose-200", "var(--rose-200)"],
-      ["rose-400", "var(--rose-400)"],
-      ["rose-600", "var(--rose-600)"],
-    ],
-  },
-  {
-    title: "Soft gold & blue",
-    swatches: [
-      ["gold-100", "var(--gold-100)"],
-      ["gold-200", "var(--gold-200)"],
-      ["gold-400", "var(--gold-400)"],
-      ["blue-100", "var(--blue-100)"],
-      ["blue-300", "var(--blue-300)"],
-      ["blue-500", "var(--blue-500)"],
+      ["rose-soft", colors.roseSoft],
+      ["rose-deep", colors.roseDeep],
+      ["gold-soft", colors.goldSoft],
+      ["gold-deep", colors.goldDeep],
+      ["blue-soft", colors.blueSoft],
+      ["blue-deep", colors.blueDeep],
     ],
   },
 ] as const;
@@ -86,13 +91,15 @@ export function DesignSystem() {
       <header className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
           <p className="type-label">Go Solo design system</p>
-          <h1 className="type-h1">Warm gold, mist, and soft rose</h1>
-          <p className="type-body-lg">
-            Tokens, type, spacing, and gentle curves that keep Go Solo calm and
-            welcoming.
+          <h1 className="type-h1" style={{ fontFamily: typography.fontHeading }}>
+            Sage, mist, and clay
+          </h1>
+          <p className="type-body-lg" style={{ fontFamily: typography.fontBody }}>
+            Tokens from <code>brand-tokens.ts</code> — spacing, type, and gentle
+            curves that keep Go Solo calm and welcoming.
           </p>
         </div>
-        <SoftCurve tone="cream" />
+        <SoftCurve tone="mist" />
       </header>
 
       <div className={`container ${styles.stack}`}>
@@ -100,8 +107,8 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Color tokens</h2>
             <p className="type-body-lg">
-              Soft gold, warm taupe, mist grey, charcoal, summer blue, and
-              accent rose — a calm, grounded palette.
+              Sage {colors.sage}, mist {colors.mist}, clay {colors.clay}, and
+              charcoal {colors.charcoal} — a calm, grounded palette.
             </p>
           </div>
           <div className={styles.colorGroups}>
@@ -112,7 +119,9 @@ export function DesignSystem() {
                   {group.swatches.map(([name, value]) => (
                     <div key={name} className={styles.swatch}>
                       <span style={{ background: value }} />
-                      <code>{name}</code>
+                      <code>
+                        {name} · {value}
+                      </code>
                     </div>
                   ))}
                 </div>
@@ -121,13 +130,14 @@ export function DesignSystem() {
           </div>
         </section>
 
-        <SoftCurve variant="wave" tone="peach" />
+        <SoftCurve variant="wave" tone="sage" />
 
         <section className={styles.section}>
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Typography scale</h2>
             <p className="type-body-lg">
-              GoSoloSerif for headings, GoSoloSans for body and UI.
+              Heading and body share IBM Plex Sans via brand tokens (
+              {typography.fontHeading.split(",")[0].replace(/"/g, "")}).
             </p>
           </div>
           <div className={styles.typeList}>
@@ -144,7 +154,7 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Brand spacing scale</h2>
             <p className="type-body-lg">
-              Core rhythm: <code>4 · 8 · 12 · 20 · 32</code> (
+              Soft rhythm: <code>4 · 8 · 12 · 20 · 32</code> (
               <code>--space-brand-*</code>).
             </p>
           </div>
@@ -152,11 +162,11 @@ export function DesignSystem() {
             {brandSpaceSteps.map((step) => (
               <div key={step} className={styles.spaceRow}>
                 <code>
-                  --space-brand-{step} · {step}px
+                  --space-brand-{step} · {spacing[step]}
                 </code>
                 <span
                   className={styles.spaceBar}
-                  style={{ width: `var(--space-brand-${step})` }}
+                  style={{ width: spacing[step] }}
                 />
               </div>
             ))}
@@ -167,7 +177,7 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Corner radius</h2>
             <p className="type-body-lg">
-              Curved corners stay in a calm 10–14px range for surfaces and
+              Soft rounded corners stay in a calm 10–14px range for surfaces and
               controls.
             </p>
           </div>
@@ -200,8 +210,9 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Button variants</h2>
             <p className="type-body-lg">
-              Primary gold, secondary taupe, and subtle mist grey — plus soft
-              rose highlights. Focus rings use Soft Summer Blue.
+              {brandButtons.primary.label}, {brandButtons.secondary.label}, and{" "}
+              {brandButtons.subtle.label} — soft clay hover tints from
+              brand-tokens.
             </p>
           </div>
           <div className={styles.buttonGrid}>
@@ -229,7 +240,7 @@ export function DesignSystem() {
             <h2 className="type-h2">Card components</h2>
             <p className="type-body-lg">
               Soft shadows and 12–14px curved corners for calm, tactile
-              surfaces. Highlights use Accent Rose; focus uses Soft Summer Blue.
+              surfaces.
             </p>
           </div>
           <div className={styles.cardGrid}>
@@ -254,11 +265,9 @@ export function DesignSystem() {
               <CardHeader
                 eyebrow="Soft"
                 title="Morning stretch kit"
-                description="A rose-tinted wash for emphasis."
+                description="A soft wash for emphasis."
               />
-              <CardBody>
-                Ideal for highlights and onboarding moments.
-              </CardBody>
+              <CardBody>Ideal for highlights and onboarding moments.</CardBody>
               <CardFooter>
                 <Button size="sm" variant="soft">
                   Preview
@@ -297,27 +306,26 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Soft curved motif</h2>
             <p className="type-body-lg">
-              Waves, blobs, arcs, and pills that echo the product’s rounded
-              language.
+              Waves, blobs, arcs, and pills filled from brand-tokens.
             </p>
           </div>
           <div className={styles.motifGrid}>
             <Card variant="soft" padding="lg">
               <CardHeader title="Wave divider" description="Section transitions" />
-              <SoftCurve tone="gold" />
+              <SoftCurve tone="sage" />
             </Card>
             <Card variant="elevated" padding="lg">
               <CardHeader title="Blob" description="Decorative anchor" />
               <div className={styles.motifRow}>
-                <SoftCurve variant="blob" tone="peach" />
-                <SoftCurve variant="blob" tone="gold" />
+                <SoftCurve variant="blob" tone="mist" />
+                <SoftCurve variant="blob" tone="clay" />
               </div>
             </Card>
             <Card variant="outline" padding="lg">
               <CardHeader title="Arc & pill" description="Accent shapes" />
               <div className={styles.motifRow}>
                 <SoftCurve variant="arc" tone="taupe" />
-                <SoftCurve variant="pill" tone="peach" />
+                <SoftCurve variant="pill" tone="gold" />
               </div>
             </Card>
           </div>
