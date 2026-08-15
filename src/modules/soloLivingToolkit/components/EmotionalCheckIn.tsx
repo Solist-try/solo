@@ -32,7 +32,7 @@ export function EmotionalCheckIn({ entries, onSubmit }: EmotionalCheckInProps) {
     <section className={styles.checkIn} aria-labelledby={headingId}>
       <header className={styles.header}>
         <h3 id={headingId}>Emotional check-in</h3>
-        <p>No fixing required — just notice how you are landing today.</p>
+        <p>Notice how you are landing today — supportive, not corrective.</p>
       </header>
 
       <form className={styles.form} onSubmit={submit}>

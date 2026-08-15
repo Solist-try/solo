@@ -118,8 +118,8 @@ export function Toolkit() {
       <header className="toolkit-header">
         <h1>Solo Living Toolkit</h1>
         <p>
-          Soft daily tools for emotional check-ins, habit momentum, and a clear
-          look at your solo budget.
+          Gentle structure for the day: notice how you feel, keep small habits
+          moving, and see your budget with clear eyes.
         </p>
       </header>
 
@@ -139,8 +139,8 @@ export function Toolkit() {
                 Daily emotional check-in
               </h2>
               <p className="toolkit-card__lede">
-                Pick an emoji that fits, leave a note if you want — no fixing
-                required.
+                Name how you are landing. A short note is optional — support
+                without pressure to fix anything.
               </p>
             </div>
           </header>
@@ -172,7 +172,7 @@ export function Toolkit() {
               <textarea
                 value={note}
                 onChange={(event) => setNote(event.target.value)}
-                placeholder="One gentle sentence about how you’re arriving today…"
+                placeholder="One gentle line about how you are arriving today…"
               />
             </label>
 
@@ -221,7 +221,8 @@ export function Toolkit() {
                 Habit tracker
               </h2>
               <p className="toolkit-card__lede">
-                Toggle days as you go — progress bars show the week’s rhythm.
+                Mark the days you show up — the bar reflects a calm weekly
+                rhythm, not a streak to protect.
               </p>
             </div>
           </header>
@@ -287,8 +288,8 @@ export function Toolkit() {
                 Budgeting tool
               </h2>
               <p className="toolkit-card__lede">
-                Enter a few monthly numbers — the summary keeps your solo budget
-                clear.
+                Enter a few monthly numbers. The summary keeps your solo budget
+                structured and easy to read.
               </p>
             </div>
           </header>
@@ -366,8 +367,8 @@ export function Toolkit() {
               </div>
               <p className="toolkit-summary__note">
                 {budget.remaining >= 0
-                  ? "You’re in the clear this month — consider parking a little of what’s left for a calm cushion."
-                  : "You’re a bit over. Try trimming one flexible line or adjusting the buffer until the stretch eases."}
+                  ? "You have room this month. If it helps, set a little aside as a quiet cushion."
+                  : "You are a bit over. Adjust one flexible line or the buffer until the stretch eases."}
               </p>
             </aside>
           </div>
