@@ -1,5 +1,7 @@
-import { useId, useState, type FormEvent } from "react";
+import { useId, useState, type CSSProperties, type FormEvent } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "../components/ui";
+import { brand } from "../styles/brand-tokens";
 
 const faqs = [
   {
@@ -98,28 +100,85 @@ export function Support() {
     }, 450);
   };
 
+  const pageStyle = {
+    gap: brand.spacing[32],
+    paddingBlock: `${brand.spacingSteps[8]} ${brand.spacingSteps[12]}`,
+    ["--support-radius" as string]: brand.radius.lg,
+    ["--support-radius-md" as string]: brand.radius.md,
+    ["--support-space-8" as string]: brand.spacing[8],
+    ["--support-space-12" as string]: brand.spacing[12],
+    ["--support-space-20" as string]: brand.spacing[20],
+    ["--support-space-32" as string]: brand.spacing[32],
+    ["--support-mist" as string]: brand.colors.mist,
+    ["--support-sage" as string]: brand.colors.sage,
+    ["--support-clay" as string]: brand.colors.clay,
+    ["--support-charcoal" as string]: brand.colors.charcoal,
+    ["--support-hover" as string]: brand.colors.button.hoverTint,
+    ["--support-shadow" as string]: brand.shadows.soft,
+    fontFamily: brand.typography.body,
+    color: brand.colors.charcoal,
+  } as CSSProperties;
+
+  const headingStyle: CSSProperties = {
+    fontFamily: brand.typography.heading,
+    color: brand.colors.charcoal,
+  };
+
+  const bodyStyle: CSSProperties = {
+    fontFamily: brand.typography.body,
+    color: brand.colors.charcoalSoft,
+    lineHeight: brand.typography.leading.relaxed,
+  };
+
+  const mistCardStyle: CSSProperties = {
+    borderRadius: brand.radius.lg,
+    background: brand.colors.mist,
+    boxShadow: brand.shadows.soft,
+    color: brand.colors.charcoal,
+  };
+
+  const fieldControlStyle: CSSProperties = {
+    borderRadius: brand.radius.md,
+    padding: `${brand.spacing[12]} ${brand.spacing[20]}`,
+    color: brand.colors.charcoal,
+    boxShadow: brand.shadows.xs,
+    fontFamily: brand.typography.body,
+  };
+
   return (
-    <div className="container support-page">
-      <header className="support-header">
-        <h1>Support</h1>
-        <p>
+    <div className="container support-page" style={pageStyle}>
+      <header className="support-header" style={{ gap: brand.spacing[12] }}>
+        <h1 style={headingStyle}>Support</h1>
+        <p style={bodyStyle}>
           Answers, a direct contact path, and safety resources — so you never
           have to figure solo living out completely alone.
         </p>
       </header>
 
-      <section className="support-section" aria-labelledby="faq-heading">
-        <h2 id="faq-heading">FAQ</h2>
-        <p className="support-section__lede">
+      <section
+        className="support-section"
+        aria-labelledby="faq-heading"
+        style={{ gap: brand.spacing[20] }}
+      >
+        <h2 id="faq-heading" style={headingStyle}>
+          FAQ
+        </h2>
+        <p className="support-section__lede" style={bodyStyle}>
           Quick answers about safety, community, and getting around GoSolo.
         </p>
-        <ul className="support-faq">
+        <ul className="support-faq" style={{ gap: brand.spacing[12] }}>
           {faqs.map((faq) => {
             const open = openFaq === faq.id;
             return (
               <li
                 key={faq.id}
                 className={`support-faq__item${open ? " is-open" : ""}`}
+                style={{
+                  ...mistCardStyle,
+                  borderColor: open
+                    ? "rgba(183, 196, 178, 0.55)"
+                    : "rgba(199, 184, 174, 0.28)",
+                }}
               >
                 <button
                   type="button"
@@ -132,9 +191,24 @@ export function Support() {
                       current === faq.id ? null : faq.id,
                     )
                   }
+                  style={{
+                    gap: brand.spacing[12],
+                    padding: brand.spacing[20],
+                    color: brand.colors.charcoal,
+                    fontFamily: brand.typography.heading,
+                  }}
                 >
                   <span>{faq.question}</span>
-                  <span className="support-faq__icon" aria-hidden="true">
+                  <span
+                    className="support-faq__icon"
+                    aria-hidden="true"
+                    style={{
+                      borderRadius: brand.radius.md,
+                      background: brand.colors.sage,
+                      color: brand.colors.charcoal,
+                      boxShadow: brand.shadows.xs,
+                    }}
+                  >
                     +
                   </span>
                 </button>
@@ -144,6 +218,10 @@ export function Support() {
                     id={`${faq.id}-panel`}
                     role="region"
                     aria-labelledby={`${faq.id}-trigger`}
+                    style={{
+                      padding: `0 ${brand.spacing[20]} ${brand.spacing[20]}`,
+                      ...bodyStyle,
+                    }}
                   >
                     <p>{faq.answer}</p>
                   </div>
@@ -154,14 +232,32 @@ export function Support() {
         </ul>
       </section>
 
-      <section className="support-section" aria-labelledby="contact-heading">
-        <h2 id="contact-heading">Contact us</h2>
-        <p className="support-section__lede">
+      <section
+        className="support-section"
+        aria-labelledby="contact-heading"
+        style={{ gap: brand.spacing[20] }}
+      >
+        <h2 id="contact-heading" style={headingStyle}>
+          Contact us
+        </h2>
+        <p className="support-section__lede" style={bodyStyle}>
           Send a note and we’ll follow up. For urgent safety issues, use the
           resources below first.
         </p>
-        <div className="support-form-card">
-          <form className="support-form" onSubmit={onSubmit} noValidate>
+        <div
+          className="support-form-card"
+          style={{
+            ...mistCardStyle,
+            gap: brand.spacing[20],
+            padding: brand.spacing[20],
+          }}
+        >
+          <form
+            className="support-form"
+            onSubmit={onSubmit}
+            noValidate
+            style={{ gap: brand.spacing[12] }}
+          >
             {error ? <p className="support-error">{error}</p> : null}
             {sent ? (
               <p className="support-success" role="status">
@@ -169,8 +265,8 @@ export function Support() {
               </p>
             ) : null}
 
-            <label className="support-field">
-              <span>Name</span>
+            <label className="support-field" style={{ gap: brand.spacing[8] }}>
+              <span style={{ color: brand.colors.charcoal }}>Name</span>
               <input
                 id={`${formId}-name`}
                 name="name"
@@ -178,11 +274,12 @@ export function Support() {
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 required
+                style={fieldControlStyle}
               />
             </label>
 
-            <label className="support-field">
-              <span>Email</span>
+            <label className="support-field" style={{ gap: brand.spacing[8] }}>
+              <span style={{ color: brand.colors.charcoal }}>Email</span>
               <input
                 id={`${formId}-email`}
                 type="email"
@@ -191,11 +288,12 @@ export function Support() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
+                style={fieldControlStyle}
               />
             </label>
 
-            <label className="support-field">
-              <span>Topic</span>
+            <label className="support-field" style={{ gap: brand.spacing[8] }}>
+              <span style={{ color: brand.colors.charcoal }}>Topic</span>
               <select
                 id={`${formId}-topic`}
                 name="topic"
@@ -203,6 +301,7 @@ export function Support() {
                 onChange={(event) =>
                   setTopic(event.target.value as (typeof topics)[number])
                 }
+                style={fieldControlStyle}
               >
                 {topics.map((option) => (
                   <option key={option} value={option}>
@@ -212,8 +311,8 @@ export function Support() {
               </select>
             </label>
 
-            <label className="support-field">
-              <span>Message</span>
+            <label className="support-field" style={{ gap: brand.spacing[8] }}>
+              <span style={{ color: brand.colors.charcoal }}>Message</span>
               <textarea
                 id={`${formId}-message`}
                 name="message"
@@ -221,27 +320,43 @@ export function Support() {
                 onChange={(event) => setMessage(event.target.value)}
                 placeholder="Tell us what’s going on — as much or as little as you want."
                 required
+                style={fieldControlStyle}
               />
             </label>
 
-            <button type="submit" className="support-submit" disabled={pending}>
+            <Button type="submit" disabled={pending}>
               {pending ? "Sending…" : "Send message"}
-            </button>
+            </Button>
           </form>
         </div>
       </section>
 
-      <section className="support-section" aria-labelledby="safety-heading">
-        <h2 id="safety-heading">Safety resources</h2>
-        <p className="support-section__lede">
+      <section
+        className="support-section"
+        aria-labelledby="safety-heading"
+        style={{ gap: brand.spacing[20] }}
+      >
+        <h2 id="safety-heading" style={headingStyle}>
+          Safety resources
+        </h2>
+        <p className="support-section__lede" style={bodyStyle}>
           Keep these nearby. If you’re in immediate danger, contact local
           emergency services first.
         </p>
-        <ul className="support-resources">
+        <ul className="support-resources" style={{ gap: brand.spacing[12] }}>
           {safetyResources.map((resource) => (
-            <li key={resource.title} className="support-resource">
-              <h3>{resource.title}</h3>
-              <p>{resource.body}</p>
+            <li
+              key={resource.title}
+              className="support-resource"
+              style={{
+                ...mistCardStyle,
+                gap: brand.spacing[8],
+                padding: brand.spacing[20],
+                borderLeft: `3px solid ${brand.colors.sage}`,
+              }}
+            >
+              <h3 style={headingStyle}>{resource.title}</h3>
+              <p style={bodyStyle}>{resource.body}</p>
               {resource.external ? (
                 <a
                   href={resource.href}
@@ -251,20 +366,30 @@ export function Support() {
                       ? "noopener noreferrer"
                       : undefined
                   }
+                  style={{ color: brand.colors.sageDeep }}
                 >
                   Open resource →
                 </a>
               ) : (
-                <Link to={resource.href}>Open resource →</Link>
+                <Link to={resource.href} style={{ color: brand.colors.sageDeep }}>
+                  Open resource →
+                </Link>
               )}
             </li>
           ))}
         </ul>
       </section>
 
-      <p className="support-footer">
-        You can also visit the <Link to="/safety">Safety center</Link> or{" "}
-        <Link to="/messages">Messages</Link> anytime.
+      <p className="support-footer" style={bodyStyle}>
+        You can also visit the{" "}
+        <Link to="/safety" style={{ color: brand.colors.sageDeep }}>
+          Safety center
+        </Link>{" "}
+        or{" "}
+        <Link to="/messages" style={{ color: brand.colors.sageDeep }}>
+          Messages
+        </Link>{" "}
+        anytime.
       </p>
     </div>
   );
