@@ -39,7 +39,7 @@
     var(--gosolo-peach-gold),
     var(--gold-400)
   );
-  box-shadow: 0 6px 16px rgba(247, 200, 165, 0.45);
+  box-shadow: 0 6px 16px rgba(231, 207, 169, 0.45);
   overflow: hidden;
 }
 
@@ -59,7 +59,7 @@
   right: 0.2rem;
   bottom: 0;
   height: 0.85rem;
-  background: rgba(87, 76, 67, 0.28);
+  background: rgba(58, 58, 60, 0.28);
   border-radius: 40% 40% 0 0;
 }
 
@@ -98,7 +98,7 @@
 
 .link:hover {
   color: var(--neutral-900);
-  background: rgba(247, 200, 165, 0.35);
+  background: rgba(231, 207, 169, 0.35);
   transform: translateY(-1px);
   box-shadow: var(--shadow-xs);
 }
@@ -106,7 +106,7 @@
 .active {
   color: var(--neutral-950);
   font-weight: 650;
-  background: rgba(247, 200, 165, 0.5);
+  background: rgba(231, 207, 169, 0.5);
 }
 
 .active::after {

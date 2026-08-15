@@ -82,5 +82,25 @@
 .tone-taupe.blob,
 .tone-taupe.arc,
 .tone-taupe.pill {
-  background: linear-gradient(145deg, var(--neutral-100), var(--neutral-300));
+  background: linear-gradient(145deg, var(--neutral-100), var(--brand-warm-taupe));
+}
+
+.tone-blue path {
+  fill: var(--blue-100);
+}
+
+.tone-blue.blob,
+.tone-blue.arc,
+.tone-blue.pill {
+  background: linear-gradient(145deg, var(--blue-100), var(--blue-300));
+}
+
+.tone-rose path {
+  fill: var(--rose-100);
+}
+
+.tone-rose.blob,
+.tone-rose.arc,
+.tone-rose.pill {
+  background: linear-gradient(145deg, var(--rose-100), var(--rose-200));
 }

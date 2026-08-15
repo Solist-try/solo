@@ -57,7 +57,7 @@
 
 .primary:not(:disabled):hover {
   background-position: 100% 50%;
-  box-shadow: 0 14px 34px rgba(201, 123, 75, 0.34);
+  box-shadow: 0 14px 34px rgba(217, 165, 160, 0.34);
 }
 
 .secondary {

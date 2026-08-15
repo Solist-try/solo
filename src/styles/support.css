@@ -16,7 +16,7 @@
 
 .support-header h1 {
   margin: 0;
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
   font-size: clamp(2.35rem, 5vw, 3.25rem);
   color: #2a241f;
   letter-spacing: -0.025em;
@@ -38,7 +38,7 @@
 
 .support-section h2 {
   margin: 0;
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
   font-size: 1.5rem;
   color: #2a241f;
   letter-spacing: -0.02em;
@@ -63,7 +63,7 @@
 .support-faq__item {
   border-radius: 1.2rem;
   background: rgba(255, 250, 246, 0.96);
-  border: 1px solid rgba(142, 141, 138, 0.14);
+  border: 1px solid rgba(199, 184, 174, 0.14);
   box-shadow: 0 8px 22px rgba(42, 36, 31, 0.05);
   overflow: hidden;
   transition:
@@ -72,7 +72,7 @@
 }
 
 .support-faq__item.is-open {
-  border-color: rgba(247, 200, 165, 0.55);
+  border-color: rgba(231, 207, 169, 0.55);
   box-shadow: 0 12px 28px rgba(42, 36, 31, 0.08);
 }
 
@@ -103,7 +103,7 @@
   display: grid;
   place-items: center;
   border-radius: 999px;
-  background: rgba(247, 200, 165, 0.4);
+  background: rgba(231, 207, 169, 0.4);
   color: #975533;
   font-size: 1.15rem;
   line-height: 1;
@@ -112,7 +112,7 @@
 
 .support-faq__item.is-open .support-faq__icon {
   transform: rotate(45deg);
-  background: rgba(247, 200, 165, 0.7);
+  background: rgba(231, 207, 169, 0.7);
 }
 
 .support-faq__panel {
@@ -134,7 +134,7 @@
   padding: 1.4rem 1.35rem;
   border-radius: 1.4rem;
   background: rgba(255, 250, 246, 0.96);
-  border: 1px solid rgba(142, 141, 138, 0.14);
+  border: 1px solid rgba(199, 184, 174, 0.14);
   box-shadow: 0 10px 28px rgba(42, 36, 31, 0.06);
 }
 
@@ -159,9 +159,9 @@
 .support-field textarea {
   width: 100%;
   padding: 0.65rem 1rem;
-  border: 1px solid rgba(142, 141, 138, 0.22);
+  border: 1px solid rgba(199, 184, 174, 0.22);
   border-radius: 0.95rem;
-  background: #fffaf6;
+  background: var(--neutral-0);
   color: #2a241f;
   font: inherit;
   transition:
@@ -183,8 +183,8 @@
 .support-field select:focus,
 .support-field textarea:focus {
   outline: none;
-  border-color: #f7c8a5;
-  box-shadow: 0 0 0 3px rgba(247, 200, 165, 0.35);
+  border-color: var(--brand-soft-gold);
+  box-shadow: 0 0 0 3px rgba(231, 207, 169, 0.35);
 }
 
 .support-submit {
@@ -196,11 +196,11 @@
   padding: 0.55rem 1.25rem;
   border: none;
   border-radius: 999px;
-  background: linear-gradient(135deg, #e08a52, #d4a84b);
-  color: #fffaf6;
+  background: var(--gradient-cta);
+  color: var(--neutral-0);
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(201, 123, 75, 0.22);
+  box-shadow: 0 8px 18px rgba(217, 165, 160, 0.22);
   transition:
     transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 220ms ease,
@@ -209,7 +209,7 @@
 
 .support-submit:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(201, 123, 75, 0.28);
+  box-shadow: 0 12px 24px rgba(217, 165, 160, 0.28);
 }
 
 .support-submit:disabled {
@@ -252,11 +252,11 @@
   border-radius: 1.2rem;
   background: linear-gradient(
     155deg,
-    rgba(247, 200, 165, 0.22),
+    rgba(231, 207, 169, 0.22),
     rgba(255, 250, 246, 0.96) 50%,
     rgba(247, 236, 208, 0.28)
   );
-  border: 1px solid rgba(247, 200, 165, 0.4);
+  border: 1px solid rgba(231, 207, 169, 0.4);
   box-shadow: 0 8px 22px rgba(42, 36, 31, 0.05);
 }
 
@@ -287,7 +287,7 @@
 
 .support-footer {
   margin: 0;
-  color: #8e8d8a;
+  color: var(--color-text-soft);
   font-size: 0.9rem;
   line-height: 1.65;
 }

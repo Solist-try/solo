@@ -3,7 +3,7 @@ import styles from "./SoftCurve.module.css";
 
 export type SoftCurveProps = HTMLAttributes<HTMLDivElement> & {
   variant?: "wave" | "blob" | "arc" | "pill";
-  tone?: "cream" | "peach" | "gold" | "taupe";
+  tone?: "cream" | "peach" | "gold" | "taupe" | "blue" | "rose";
   flip?: boolean;
 };
 

@@ -1,31 +1,46 @@
 :root {
-  --neutral-0: #fffaf6;
-  --neutral-50: #f8ebe1;
-  --neutral-100: #efe3d8;
-  --neutral-300: #c9b9aa;
-  --neutral-500: #8a7a6d;
-  --neutral-600: #6f6156;
-  --neutral-800: #3f3730;
-  --neutral-900: #2a241f;
-  --neutral-950: #1a1613;
+  --neutral-0: #fffcfa;
+  --neutral-50: #e9e6e3;
+  --neutral-100: #e2deda;
+  --neutral-300: #c7b8ae;
+  --neutral-500: #8a7f78;
+  --neutral-600: #6e6e70;
+  --neutral-800: #48484a;
+  --neutral-900: #3a3a3c;
+  --neutral-950: #2a2a2c;
 
-  --peach-100: #ffe4d1;
-  --peach-200: #fbc9a8;
-  --peach-300: #f0a978;
-  --peach-400: #e08a52;
-  --peach-500: #c97b4b;
-  --peach-700: #975533;
+  --brand-soft-gold: #e7cfa9;
+  --brand-warm-taupe: #c7b8ae;
+  --brand-mist-grey: #e9e6e3;
+  --brand-deep-charcoal: #3a3a3c;
+  --brand-soft-summer-blue: #8fa6b8;
+  --brand-accent-rose: #d9a5a0;
 
-  --gold-300: #e8c56a;
-  --gold-400: #d4a84b;
+  --rose-50: #f8eeec;
+  --rose-100: #f3e4e1;
+  --rose-200: #d9a5a0;
+  --rose-400: #c48984;
+  --rose-500: #b5756f;
 
-  --font-display: "Fraunces", "Georgia", serif;
-  --font-body: "Outfit", "Segoe UI", sans-serif;
+  --peach-100: #f3e4e1;
+  --peach-200: #d9a5a0;
+  --peach-300: #cfa096;
+  --peach-400: #c48984;
+  --peach-500: #b5756f;
+  --peach-700: #84524e;
+
+  --gold-100: #f4e9d8;
+  --gold-200: #e7cfa9;
+  --gold-300: #dcc094;
+  --gold-400: #c9b08a;
+
+  --font-display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-soft: 0 10px 28px rgba(42, 36, 31, 0.07);
-  --shadow-lift: 0 18px 44px rgba(42, 36, 31, 0.11);
+  --shadow-soft: 0 10px 28px rgba(58, 58, 60, 0.07);
+  --shadow-lift: 0 18px 44px rgba(58, 58, 60, 0.1);
   --nav-height: 4.25rem;
   --bottom-nav-height: 4.75rem;
 }
@@ -48,8 +63,8 @@ body {
   line-height: 1.6;
   color: var(--neutral-900);
   background:
-    radial-gradient(ellipse 80% 60% at 15% 10%, rgba(240, 169, 120, 0.42), transparent 55%),
-    radial-gradient(ellipse 70% 50% at 90% 20%, rgba(232, 197, 106, 0.26), transparent 50%),
+    radial-gradient(ellipse 80% 60% at 15% 10%, rgba(217, 165, 160, 0.42), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 90% 20%, rgba(231, 207, 169, 0.26), transparent 50%),
     radial-gradient(ellipse 60% 40% at 50% 100%, rgba(168, 151, 138, 0.2), transparent 55%),
     var(--neutral-50);
   background-attachment: fixed;
@@ -165,7 +180,7 @@ ul {
 .nav__links a:hover,
 .nav__links a.is-active {
   color: var(--neutral-950);
-  background: rgba(201, 123, 75, 0.14);
+  background: rgba(217, 165, 160, 0.14);
 }
 
 @media (min-width: 820px) {
@@ -229,9 +244,9 @@ ul {
   background: linear-gradient(
     145deg,
     #f7d5bc 0%,
-    #efc39a 28%,
-    #d9b08c 55%,
-    #c4a48a 78%,
+    var(--gold-300) 28%,
+    var(--brand-warm-taupe) 55%,
+    var(--neutral-400) 78%,
     #a8907a 100%
   );
 }
@@ -244,7 +259,7 @@ ul {
     180deg,
     transparent 0%,
     rgba(110, 97, 86, 0.18) 28%,
-    rgba(87, 76, 67, 0.42) 100%
+    rgba(58, 58, 60, 0.42) 100%
   );
   border-radius: 40% 60% 0 0 / 28% 32% 0 0;
 }
@@ -258,9 +273,9 @@ ul {
   border-radius: 50%;
   background: radial-gradient(
     circle at 35% 35%,
-    #ffe7b8,
-    #e8c56a 48%,
-    #d4a84b 75%,
+    var(--gold-100),
+    var(--gold-300) 48%,
+    var(--gold-400) 75%,
     transparent 76%
   );
   animation: soft-float 7s var(--ease-soft) infinite;
@@ -368,7 +383,7 @@ ul {
 .btn--primary {
   background: linear-gradient(135deg, var(--peach-400), var(--gold-400));
   color: var(--neutral-0);
-  box-shadow: 0 10px 30px rgba(201, 123, 75, 0.22);
+  box-shadow: 0 10px 30px rgba(217, 165, 160, 0.22);
 }
 
 .btn--secondary {
@@ -576,7 +591,7 @@ ul {
 .mood:hover,
 .mood.is-selected {
   background: var(--peach-100);
-  border-color: rgba(201, 123, 75, 0.35);
+  border-color: rgba(217, 165, 160, 0.35);
   transform: translateY(-1px);
 }
 

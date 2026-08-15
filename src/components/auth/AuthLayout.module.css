@@ -21,7 +21,7 @@
   width: min(40vw, 18rem);
   height: min(40vw, 18rem);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(240, 169, 120, 0.4), transparent 70%);
+  background: radial-gradient(circle, rgba(217, 165, 160, 0.4), transparent 70%);
   animation: glow-pulse 7s var(--ease-soft) infinite;
 }
 

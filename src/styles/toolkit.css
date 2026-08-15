@@ -38,7 +38,7 @@
   padding: 1.5rem;
   border-radius: 1.5rem;
   background: rgba(255, 250, 246, 0.96);
-  border: 1px solid rgba(142, 141, 138, 0.16);
+  border: 1px solid rgba(199, 184, 174, 0.16);
   box-shadow: 0 10px 28px rgba(42, 36, 31, 0.07);
   animation: fade-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition:
@@ -50,7 +50,7 @@
 .toolkit-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 18px 44px rgba(42, 36, 31, 0.11);
-  border-color: rgba(247, 200, 165, 0.55);
+  border-color: rgba(231, 207, 169, 0.55);
 }
 
 .toolkit-card__header {
@@ -66,14 +66,14 @@
   display: grid;
   place-items: center;
   border-radius: 1rem;
-  background: linear-gradient(145deg, #ffe4d1, #f7ecd0);
+  background: linear-gradient(145deg, var(--rose-100), var(--gold-100));
   color: #975533;
   box-shadow: inset 0 1px 0 rgba(255, 250, 246, 0.8);
 }
 
 .toolkit-card__icon[data-tone="gold"] {
-  background: linear-gradient(145deg, #f7ecd0, #f3e2b2);
-  color: #8a6a24;
+  background: linear-gradient(145deg, var(--gold-100), var(--gold-200));
+  color: var(--gold-500);
 }
 
 .toolkit-card__icon[data-tone="taupe"] {
@@ -83,7 +83,7 @@
 
 .toolkit-card__title {
   margin: 0 0 0.35rem;
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display, "Source Serif 4", Georgia, serif);
   font-size: 1.4rem;
   color: #2a241f;
 }
@@ -108,7 +108,7 @@
   gap: 0.35rem;
   min-width: 4.5rem;
   padding: 0.7rem 0.75rem;
-  border: 1px solid rgba(142, 141, 138, 0.18);
+  border: 1px solid rgba(199, 184, 174, 0.18);
   border-radius: 1.1rem;
   background: rgba(248, 235, 225, 0.45);
   color: #574c43;
@@ -122,13 +122,13 @@
 
 .toolkit-mood:hover {
   transform: translateY(-2px);
-  border-color: rgba(247, 200, 165, 0.7);
+  border-color: rgba(231, 207, 169, 0.7);
 }
 
 .toolkit-mood.is-selected {
-  background: rgba(247, 200, 165, 0.55);
+  background: rgba(231, 207, 169, 0.55);
   border-color: rgba(224, 138, 82, 0.45);
-  box-shadow: 0 8px 18px rgba(247, 200, 165, 0.35);
+  box-shadow: 0 8px 18px rgba(231, 207, 169, 0.35);
 }
 
 .toolkit-mood__emoji {
@@ -157,9 +157,9 @@
   min-height: 5.5rem;
   resize: vertical;
   padding: 0.85rem 1rem;
-  border: 1px solid rgba(142, 141, 138, 0.22);
+  border: 1px solid rgba(199, 184, 174, 0.22);
   border-radius: 1rem;
-  background: #fffaf6;
+  background: var(--neutral-0);
   color: #2a241f;
   transition:
     border-color 220ms ease,
@@ -168,8 +168,8 @@
 
 .toolkit-note textarea:focus {
   outline: none;
-  border-color: #f7c8a5;
-  box-shadow: 0 0 0 3px rgba(247, 200, 165, 0.35);
+  border-color: var(--brand-soft-gold);
+  box-shadow: 0 0 0 3px rgba(231, 207, 169, 0.35);
 }
 
 .toolkit-btn {
@@ -181,11 +181,11 @@
   padding: 0.55rem 1.2rem;
   border: none;
   border-radius: 999px;
-  background: linear-gradient(135deg, #e08a52, #d4a84b);
-  color: #fffaf6;
+  background: var(--gradient-cta);
+  color: var(--neutral-0);
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(201, 123, 75, 0.22);
+  box-shadow: 0 8px 18px rgba(217, 165, 160, 0.22);
   transition:
     transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 220ms ease,
@@ -194,7 +194,7 @@
 
 .toolkit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(201, 123, 75, 0.28);
+  box-shadow: 0 12px 24px rgba(217, 165, 160, 0.28);
 }
 
 .toolkit-btn:disabled {
@@ -216,7 +216,7 @@
   padding: 0.85rem 1rem;
   border-radius: 1rem;
   background: rgba(248, 235, 225, 0.55);
-  border: 1px solid rgba(142, 141, 138, 0.1);
+  border: 1px solid rgba(199, 184, 174, 0.1);
   animation: fade-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -255,7 +255,7 @@
   padding: 1rem;
   border-radius: 1.15rem;
   background: rgba(248, 235, 225, 0.4);
-  border: 1px solid rgba(142, 141, 138, 0.12);
+  border: 1px solid rgba(199, 184, 174, 0.12);
 }
 
 .toolkit-habit__top {
@@ -281,14 +281,14 @@
   width: 100%;
   height: 0.55rem;
   border-radius: 999px;
-  background: rgba(142, 141, 138, 0.16);
+  background: rgba(199, 184, 174, 0.16);
   overflow: hidden;
 }
 
 .toolkit-progress__fill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #f7c8a5, #d4a84b);
+  background: linear-gradient(90deg, var(--brand-soft-gold), var(--gold-400));
   transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -302,10 +302,10 @@
   min-width: 2.4rem;
   min-height: 2.4rem;
   padding: 0.35rem;
-  border: 1px solid rgba(142, 141, 138, 0.2);
+  border: 1px solid rgba(199, 184, 174, 0.2);
   border-radius: 0.85rem;
-  background: #fffaf6;
-  color: #8e8d8a;
+  background: var(--neutral-0);
+  color: var(--color-text-soft);
   font-size: 0.7rem;
   font-weight: 600;
   cursor: pointer;
@@ -318,14 +318,14 @@
 
 .toolkit-day:hover {
   transform: translateY(-1px);
-  border-color: rgba(247, 200, 165, 0.7);
+  border-color: rgba(231, 207, 169, 0.7);
 }
 
 .toolkit-day.is-on {
-  background: linear-gradient(145deg, #f7c8a5, #e08a52);
+  background: linear-gradient(145deg, var(--brand-soft-gold), var(--rose-400));
   border-color: transparent;
-  color: #fffaf6;
-  box-shadow: 0 6px 14px rgba(247, 200, 165, 0.35);
+  color: var(--neutral-0);
+  box-shadow: 0 6px 14px rgba(231, 207, 169, 0.35);
 }
 
 /* Budgeting */
@@ -349,9 +349,9 @@
   width: 100%;
   min-height: 2.6rem;
   padding: 0.55rem 0.95rem;
-  border: 1px solid rgba(142, 141, 138, 0.22);
+  border: 1px solid rgba(199, 184, 174, 0.22);
   border-radius: 0.95rem;
-  background: #fffaf6;
+  background: var(--neutral-0);
   color: #2a241f;
   transition:
     border-color 220ms ease,
@@ -360,8 +360,8 @@
 
 .toolkit-field input:focus {
   outline: none;
-  border-color: #f7c8a5;
-  box-shadow: 0 0 0 3px rgba(247, 200, 165, 0.35);
+  border-color: var(--brand-soft-gold);
+  box-shadow: 0 0 0 3px rgba(231, 207, 169, 0.35);
 }
 
 .toolkit-budget-grid {
@@ -374,8 +374,8 @@
   gap: 0.75rem;
   padding: 1.15rem;
   border-radius: 1.15rem;
-  background: linear-gradient(160deg, #fff4ec, #fffaf6 50%, #f7ecd0);
-  border: 1px solid rgba(247, 200, 165, 0.45);
+  background: linear-gradient(160deg, var(--rose-50), var(--neutral-0) 50%, var(--gold-100));
+  border: 1px solid rgba(231, 207, 169, 0.45);
   box-shadow: 0 8px 22px rgba(42, 36, 31, 0.06);
 }
 

@@ -150,7 +150,7 @@
   padding: var(--space-7);
   border-radius: var(--radius-2xl);
   background: var(--gradient-soft);
-  border: 1px solid rgba(201, 123, 75, 0.16);
+  border: 1px solid rgba(217, 165, 160, 0.16);
   box-shadow: var(--shadow-soft);
 }
 

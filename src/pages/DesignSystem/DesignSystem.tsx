@@ -11,6 +11,17 @@ import styles from "./DesignSystem.module.css";
 
 const colorGroups = [
   {
+    title: "Brand palette",
+    swatches: [
+      ["soft-gold", "var(--brand-soft-gold)"],
+      ["warm-taupe", "var(--brand-warm-taupe)"],
+      ["mist-grey", "var(--brand-mist-grey)"],
+      ["deep-charcoal", "var(--brand-deep-charcoal)"],
+      ["summer-blue", "var(--brand-soft-summer-blue)"],
+      ["accent-rose", "var(--brand-accent-rose)"],
+    ],
+  },
+  {
     title: "Warm neutrals",
     swatches: [
       ["neutral-0", "var(--neutral-0)"],
@@ -23,22 +34,24 @@ const colorGroups = [
     ],
   },
   {
-    title: "Peach accent",
+    title: "Accent rose",
     swatches: [
-      ["peach-50", "var(--peach-50)"],
-      ["peach-100", "var(--peach-100)"],
-      ["peach-300", "var(--peach-300)"],
-      ["peach-500", "var(--peach-500)"],
-      ["peach-700", "var(--peach-700)"],
+      ["rose-50", "var(--rose-50)"],
+      ["rose-100", "var(--rose-100)"],
+      ["rose-200", "var(--rose-200)"],
+      ["rose-400", "var(--rose-400)"],
+      ["rose-600", "var(--rose-600)"],
     ],
   },
   {
-    title: "Soft gold",
+    title: "Soft gold & blue",
     swatches: [
       ["gold-100", "var(--gold-100)"],
-      ["gold-300", "var(--gold-300)"],
+      ["gold-200", "var(--gold-200)"],
       ["gold-400", "var(--gold-400)"],
-      ["gold-500", "var(--gold-500)"],
+      ["blue-100", "var(--blue-100)"],
+      ["blue-300", "var(--blue-300)"],
+      ["blue-500", "var(--blue-500)"],
     ],
   },
 ] as const;
@@ -72,10 +85,10 @@ export function DesignSystem() {
       <header className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
           <p className="type-label">Go Solo design system</p>
-          <h1 className="type-h1">Warm neutrals, soft curves</h1>
+          <h1 className="type-h1">Warm gold, mist, and soft rose</h1>
           <p className="type-body-lg">
-            Tokens, type, spacing, buttons, cards, and the curved motif that
-            gives the product its rounded, welcoming feel.
+            Tokens, type, spacing, and gentle curves that keep Go Solo calm and
+            welcoming.
           </p>
         </div>
         <SoftCurve tone="cream" />
@@ -86,7 +99,8 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Color tokens</h2>
             <p className="type-body-lg">
-              Peach–gold accents on a warm neutral foundation.
+              Soft gold, warm taupe, mist grey, charcoal, summer blue, and
+              accent rose — a calm, grounded palette.
             </p>
           </div>
           <div className={styles.colorGroups}>
@@ -112,7 +126,7 @@ export function DesignSystem() {
           <div className={styles.sectionHead}>
             <h2 className="type-h2">Typography scale</h2>
             <p className="type-body-lg">
-              Fraunces for display moments, Outfit for UI and reading.
+              Source Serif 4 for display moments, Nunito for UI and reading.
             </p>
           </div>
           <div className={styles.typeList}>
@@ -140,6 +154,42 @@ export function DesignSystem() {
                 <span
                   className={styles.spaceBar}
                   style={{ width: `var(--space-${step})` }}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.sectionHead}>
+            <h2 className="type-h2">Corner radius</h2>
+            <p className="type-body-lg">
+              Curved corners stay in a calm 10–14px range for surfaces and
+              controls (<code>--radius-sm</code> through <code>--radius-lg</code>
+              ).
+            </p>
+          </div>
+          <div className={styles.spaceList}>
+            {(
+              [
+                ["sm", "10px"],
+                ["md", "12px"],
+                ["lg", "14px"],
+                ["xl", "14px"],
+                ["2xl", "16px"],
+              ] as const
+            ).map(([name, px]) => (
+              <div key={name} className={styles.spaceRow}>
+                <code>
+                  --radius-{name} · {px}
+                </code>
+                <span
+                  className={styles.spaceBar}
+                  style={{
+                    width: "4.5rem",
+                    height: "2.25rem",
+                    borderRadius: `var(--radius-${name})`,
+                  }}
                 />
               </div>
             ))}
