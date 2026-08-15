@@ -89,8 +89,8 @@ export function Community() {
       <header className="community-header">
         <h1>Community</h1>
         <p>
-          Encouragement and practical notes from people walking solo — reply
-          when you want company.
+          Supportive notes from people building solo lives on their own terms —
+          share what helps, take what you need, leave the rest.
         </p>
       </header>
 
@@ -125,7 +125,7 @@ export function Community() {
       <div className="community-feed">
         {visiblePosts.length === 0 ? (
           <div className="community-empty">
-            <p>No posts in this topic yet. Try another filter.</p>
+            <p>Nothing in this topic yet. Browse another filter when you are ready.</p>
             <button
               type="button"
               className="community-empty__action"
@@ -233,12 +233,13 @@ function PostCard({
           type="button"
           className={`community-action${liked ? " is-liked" : ""}`}
           aria-pressed={liked}
-          aria-label={liked ? "Unlike post" : "Like post"}
+          aria-label={liked ? "Remove appreciation" : "Appreciate post"}
           onClick={onToggleLike}
         >
           <HeartIcon filled={liked} />
           <span>
-            {post.likes} {post.likes === 1 ? "Like" : "Likes"}
+            {post.likes}{" "}
+            {post.likes === 1 ? "Appreciation" : "Appreciations"}
           </span>
         </button>
         <button
@@ -335,7 +336,7 @@ function CommentDrawer({
 
         {post.comments.length === 0 ? (
           <p className="community-drawer__empty">
-            Be the first to leave a kind note.
+            No replies yet — add a supportive note if you want to.
           </p>
         ) : (
           <ul className="community-drawer__list">
@@ -373,14 +374,14 @@ function CommentDrawer({
               setDraft(event.target.value);
               if (error) setError(null);
             }}
-            placeholder="Share a supportive reply…"
+            placeholder="Share a practical or encouraging note…"
           />
           <button
             type="submit"
             className="community-drawer__submit"
             disabled={!draft.trim()}
           >
-            Reply
+            Send
           </button>
         </form>
       </div>
