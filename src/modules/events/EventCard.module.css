@@ -1,0 +1,70 @@
+.card {
+  height: 100%;
+  box-shadow: var(--shadow-soft);
+  animation: fade-rise var(--duration-slow) var(--ease-out) both;
+}
+
+.body {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.body > p {
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+.meta {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.meta li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.meta span {
+  color: var(--color-text-soft);
+}
+
+.meta strong {
+  color: var(--neutral-800);
+  font-weight: var(--weight-medium);
+  text-align: right;
+}
+
+.footer {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendarActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.googleLink {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--peach-700);
+}
+
+.googleLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calendarActions {
+    justify-content: space-between;
+  }
+}

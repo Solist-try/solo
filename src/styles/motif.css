@@ -1,0 +1,41 @@
+/* Soft curved motif utilities */
+
+.curve-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.curve-blob {
+  border-radius: var(--radius-blob);
+  background: var(--gradient-curve);
+}
+
+.curve-panel {
+  border-radius: var(--radius-2xl);
+  background: var(--color-surface-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.curve-divider {
+  display: block;
+  width: 100%;
+  height: clamp(2.5rem, 6vw, 4.5rem);
+  background-color: transparent;
+  background-image: var(--curve-wave);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.curve-divider--peach {
+  background-image: var(--curve-wave-peach);
+}
+
+.curve-edge {
+  border-radius: var(--radius-xl) var(--radius-xl) var(--radius-2xl) var(--radius-2xl);
+}
+
+.curve-pill {
+  border-radius: var(--radius-pill);
+}

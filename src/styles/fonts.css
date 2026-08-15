@@ -1,0 +1,69 @@
+/**
+ * Brand font aliases.
+ * GoSoloSerif / GoSoloSans resolve to the loaded Source Serif 4 + Nunito files
+ * so design tokens can use the Go Solo names while web fonts stay CDN-hosted.
+ */
+
+@font-face {
+  font-family: "GoSoloSerif";
+  src: local("Source Serif 4"), local("SourceSerif4-Regular");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoSoloSerif";
+  src: local("Source Serif 4"), local("SourceSerif4-Medium");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoSoloSerif";
+  src: local("Source Serif 4"), local("SourceSerif4-SemiBold");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoSoloSerif";
+  src: local("Source Serif 4"), local("SourceSerif4-Bold");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoSoloSans";
+  src: local("Nunito"), local("Nunito Regular");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoSoloSans";
+  src: local("Nunito Medium"), local("Nunito");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoSoloSans";
+  src: local("Nunito SemiBold"), local("Nunito");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GoSoloSans";
+  src: local("Nunito Bold"), local("Nunito");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

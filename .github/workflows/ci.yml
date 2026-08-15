@@ -1,0 +1,46 @@
+# CI for the Go Solo Vite/React app (+ optional Express health API)
+
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            echo "Lockfile found — running npm ci"
+            npm ci
+          else
+            echo "No lockfile found — running npm install"
+            npm install
+          fi
+
+      - name: Typecheck, lint, test, and build
+        run: npm run check
+
+      - name: Start app UI (manual runs)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          npm run build
+          npm start &
+          sleep 2
+          curl -sf http://127.0.0.1:3000/ | grep -q "Go Solo"
+          curl -sf http://127.0.0.1:3000/health
+          echo
+          echo "Go Solo UI + health responded on :3000"

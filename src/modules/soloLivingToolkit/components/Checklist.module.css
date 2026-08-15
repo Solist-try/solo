@@ -1,0 +1,108 @@
+.checklist {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.header h3 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-1);
+}
+
+.header p {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.progressLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--peach-600);
+  font-weight: var(--weight-semibold);
+}
+
+.track {
+  height: 0.45rem;
+  border-radius: var(--radius-pill);
+  background: var(--neutral-100);
+  overflow: hidden;
+}
+
+.track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--gradient-cta);
+  transition: width var(--duration-med) var(--ease-out);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-soft),
+    background var(--duration-fast) var(--ease-soft);
+}
+
+.item:hover {
+  border-color: var(--peach-300);
+}
+
+.item input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1rem;
+  border-radius: 0.4rem;
+  border: 1.5px solid var(--neutral-400);
+  background: var(--neutral-0);
+  transition:
+    background var(--duration-fast) var(--ease-soft),
+    border-color var(--duration-fast) var(--ease-soft),
+    box-shadow var(--duration-fast) var(--ease-soft);
+}
+
+.item input:focus-visible + .box {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.item input:checked + .box {
+  background: var(--peach-400);
+  border-color: var(--peach-400);
+  box-shadow: inset 0 0 0 2px var(--neutral-0);
+}
+
+.label {
+  color: var(--color-text);
+  line-height: var(--leading-snug);
+}
+
+.done .label {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(138, 122, 109, 0.45);
+}

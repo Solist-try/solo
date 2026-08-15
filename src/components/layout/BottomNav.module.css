@@ -1,0 +1,144 @@
+/* Go Solo bottom nav — taupe base · gold active · charcoal icons · rose accents */
+
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  padding: 0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom));
+  background: linear-gradient(
+    180deg,
+    #d2c3b9 0%,
+    var(--brand-warm-taupe, #c7b8ae) 55%,
+    #b9aaa0 100%
+  );
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(168, 153, 144, 0.55);
+  box-shadow: 0 -8px 28px rgba(58, 58, 60, 0.08);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-brand-4, 4px);
+  width: min(100%, 36rem);
+  margin-inline: auto;
+}
+
+.item {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-brand-4, 4px);
+  padding: var(--space-brand-4, 4px) 0.15rem;
+  border-radius: var(--radius-md, 12px);
+  color: var(--brand-deep-charcoal, #3a3a3c);
+  text-decoration: none;
+  transition:
+    color var(--duration-med) var(--ease-soft),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.item:hover {
+  color: var(--rose-600, #9e635e);
+}
+
+.item:hover .iconWell {
+  background: var(--color-highlight-soft, rgba(217, 165, 160, 0.22));
+  border-color: rgba(217, 165, 160, 0.55);
+  color: var(--rose-600, #9e635e);
+  box-shadow: 0 4px 12px rgba(217, 165, 160, 0.22);
+}
+
+.item:focus-visible {
+  outline: none;
+}
+
+.item:focus-visible .iconWell {
+  outline: 2px solid var(--brand-accent-rose, #d9a5a0);
+  outline-offset: 2px;
+  background: var(--color-highlight-soft, rgba(217, 165, 160, 0.22));
+  border-color: var(--brand-accent-rose, #d9a5a0);
+  color: var(--rose-600, #9e635e);
+}
+
+/* Rounded icon containers — 12px */
+.iconWell {
+  display: grid;
+  place-items: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  border-radius: 12px;
+  background: rgba(255, 252, 250, 0.45);
+  border: 1px solid rgba(58, 58, 60, 0.12);
+  color: var(--brand-deep-charcoal, #3a3a3c);
+  transition:
+    background var(--duration-med) var(--ease-soft),
+    border-color var(--duration-med) var(--ease-soft),
+    color var(--duration-med) var(--ease-soft),
+    box-shadow var(--duration-med) var(--ease-soft),
+    transform var(--duration-med) var(--ease-spring);
+}
+
+.label {
+  font-family: var(--font-gosolo-sans, var(--font-body));
+  font-size: 0.68rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  color: inherit;
+}
+
+/* Soft gold active state */
+.active {
+  color: var(--brand-deep-charcoal, #3a3a3c);
+}
+
+.active .iconWell {
+  background: var(--brand-soft-gold, #e7cfa9);
+  border-color: rgba(201, 176, 138, 0.65);
+  color: var(--brand-deep-charcoal, #3a3a3c);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+.active .label {
+  font-weight: var(--weight-semibold);
+  color: var(--brand-deep-charcoal, #3a3a3c);
+}
+
+.active:hover .iconWell {
+  background: var(--gold-300, #dcc094);
+  border-color: rgba(217, 165, 160, 0.45);
+  color: var(--brand-deep-charcoal, #3a3a3c);
+}
+
+.active:focus-visible .iconWell {
+  outline-color: var(--brand-accent-rose, #d9a5a0);
+}
+
+@media (min-width: 900px) {
+  .nav {
+    padding-inline: 1rem;
+  }
+
+  .inner {
+    width: min(100%, 42rem);
+  }
+
+  .label {
+    font-size: 0.72rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .iconWell {
+    transition: none;
+  }
+
+  .active .iconWell {
+    transform: none;
+  }
+}
