@@ -4,24 +4,23 @@
    -------------------------------------------------------------------------- */
 
 .home-page {
-  /* Opening palette (scoped) */
-  --home-mist: #e4e5e3;
-  --home-mist-mid: #d8dad7;
-  --home-sage: #b0bdb0;
-  --home-sage-soft: #c5cec3;
-  --home-sage-deep: #65795d; /* white text ≥4.5:1 */
-  --home-clay: #b5ada5; /* desaturated clay / soft hover */
+  /* Opening palette — sage + mist first, low yellow */
+  --home-mist: var(--brand-mist, #e9e6e3);
+  --home-mist-mid: var(--brand-mist-deep, #ddd8d3);
+  --home-sage: var(--brand-sage, #b7c4b2);
+  --home-sage-soft: var(--brand-sage-soft, #d5ddd1);
+  --home-sage-deep: var(--brand-sage-deep, #65795d);
+  --home-clay: var(--brand-clay, #c7b8ae);
   --home-clay-soft: #c2bbb4;
-  --home-charcoal: #3a3a3c;
-  --home-text-muted: #4f4740; /* warm clay-hue, ≥4.5:1 on mist & sage wash */
-  --home-gold: #dbccb5; /* soft gold sat −40% */
-  --home-gold-deep: #bcad97; /* gold-400 sat −40% */
-  --home-white: #fffcfa;
+  --home-charcoal: var(--brand-charcoal, #3a3a3c);
+  --home-text-muted: var(--color-text-muted, #5c5c5e);
+  --home-white: var(--neutral-0, #fffcfa);
 
   min-height: 100%;
   background: var(--home-mist);
   padding-bottom: var(--space-brand-32, 32px);
   color: var(--home-charcoal);
+  font-family: var(--font-body);
 }
 
 /* Top navigation */
@@ -62,10 +61,10 @@
   border-radius: var(--radius-md, 12px);
   background: linear-gradient(
     145deg,
-    var(--home-gold),
-    var(--home-gold-deep)
+    var(--home-sage),
+    var(--home-clay)
   );
-  box-shadow: 0 6px 16px rgba(101, 121, 93, 0.22);
+  box-shadow: var(--shadow-soft);
   overflow: hidden;
 }
 

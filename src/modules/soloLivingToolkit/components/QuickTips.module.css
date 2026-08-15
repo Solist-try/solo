@@ -29,15 +29,15 @@
 }
 
 .tip[data-tone="calm"] {
-  background: linear-gradient(160deg, var(--neutral-0), var(--peach-50));
+  background: linear-gradient(160deg, var(--neutral-0), var(--sage-50));
 }
 
 .tip[data-tone="practical"] {
-  background: linear-gradient(160deg, var(--neutral-0), var(--neutral-100));
+  background: linear-gradient(160deg, var(--neutral-0), var(--brand-mist));
 }
 
 .tip[data-tone="warm"] {
-  background: linear-gradient(160deg, var(--gold-100), var(--peach-50));
+  background: linear-gradient(160deg, var(--sage-100), var(--brand-mist));
 }
 
 .tone {
@@ -45,7 +45,7 @@
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--peach-600);
+  color: var(--brand-sage-deep, #65795d);
 }
 
 .tip h4 {

@@ -16,12 +16,12 @@
   background:
     radial-gradient(
       ellipse 70% 50% at 12% 8%,
-      rgba(231, 207, 169, 0.4),
+      rgba(183, 196, 178, 0.4),
       transparent 55%
     ),
     radial-gradient(
       ellipse 55% 40% at 90% 16%,
-      rgba(143, 166, 184, 0.24),
+      rgba(233, 230, 227, 0.7),
       transparent 52%
     ),
     var(--brand-mist-grey, #e9e6e3);

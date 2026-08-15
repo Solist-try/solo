@@ -39,7 +39,7 @@
   width: min(100%, 10rem);
   height: 2.5rem;
   border-radius: var(--radius-pill);
-  background: var(--color-accent-soft);
+  background: var(--brand-sage-soft, #d5ddd1);
 }
 
 .tone-cream path,

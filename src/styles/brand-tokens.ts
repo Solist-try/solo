@@ -20,7 +20,8 @@ export const colors = {
 
   /** Extended / derived */
   white: "#FFFCFA",
-  softGold: "#E7CFA9",
+  /** Desaturated warm accent — clay/mist, low yellow */
+  softGold: "#D4CDC4",
   warmTaupe: "#C7B8AE",
   clayBeige: "#C7B8AE",
   sageGreen: "#B7C4B2",
@@ -29,7 +30,7 @@ export const colors = {
   softSummerBlue: "#8FA6B8",
   accentRose: "#D9A5A0",
 
-  mistSoft: "#F4F1EE",
+  mistSoft: "#F2F0ED",
   mistDeep: "#DDD8D3",
   taupeMuted: "#A89990",
   charcoalSoft: "#5C5C5E",
@@ -39,8 +40,9 @@ export const colors = {
 
   roseSoft: "#F3E4E1",
   roseDeep: "#C48984",
-  goldSoft: "#F4E9D8",
-  goldDeep: "#C9B08A",
+  /** Soft clay-mist wash (formerly yellow-gold) */
+  goldSoft: "#E8E4DF",
+  goldDeep: "#B8AEA3",
   blueSoft: "#E4EBF0",
   blueDeep: "#6F8799",
 

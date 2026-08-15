@@ -6,16 +6,16 @@
   right: 0;
   bottom: 0;
   z-index: 50;
-  padding: 0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom));
+  padding: var(--space-brand-8, 8px) var(--space-brand-12, 12px)
+    calc(var(--space-brand-8, 8px) + env(safe-area-inset-bottom));
   background: linear-gradient(
     180deg,
-    #d2c3b9 0%,
-    var(--brand-warm-taupe, #c7b8ae) 55%,
-    #b9aaa0 100%
+    var(--brand-mist, #e9e6e3) 0%,
+    var(--brand-clay, #c7b8ae) 100%
   );
   backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(168, 153, 144, 0.55);
-  box-shadow: 0 -8px 28px rgba(58, 58, 60, 0.08);
+  border-top: 1px solid rgba(168, 153, 144, 0.45);
+  box-shadow: var(--shadow-soft);
 }
 
 .inner {
@@ -47,7 +47,7 @@
   background: var(--btn-hover-tint, var(--brand-clay-beige, #c7b8ae));
   border-color: rgba(183, 196, 178, 0.65);
   color: var(--brand-deep-charcoal, #3a3a3c);
-  box-shadow: 0 4px 12px rgba(183, 196, 178, 0.28);
+  box-shadow: var(--shadow-glow);
 }
 
 .item:focus-visible {
@@ -68,7 +68,7 @@
   place-items: center;
   width: 2.55rem;
   height: 2.55rem;
-  border-radius: 12px;
+  border-radius: var(--radius-md, 12px);
   background: rgba(255, 252, 250, 0.45);
   border: 1px solid rgba(58, 58, 60, 0.12);
   color: var(--brand-deep-charcoal, #3a3a3c);

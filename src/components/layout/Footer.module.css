@@ -1,21 +1,22 @@
 .footer {
   margin-top: auto;
   border-top: 1px solid var(--color-border);
-  background: rgba(239, 227, 216, 0.65);
-  padding-block: var(--space-6);
+  background: var(--brand-mist, #e9e6e3);
+  padding-block: var(--space-brand-32, 32px);
+  box-shadow: var(--shadow-soft);
 }
 
 .inner {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-brand-20, 20px);
 }
 
 .brand {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: var(--text-xl);
-  font-weight: 650;
-  color: var(--taupe-800);
-  margin-bottom: var(--space-1);
+  font-weight: var(--weight-semibold);
+  color: var(--brand-charcoal, #3a3a3c);
+  margin-bottom: var(--space-brand-4, 4px);
 }
 
 .tagline {

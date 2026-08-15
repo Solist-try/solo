@@ -7,7 +7,7 @@
   font-family: var(--font-gosolo-serif, var(--font-display));
   font-size: var(--text-xl);
   margin-bottom: var(--space-brand-4, 4px);
-  color: var(--gold-500, #b59a72);
+  color: var(--brand-charcoal, #3a3a3c);
 }
 
 .header p {
@@ -35,8 +35,8 @@
   justify-items: start;
   padding: var(--space-brand-12, 12px) var(--space-brand-20, 20px);
   border-radius: var(--radius-md, 12px);
-  border: 1px solid rgba(217, 165, 160, 0.35);
-  background: rgba(255, 252, 250, 0.7);
+  border: 1px solid rgba(183, 196, 178, 0.4);
+  background: var(--brand-mist, #e9e6e3);
   color: var(--color-text-muted);
   cursor: pointer;
   text-align: left;
@@ -58,9 +58,9 @@
 }
 
 .mood:hover {
-  border-color: var(--brand-accent-rose, #d9a5a0);
-  background: var(--color-highlight-soft, rgba(217, 165, 160, 0.22));
-  color: var(--rose-600, #9e635e);
+  border-color: var(--brand-sage, #b7c4b2);
+  background: var(--brand-sage-soft, #d5ddd1);
+  color: var(--brand-sage-deep, #65795d);
 }
 
 .mood:focus-visible {
@@ -69,10 +69,10 @@
 }
 
 .moodActive {
-  background: var(--color-highlight-soft, rgba(217, 165, 160, 0.22));
-  border-color: var(--brand-accent-rose, #d9a5a0);
+  background: var(--brand-sage-soft, #d5ddd1);
+  border-color: var(--brand-sage, #b7c4b2);
   box-shadow: var(--shadow-xs);
-  color: var(--rose-700, #84524e);
+  color: var(--brand-sage-deep, #65795d);
 }
 
 .note {
@@ -84,13 +84,13 @@
 .note span {
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
-  color: var(--rose-600, #9e635e);
+  color: var(--brand-sage-deep, #65795d);
 }
 
 .note textarea {
   width: 100%;
   padding: var(--space-brand-12, 12px) var(--space-brand-20, 20px);
-  border: 1px solid rgba(217, 165, 160, 0.4);
+  border: 1px solid rgba(183, 196, 178, 0.45);
   border-radius: var(--radius-md, 12px);
   background: var(--color-bg-elevated);
   resize: vertical;
@@ -112,8 +112,9 @@
 .entry {
   padding: var(--space-brand-20, 20px);
   border-radius: var(--radius-md, 12px);
-  background: rgba(243, 228, 225, 0.55);
-  border: 1px solid rgba(217, 165, 160, 0.35);
+  background: var(--brand-mist, #e9e6e3);
+  border: 1px solid rgba(183, 196, 178, 0.35);
+  box-shadow: var(--shadow-xs);
 }
 
 .entryTop {
@@ -124,7 +125,7 @@
 }
 
 .entryTop strong {
-  color: var(--rose-600, #9e635e);
+  color: var(--brand-sage-deep, #65795d);
 }
 
 .entryTop span,

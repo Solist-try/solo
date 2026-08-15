@@ -4,7 +4,7 @@ type IllustrationProps = {
   className?: string;
 };
 
-/** Soft Go Solo illustrations — colors from brand-tokens.ts */
+/** Soft Go Solo illustrations — sage · mist · clay from brand-tokens.ts */
 
 export function AutonomyIllustration({ className }: IllustrationProps) {
   return (
@@ -12,20 +12,20 @@ export function AutonomyIllustration({ className }: IllustrationProps) {
       className={className}
       viewBox="0 0 240 180"
       role="img"
-      aria-label="Soft illustration of a solitary path toward a warm gold horizon"
+      aria-label="Soft illustration of a solitary path toward a calm sage horizon"
     >
       <defs>
         <linearGradient id="autoSky" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor={colors.goldSoft} />
+          <stop offset="0%" stopColor={colors.sageSoft} />
           <stop offset="100%" stopColor={colors.mist} />
         </linearGradient>
         <linearGradient id="autoPath" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={colors.softGold} />
-          <stop offset="100%" stopColor={colors.goldDeep} />
+          <stop offset="0%" stopColor={colors.sage} />
+          <stop offset="100%" stopColor={colors.clay} />
         </linearGradient>
       </defs>
       <rect width="240" height="180" rx={parseInt(radius.lg, 10)} fill="url(#autoSky)" />
-      <circle cx="168" cy="58" r="28" fill={colors.softGold} opacity="0.95" />
+      <circle cx="168" cy="58" r="28" fill={colors.sage} opacity="0.9" />
       <path
         d="M0 128 C48 108 78 142 120 124 C162 106 186 138 240 120 L240 180 L0 180 Z"
         fill={colors.clay}
@@ -59,9 +59,9 @@ export function ConnectionIllustration({ className }: IllustrationProps) {
     >
       <rect width="240" height="180" rx={parseInt(radius.lg, 10)} fill={colors.mist} />
       <circle cx="88" cy="78" r="46" fill={colors.blueSoft} />
-      <circle cx="156" cy="86" r="40" fill={colors.goldSoft} />
+      <circle cx="156" cy="86" r="40" fill={colors.sageSoft} />
       <circle cx="92" cy="72" r="14" fill={colors.clay} />
-      <circle cx="152" cy="78" r="12" fill={colors.softGold} />
+      <circle cx="152" cy="78" r="12" fill={colors.sage} />
       <path
         d="M70 120 C78 100 106 98 114 118"
         fill="none"
@@ -72,14 +72,14 @@ export function ConnectionIllustration({ className }: IllustrationProps) {
       <path
         d="M134 122 C142 104 168 104 176 122"
         fill="none"
-        stroke={colors.goldDeep}
+        stroke={colors.sageDeep}
         strokeWidth="4"
         strokeLinecap="round"
       />
       <path
         d="M108 108 C120 98 130 98 140 108"
         fill="none"
-        stroke={colors.accentRose}
+        stroke={colors.clay}
         strokeWidth="3.5"
         strokeLinecap="round"
       />
@@ -96,11 +96,11 @@ export function SustainabilityIllustration({ className }: IllustrationProps) {
       role="img"
       aria-label="Soft illustration of a leaf and cycling path"
     >
-      <rect width="240" height="180" rx={parseInt(radius.lg, 10)} fill={colors.goldSoft} />
+      <rect width="240" height="180" rx={parseInt(radius.lg, 10)} fill={colors.mist} />
       <ellipse cx="120" cy="128" rx="70" ry="18" fill={colors.clay} opacity="0.7" />
       <path
         d="M78 118 C96 70 150 58 172 92 C140 86 110 98 96 122 Z"
-        fill={colors.softSummerBlue}
+        fill={colors.sage}
         opacity="0.85"
       />
       <path
@@ -115,7 +115,7 @@ export function SustainabilityIllustration({ className }: IllustrationProps) {
         cy="74"
         r="18"
         fill="none"
-        stroke={colors.softGold}
+        stroke={colors.sageDeep}
         strokeWidth="4"
         strokeDasharray="8 6"
       />
@@ -124,7 +124,7 @@ export function SustainabilityIllustration({ className }: IllustrationProps) {
         cy="70"
         r="14"
         fill="none"
-        stroke={colors.accentRose}
+        stroke={colors.clay}
         strokeWidth="3"
         strokeDasharray="6 5"
       />
@@ -148,11 +148,11 @@ export function ResilienceIllustration({ className }: IllustrationProps) {
       role="img"
       aria-label="Soft illustration of a calm heart held by soft light"
     >
-      <rect width="240" height="180" rx={parseInt(radius.lg, 10)} fill={colors.roseSoft} />
+      <rect width="240" height="180" rx={parseInt(radius.lg, 10)} fill={colors.sageSoft} />
       <circle cx="120" cy="92" r="54" fill={colors.white} opacity="0.55" />
       <path
         d="M120 138 C86 114 74 92 74 76 C74 60 86 50 100 50 C110 50 117 56 120 64 C123 56 130 50 140 50 C154 50 166 60 166 76 C166 92 154 114 120 138 Z"
-        fill={colors.accentRose}
+        fill={colors.clay}
       />
       <path
         d="M98 78 C106 70 116 72 120 80"
@@ -161,12 +161,12 @@ export function ResilienceIllustration({ className }: IllustrationProps) {
         strokeWidth="4"
         strokeLinecap="round"
       />
-      <circle cx="168" cy="48" r="8" fill={colors.softGold} opacity="0.9" />
+      <circle cx="168" cy="48" r="8" fill={colors.sage} opacity="0.9" />
       <circle cx="64" cy="54" r="6" fill={colors.softSummerBlue} opacity="0.8" />
       <path
         d="M40 140 C72 128 100 148 120 136 C140 124 170 138 200 130"
         fill="none"
-        stroke={colors.clay}
+        stroke={colors.mistDeep}
         strokeWidth="3"
         strokeLinecap="round"
       />

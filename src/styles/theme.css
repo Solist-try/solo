@@ -16,9 +16,14 @@
   --brand-clay-beige: var(--brand-clay);
   --brand-warm-taupe: var(--brand-clay);
   --brand-deep-charcoal: var(--brand-charcoal);
-  --brand-soft-gold: #e7cfa9;
+  /* Desaturated clay-mist (low yellow) — legacy soft-gold alias */
+  --brand-soft-gold: #d4cdc4;
   --brand-soft-summer-blue: #8fa6b8;
   --brand-accent-rose: #d9a5a0;
+  --brand-sage-soft: #d5ddd1;
+  --brand-sage-deep: #65795d;
+  --brand-mist-soft: #f2f0ed;
+  --brand-mist-deep: #ddd8d3;
 
   /* Sage scale */
   --sage-50: #eef2ec;
@@ -65,13 +70,13 @@
   --nav-link-color: var(--brand-charcoal);
   --nav-link-underline: var(--brand-sage);
 
-  /* Soft gold scale */
-  --gold-50: #faf4ea;
-  --gold-100: #f4e9d8;
-  --gold-200: #e7cfa9;
-  --gold-300: #dcc094;
-  --gold-400: #c9b08a;
-  --gold-500: #b59a72;
+  /* Soft gold scale — desaturated toward mist/clay (low yellow) */
+  --gold-50: #f2efeb;
+  --gold-100: #e8e4df;
+  --gold-200: #d4cdc4;
+  --gold-300: #c9c0b6;
+  --gold-400: #b8aea3;
+  --gold-500: #9f948a;
 
   /* Accent rose */
   --rose-50: #f8eeec;
@@ -92,15 +97,15 @@
   --blue-500: #6f8799;
   --blue-600: #5a7080;
 
-  /* Legacy peach → rose */
-  --peach-50: var(--rose-50);
-  --peach-100: var(--rose-100);
-  --peach-200: var(--rose-200);
-  --peach-300: var(--rose-300);
-  --peach-400: var(--rose-400);
-  --peach-500: var(--rose-500);
-  --peach-600: var(--rose-600);
-  --peach-700: var(--rose-700);
+  /* Legacy peach → sage (more sage/mist, less warm yellow) */
+  --peach-50: var(--sage-50);
+  --peach-100: var(--sage-100);
+  --peach-200: var(--sage-200);
+  --peach-300: var(--sage-300);
+  --peach-400: var(--sage-400);
+  --peach-500: var(--sage-500);
+  --peach-600: var(--sage-deep);
+  --peach-700: var(--sage-deep);
 
   /* Legacy taupe */
   --taupe-50: var(--neutral-100);
@@ -192,7 +197,7 @@
     160deg,
     var(--sage-100),
     var(--neutral-0) 42%,
-    var(--blue-100)
+    var(--brand-mist)
   );
   --gradient-curve: linear-gradient(
     120deg,
@@ -278,7 +283,9 @@
   --radius-blob: 42% 58% 55% 45% / 48% 42% 58% 52%;
 
   --curve-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFCFA' d='M0,48 C240,80 480,0 720,32 C960,64 1200,72 1440,24 L1440,80 L0,80 Z'/%3E%3C/svg%3E");
-  --curve-wave-peach: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23F3E4E1' d='M0,40 C300,80 520,8 760,36 C1000,64 1240,70 1440,28 L1440,80 L0,80 Z'/%3E%3C/svg%3E");
+  --curve-wave-peach: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23D5DDD1' d='M0,40 C300,80 520,8 760,36 C1000,64 1240,70 1440,28 L1440,80 L0,80 Z'/%3E%3C/svg%3E");
+  --curve-wave-sage: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23D5DDD1' d='M0,40 C300,80 520,8 760,36 C1000,64 1240,70 1440,28 L1440,80 L0,80 Z'/%3E%3C/svg%3E");
+  --curve-wave-mist: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23E9E6E3' d='M0,40 C300,80 520,8 760,36 C1000,64 1240,70 1440,28 L1440,80 L0,80 Z'/%3E%3C/svg%3E");
 
   --container: 72rem;
   --container-narrow: 40rem;

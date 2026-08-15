@@ -75,8 +75,8 @@
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--peach-400);
-  box-shadow: 0 0 0 3px rgba(224, 138, 82, 0.2);
+  border-color: var(--color-focus);
+  box-shadow: var(--color-focus-ring);
 }
 
 .actions {

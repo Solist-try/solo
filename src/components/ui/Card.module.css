@@ -30,7 +30,7 @@
 
 .soft {
   background: var(--gradient-soft);
-  border-color: rgba(217, 165, 160, 0.18);
+  border-color: rgba(183, 196, 178, 0.28);
   box-shadow: var(--shadow-soft);
 }
 
@@ -49,7 +49,7 @@
 
 .interactive:hover {
   transform: translateY(-2px);
-  border-color: var(--brand-accent-rose);
+  border-color: var(--brand-sage);
   box-shadow: var(--shadow-lift);
 }
 
@@ -78,7 +78,7 @@
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--color-highlight);
+  color: var(--brand-sage-deep);
 }
 
 .title {
