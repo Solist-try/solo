@@ -46,8 +46,8 @@ export function Resources() {
       <header className="resources-header">
         <h1>Resources Library</h1>
         <p>
-          Guides, tools, and checklists for solo living — search by topic when
-          you need something steady and useful.
+          Clear guides and practical tools for solo living — find what you need,
+          use what fits, leave the rest without guilt.
         </p>
       </header>
 
@@ -75,7 +75,7 @@ export function Resources() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search guides, tools, topics…"
+            placeholder="Search by topic, format, or need…"
             autoComplete="off"
           />
         </label>
@@ -109,7 +109,10 @@ export function Resources() {
 
       {visible.length === 0 ? (
         <div className="resources-empty">
-          <p>No resources match that search. Try another keyword or category.</p>
+          <p>
+            Nothing matches that search. Try a broader word, or clear filters and
+            start again.
+          </p>
           <button
             type="button"
             className="resources-empty__action"
@@ -165,8 +168,8 @@ function ResourceCard({
             <strong>{resource.format}</strong> · {resource.readTime} read
           </p>
           <p>
-            Keep this nearby for the moments when solo living asks for a clear
-            next step — steady, practical, and kind to your pace.
+            Keep this close for moments that ask for a clear next step — practical,
+            paced, and honest about what helps.
           </p>
         </div>
       ) : null}
