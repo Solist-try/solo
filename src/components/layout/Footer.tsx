@@ -23,6 +23,8 @@ export function Footer() {
         <div className={styles.links}>
           <Link to="/mission">Mission</Link>
           <Link to="/community">Community</Link>
+          <Link to="/community/buddy">Buddy System</Link>
+          <Link to="/community/skill-swap">Skill Swap</Link>
           <Link to="/resources">Resources</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/events">Events</Link>

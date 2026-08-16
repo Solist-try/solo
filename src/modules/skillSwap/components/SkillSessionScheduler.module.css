@@ -1,0 +1,99 @@
+.scheduler {
+  display: grid;
+  gap: var(--space-brand-12, 12px);
+  padding: var(--space-brand-20, 20px);
+  border-radius: var(--radius-lg, 14px);
+  background: var(--brand-mist, #e9e6e3);
+  border: 1px solid rgba(199, 184, 174, 0.35);
+  box-shadow: var(--shadow-soft);
+}
+
+.scheduler h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  color: var(--brand-charcoal, #3a3a3c);
+}
+
+.scheduler p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-brand-8, 8px);
+}
+
+.field span {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--brand-charcoal, #3a3a3c);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 2.7rem;
+  padding: var(--space-brand-12, 12px) var(--space-brand-20, 20px);
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid rgba(199, 184, 174, 0.4);
+  background: var(--neutral-0, #fffcfa);
+  color: var(--brand-charcoal, #3a3a3c);
+  font: inherit;
+}
+
+.field textarea {
+  min-height: 4.5rem;
+  resize: vertical;
+}
+
+.modes {
+  display: grid;
+  gap: var(--space-brand-8, 8px);
+}
+
+@media (min-width: 560px) {
+  .modes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mode {
+  min-height: 2.6rem;
+  padding: var(--space-brand-12, 12px) var(--space-brand-20, 20px);
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid rgba(199, 184, 174, 0.4);
+  background: var(--neutral-0, #fffcfa);
+  color: var(--brand-charcoal, #3a3a3c);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modeActive {
+  background: var(--brand-sage, #b7c4b2);
+  border-color: rgba(154, 174, 150, 0.5);
+  box-shadow: var(--shadow-soft);
+}
+
+.reminder {
+  margin: 0;
+  padding: var(--space-brand-12, 12px) var(--space-brand-20, 20px);
+  border-radius: var(--radius-md, 12px);
+  background: var(--brand-sage-soft, #d5ddd1);
+  color: var(--brand-charcoal, #3a3a3c);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-brand-12, 12px);
+}
+
+.empty {
+  color: var(--color-text-muted);
+}

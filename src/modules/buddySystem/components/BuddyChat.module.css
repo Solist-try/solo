@@ -1,0 +1,25 @@
+.wrap {
+  display: grid;
+  gap: var(--space-brand-12, 12px);
+  min-height: 22rem;
+  border-radius: var(--radius-lg, 14px);
+  overflow: hidden;
+  border: 1px solid rgba(199, 184, 174, 0.35);
+  box-shadow: var(--shadow-soft);
+  background: var(--neutral-0, #fffcfa);
+}
+
+.empty {
+  display: grid;
+  place-items: center;
+  gap: var(--space-brand-8, 8px);
+  padding: var(--space-brand-32, 32px) var(--space-brand-20, 20px);
+  text-align: center;
+  color: var(--color-text-muted);
+  background: var(--brand-mist, #e9e6e3);
+}
+
+.empty strong {
+  color: var(--brand-charcoal, #3a3a3c);
+  font-family: var(--font-heading);
+}

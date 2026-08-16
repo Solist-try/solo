@@ -7,7 +7,9 @@ import {
   type CSSProperties,
   type FormEvent,
 } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../auth";
+import { CommunitySubnav } from "../components/community/CommunitySubnav";
 import { Avatar, Button } from "../components/ui";
 import {
   BlockUserButton,
@@ -101,6 +103,8 @@ export function Community() {
 
   return (
     <div className="container community-page" style={pageStyle}>
+      <CommunitySubnav />
+
       <header
         className="community-header"
         style={{ gap: brand.spacing[12] }}
@@ -123,6 +127,57 @@ export function Community() {
           share what helps, take what you need, leave the rest.
         </p>
       </header>
+
+      <section
+        aria-label="Community modules"
+        style={{
+          display: "grid",
+          gap: brand.spacing[20],
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+        }}
+      >
+        <Link
+          to="/community/buddy"
+          style={{
+            display: "grid",
+            gap: brand.spacing[12],
+            padding: brand.spacing[20],
+            borderRadius: brand.radius.lg,
+            background: `linear-gradient(155deg, rgba(183,196,178,0.4), ${brand.colors.mist} 55%, rgba(199,184,174,0.35))`,
+            boxShadow: brand.shadows.soft,
+            color: brand.colors.charcoal,
+            textDecoration: "none",
+          }}
+        >
+          <strong style={{ fontFamily: brand.typography.heading, fontSize: "1.15rem" }}>
+            Buddy System
+          </strong>
+          <span style={{ fontFamily: brand.typography.body, color: brand.colors.charcoalSoft }}>
+            Match on solo goals, choose light or active connection, and track
+            shared milestones.
+          </span>
+        </Link>
+        <Link
+          to="/community/skill-swap"
+          style={{
+            display: "grid",
+            gap: brand.spacing[12],
+            padding: brand.spacing[20],
+            borderRadius: brand.radius.lg,
+            background: `linear-gradient(155deg, rgba(199,184,174,0.4), ${brand.colors.mist} 55%, rgba(183,196,178,0.35))`,
+            boxShadow: brand.shadows.soft,
+            color: brand.colors.charcoal,
+            textDecoration: "none",
+          }}
+        >
+          <strong style={{ fontFamily: brand.typography.heading, fontSize: "1.15rem" }}>
+            Skill Swap
+          </strong>
+          <span style={{ fontFamily: brand.typography.body, color: brand.colors.charcoalSoft }}>
+            Offer and request practical skills — cook, budget, travel, and more.
+          </span>
+        </Link>
+      </section>
 
       <GuidelinesReminder />
 

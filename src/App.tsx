@@ -11,6 +11,7 @@ import { Onboarding } from "./pages/Onboarding";
 import { Signup } from "./pages/Auth/Signup";
 import {
   Blog,
+  BuddySystem,
   Community,
   DesignSystem,
   Events,
@@ -21,6 +22,7 @@ import {
   Resources,
   Safety,
   Settings,
+  SkillSwap,
   Support,
   Toolkit,
 } from "./pages";
@@ -41,6 +43,8 @@ export default function App() {
               <Route element={<AppLayout />}>
                 <Route index element={<Home />} />
                 <Route path="community" element={<Community />} />
+                <Route path="community/buddy" element={<BuddySystem />} />
+                <Route path="community/skill-swap" element={<SkillSwap />} />
                 <Route path="resources" element={<Resources />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="events" element={<Events />} />
