@@ -1,0 +1,95 @@
+.card {
+  display: grid;
+  gap: var(--space-brand-12, 12px);
+  padding: var(--space-brand-20, 20px);
+  border-radius: var(--radius-lg, 14px);
+  background: linear-gradient(
+    160deg,
+    var(--brand-mist, #e9e6e3) 0%,
+    rgba(255, 252, 250, 0.95) 55%,
+    rgba(199, 184, 174, 0.35) 100%
+  );
+  border: 1px solid rgba(199, 184, 174, 0.35);
+  box-shadow: var(--shadow-soft);
+  animation: fade-rise 0.65s var(--ease-out) both;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-brand-12, 12px);
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-brand-12, 12px);
+  min-width: 0;
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-brand-4, 4px);
+  min-width: 0;
+}
+
+.copy h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--brand-charcoal, #3a3a3c);
+}
+
+.copy p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.score {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: var(--space-brand-4, 4px) var(--space-brand-12, 12px);
+  border-radius: var(--radius-md, 12px);
+  background: var(--brand-sage, #b7c4b2);
+  color: var(--brand-charcoal, #3a3a3c);
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-xs);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-brand-8, 8px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.85rem;
+  padding: var(--space-brand-4, 4px) var(--space-brand-12, 12px);
+  border-radius: var(--radius-md, 12px);
+  background: var(--neutral-0, #fffcfa);
+  color: var(--brand-charcoal, #3a3a3c);
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: 1px solid rgba(183, 196, 178, 0.4);
+}
+
+.mode {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--brand-sage-deep, #65795d);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-brand-12, 12px);
+}

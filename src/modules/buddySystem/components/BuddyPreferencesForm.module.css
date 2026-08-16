@@ -1,0 +1,109 @@
+.form {
+  display: grid;
+  gap: var(--space-brand-20, 20px);
+  padding: var(--space-brand-20, 20px);
+  border-radius: var(--radius-lg, 14px);
+  background: var(--brand-mist, #e9e6e3);
+  border: 1px solid rgba(199, 184, 174, 0.35);
+  box-shadow: var(--shadow-soft);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-brand-12, 12px);
+}
+
+.section h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--brand-charcoal, #3a3a3c);
+}
+
+.section p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-brand-8, 8px);
+}
+
+.chip {
+  min-height: 2.35rem;
+  padding: var(--space-brand-8, 8px) var(--space-brand-20, 20px);
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid rgba(199, 184, 174, 0.4);
+  background: var(--neutral-0, #fffcfa);
+  color: var(--brand-charcoal, #3a3a3c);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition:
+    background var(--duration-med) var(--ease-soft),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  background: var(--brand-sage-soft, #d5ddd1);
+}
+
+.chipActive {
+  background: var(--brand-sage, #b7c4b2);
+  border-color: rgba(154, 174, 150, 0.5);
+  box-shadow: var(--shadow-soft);
+}
+
+.modes {
+  display: grid;
+  gap: var(--space-brand-12, 12px);
+}
+
+@media (min-width: 720px) {
+  .modes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.modeCard {
+  display: grid;
+  gap: var(--space-brand-8, 8px);
+  padding: var(--space-brand-20, 20px);
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid rgba(199, 184, 174, 0.4);
+  background: var(--neutral-0, #fffcfa);
+  text-align: left;
+  cursor: pointer;
+  color: var(--brand-charcoal, #3a3a3c);
+  font-family: var(--font-body);
+  box-shadow: var(--shadow-xs);
+}
+
+.modeCard strong {
+  font-family: var(--font-heading);
+}
+
+.modeCard span {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.modeActive {
+  background: var(--brand-sage-soft, #d5ddd1);
+  border-color: rgba(183, 196, 178, 0.55);
+  box-shadow: var(--shadow-soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-brand-12, 12px);
+}

@@ -1,5 +1,7 @@
 export { Home } from "./Home";
 export { Community } from "./Community";
+export { BuddySystem } from "./BuddySystem";
+export { SkillSwap } from "./SkillSwap";
 export { Resources } from "./Resources";
 export { Events } from "./Events";
 export { Profile } from "./Profile";
