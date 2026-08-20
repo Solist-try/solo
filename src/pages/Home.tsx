@@ -21,6 +21,13 @@ const quickAccess: QuickCard[] = [
     Icon: CommunityIcon,
   },
   {
+    to: "/community/buddy",
+    title: "Buddy",
+    description: "Find short-term or long-term company for travel, walks, or meals.",
+    action: "Find a buddy",
+    Icon: BuddyIcon,
+  },
+  {
     to: "/resources",
     title: "Resources",
     description: "Guides, checklists, and calm packing rituals.",
@@ -177,6 +184,37 @@ export function Home() {
               Meet the community
             </Link>
           </div>
+          <div
+            style={{
+              marginTop: brand.spacing[20],
+              display: "grid",
+              gap: brand.spacing[8],
+              justifyItems: "center",
+            }}
+          >
+            <p
+              style={{
+                ...bodyStyle,
+                margin: 0,
+                fontSize: "0.95rem",
+              }}
+            >
+              Looking for calm company?
+            </p>
+            <Link
+              to="/community/buddy"
+              className="home-btn home-btn--secondary"
+              style={{
+                background: brand.colors.clay,
+                color: brand.colors.charcoal,
+                borderRadius: brand.radius.md,
+                fontFamily: brand.typography.body,
+                boxShadow: brand.shadows.soft,
+              }}
+            >
+              Find Buddy
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -200,7 +238,7 @@ export function Home() {
               Quick access
             </h2>
             <p style={bodyStyle}>
-              Three calm doorways into the Go Solo experience.
+              Calm doorways into the Go Solo experience — including Buddy.
             </p>
           </header>
 
@@ -274,6 +312,50 @@ function CommunityIcon() {
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function BuddyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+      <circle
+        cx="8.5"
+        cy="9"
+        r="2.8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <circle
+        cx="15.5"
+        cy="9"
+        r="2.8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M4.8 18.2c.8-2.4 2.4-3.6 3.7-3.6s2.9 1.2 3.7 3.6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M12 18.2c.8-2.4 2.4-3.6 3.5-3.6s2.7 1.2 3.5 3.6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M10.2 11.2c.7.7 1.7 1.1 2.8 1.1s2.1-.4 2.8-1.1"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
         strokeLinecap="round"
       />
     </svg>

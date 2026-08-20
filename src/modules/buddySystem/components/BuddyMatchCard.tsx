@@ -7,10 +7,12 @@ export function BuddyMatchCard({
   buddy,
   onConnect,
   onMessage,
+  ctaLabel = "Request buddy",
 }: {
   buddy: BuddyProfile;
   onConnect: (buddy: BuddyProfile) => void;
-  onMessage: (buddy: BuddyProfile) => void;
+  onMessage?: (buddy: BuddyProfile) => void;
+  ctaLabel?: string;
 }) {
   return (
     <article
@@ -32,34 +34,46 @@ export function BuddyMatchCard({
             <p style={{ fontFamily: brand.typography.body }}>{buddy.bio}</p>
           </div>
         </div>
-        <span className={styles.score}>{buddy.compatibility}% match</span>
-      </div>
-
-      <div className={styles.meta}>
-        {(buddy.sharedGoals.length ? buddy.sharedGoals : buddy.goals.slice(0, 3)).map(
-          (goal) => (
-            <span key={goal} className={styles.chip}>
-              {goal}
-            </span>
-          ),
-        )}
+        <span className={styles.score}>{buddy.matchScore}% match</span>
       </div>
 
       <p className={styles.mode}>
-        Prefers{" "}
-        {buddy.connectionMode === "light"
-          ? "light connection (occasional check-ins)"
-          : "active buddy (shared progress)"}
+        {buddy.location} · {buddy.availability}
       </p>
+
+      <div className={styles.meta}>
+        {buddy.interests.slice(0, 4).map((interest) => (
+          <span key={interest} className={styles.chip}>
+            {interest}
+          </span>
+        ))}
+      </div>
+
+      <div className={styles.meta}>
+        {buddy.preferredActivities.map((activity) => (
+          <span key={activity} className={styles.chip}>
+            {activity}
+          </span>
+        ))}
+      </div>
 
       <div className={styles.actions}>
         <Button type="button" onClick={() => onConnect(buddy)}>
-          Connect
+          {ctaLabel}
         </Button>
-        <Button type="button" variant="secondary" onClick={() => onMessage(buddy)}>
-          Message
-        </Button>
+        {onMessage ? (
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => onMessage(buddy)}
+          >
+            Open chat
+          </Button>
+        ) : null}
       </div>
     </article>
   );
 }
+
+/** Soft beige profile card alias for Find a Buddy */
+export const BuddyProfileCard = BuddyMatchCard;

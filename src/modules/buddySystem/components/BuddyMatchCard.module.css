@@ -5,11 +5,11 @@
   border-radius: var(--radius-lg, 14px);
   background: linear-gradient(
     160deg,
-    var(--brand-mist, #e9e6e3) 0%,
-    rgba(255, 252, 250, 0.95) 55%,
-    rgba(199, 184, 174, 0.35) 100%
+    rgba(232, 220, 208, 0.95) 0%,
+    rgba(233, 230, 227, 0.98) 48%,
+    rgba(199, 184, 174, 0.42) 100%
   );
-  border: 1px solid rgba(199, 184, 174, 0.35);
+  border: 1px solid rgba(199, 184, 174, 0.4);
   box-shadow: var(--shadow-soft);
   animation: fade-rise 0.65s var(--ease-out) both;
 }
@@ -74,7 +74,7 @@
   min-height: 1.85rem;
   padding: var(--space-brand-4, 4px) var(--space-brand-12, 12px);
   border-radius: var(--radius-md, 12px);
-  background: var(--neutral-0, #fffcfa);
+  background: rgba(255, 252, 250, 0.88);
   color: var(--brand-charcoal, #3a3a3c);
   font-size: 0.78rem;
   font-weight: 500;

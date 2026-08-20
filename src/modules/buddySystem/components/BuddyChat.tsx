@@ -1,48 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
-import { ChatThread, type ChatMessage } from "../../messaging";
 import { brand } from "../../../styles/brand-tokens";
-import type { BuddyMatch } from "../types";
+import type { ActiveBuddyConnection } from "../types";
 import styles from "./BuddyChat.module.css";
 
-function seedMessages(match: BuddyMatch): ChatMessage[] {
-  return [
-    {
-      id: `${match.conversationId}-1`,
-      conversationId: match.conversationId,
-      senderId: match.buddy.id,
-      senderName: match.buddy.name,
-      body: `Hi — happy to be a ${
-        match.buddy.connectionMode === "light" ? "light" : "active"
-      } buddy for your solo goals. No pressure, just support.`,
-      createdAt: new Date().toISOString(),
-      mine: false,
-    },
-  ];
-}
-
-export function BuddyChat({ match }: { match: BuddyMatch | null }) {
-  const conversation = useMemo(() => {
-    if (!match) return null;
-    return {
-      id: match.conversationId,
-      participantId: match.buddy.id,
-      participantName: match.buddy.name,
-      title: match.buddy.name,
-      topic: "Buddy System",
-      preview: "Supportive buddy chat",
-      updatedAt: "Just now",
-      supportiveNote:
-        "Buddy System chat — moderated, non-romantic, opt out anytime.",
-    };
-  }, [match]);
-
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-
-  useEffect(() => {
-    setMessages(match ? seedMessages(match) : []);
-  }, [match]);
-
-  if (!match || !conversation) {
+/** Placeholder chat entry — full messaging can plug in later */
+export function BuddyChat({
+  match,
+  onClose,
+}: {
+  match: ActiveBuddyConnection | null;
+  onClose?: () => void;
+}) {
+  if (!match) {
     return (
       <div
         className={styles.empty}
@@ -57,32 +25,71 @@ export function BuddyChat({ match }: { match: BuddyMatch | null }) {
           Buddy chat
         </strong>
         <p style={{ fontFamily: brand.typography.body }}>
-          Connect with a match to open a safe, moderated chat.
+          Accept a match to open a calm chat placeholder.
         </p>
       </div>
     );
   }
 
   return (
-    <div className={styles.wrap} style={{ borderRadius: brand.radius.lg }}>
-      <ChatThread
-        conversation={conversation}
-        messages={messages}
-        onSend={(body) => {
-          setMessages((current) => [
-            ...current,
-            {
-              id: `${match.conversationId}-${Date.now()}`,
-              conversationId: match.conversationId,
-              senderId: "you",
-              senderName: "You",
-              body,
-              createdAt: new Date().toISOString(),
-              mine: true,
-            },
-          ]);
+    <div
+      className={styles.wrap}
+      style={{
+        borderRadius: brand.radius.lg,
+        background: brand.colors.mist,
+        boxShadow: brand.shadows.soft,
+        padding: brand.spacing[20],
+        display: "grid",
+        gap: brand.spacing[12],
+      }}
+    >
+      <div>
+        <strong style={{ fontFamily: brand.typography.heading }}>
+          Chat with {match.buddy.name}
+        </strong>
+        <p
+          style={{
+            fontFamily: brand.typography.body,
+            color: brand.colors.charcoalSoft,
+            margin: `${brand.spacing[8]} 0 0`,
+          }}
+        >
+          Placeholder thread — messaging arrives next. Conversation id:{" "}
+          {match.conversationId}
+        </p>
+      </div>
+      <div
+        style={{
+          borderRadius: brand.radius.md,
+          background: "rgba(232, 220, 208, 0.55)",
+          padding: brand.spacing[20],
+          color: brand.colors.charcoalSoft,
+          fontFamily: brand.typography.body,
+          lineHeight: 1.55,
         }}
-      />
+      >
+        Say hello when you’re ready. Keep it light, non-romantic, and paced for
+        both of you.
+      </div>
+      {onClose ? (
+        <button
+          type="button"
+          onClick={onClose}
+          style={{
+            width: "fit-content",
+            minHeight: "2.4rem",
+            padding: `${brand.spacing[8]} ${brand.spacing[20]}`,
+            borderRadius: brand.radius.md,
+            border: "1px solid rgba(199, 184, 174, 0.5)",
+            background: brand.colors.white,
+            color: brand.colors.charcoal,
+            fontFamily: brand.typography.body,
+            cursor: "pointer",
+          }}
+        >
+          Close chat
+        </button>
+      ) : null}
     </div>
   );
 }

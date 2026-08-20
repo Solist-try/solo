@@ -6,7 +6,7 @@ import {
   BUDDY_INTERESTS,
 } from "../data";
 import type {
-  BuddyAvailability,
+  BuddyAvailabilityWindow,
   BuddyConnectionMode,
   BuddyGoal,
   BuddyInterest,
@@ -33,7 +33,7 @@ export function BuddyPreferencesForm({
     onChange({ ...value, goals: toggleValue(value.goals, goal) });
   const setInterests = (interest: BuddyInterest) =>
     onChange({ ...value, interests: toggleValue(value.interests, interest) });
-  const setAvailability = (slot: BuddyAvailability) =>
+  const setAvailability = (slot: BuddyAvailabilityWindow) =>
     onChange({
       ...value,
       availability: toggleValue(value.availability, slot),

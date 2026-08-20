@@ -2,6 +2,7 @@ import express from "express";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { registerBuddyRoutes } from "./buddies/routes.js";
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -13,6 +14,8 @@ const serveReact =
   process.env.SERVE_REACT === "1" || process.argv.includes("--react");
 const hasReactBuild = fs.existsSync(path.join(distDir, "index.html"));
 const uiRoot = serveReact && hasReactBuild ? distDir : publicDir;
+
+app.use(express.json());
 
 app.get("/health", (_req, res) => {
   res.json({ ok: true });
@@ -41,10 +44,16 @@ app.get("/api/data", (_req, res) => {
   });
 });
 
+registerBuddyRoutes(app);
+
 app.use(express.static(uiRoot));
 
 app.get("*", (req, res, next) => {
-  if (req.path.startsWith("/api") || req.path === "/health") {
+  if (
+    req.path.startsWith("/api") ||
+    req.path.startsWith("/buddies") ||
+    req.path === "/health"
+  ) {
     return next();
   }
   res.sendFile(path.join(uiRoot, "index.html"), (err) => {

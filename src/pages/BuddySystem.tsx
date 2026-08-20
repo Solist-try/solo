@@ -1,29 +1,42 @@
-import { useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { CommunitySubnav } from "../components/community/CommunitySubnav";
 import {
   BuddyChat,
   BuddyMatchCard,
-  BuddyPreferencesForm,
   BuddyProgressTracker,
   BuddySafetyNotice,
-  createMatch,
+  FindBuddyFilters,
+  MatchConfirmationModal,
+  acceptBuddyRequest,
+  createActiveConnection,
   defaultBuddyPreferences,
-  matchBuddies,
-  type BuddyMatch,
-  type BuddyPreferences,
+  fetchBuddyRecommendations,
+  sendBuddyRequest,
+  type ActiveBuddyConnection,
+  type BuddyFilters,
   type BuddyProfile,
 } from "../modules/buddySystem";
 import { brand } from "../styles/brand-tokens";
 
+const initialFilters: BuddyFilters = {
+  interests: defaultBuddyPreferences.interests,
+  availability: defaultBuddyPreferences.availability[0] ?? "any",
+  activity: defaultBuddyPreferences.preferredActivities[0] ?? "any",
+};
+
 export function BuddySystem() {
-  const [preferences, setPreferences] = useState<BuddyPreferences>(
-    defaultBuddyPreferences,
-  );
-  const [matches, setMatches] = useState<BuddyProfile[]>(() =>
-    matchBuddies(defaultBuddyPreferences),
-  );
-  const [activeMatch, setActiveMatch] = useState<BuddyMatch | null>(null);
+  const [filters, setFilters] = useState<BuddyFilters>(initialFilters);
+  const [recommendations, setRecommendations] = useState<BuddyProfile[]>([]);
+  const [loading, setLoading] = useState(false);
   const [optedIn, setOptedIn] = useState(true);
+  const [pendingBuddy, setPendingBuddy] = useState<BuddyProfile | null>(null);
+  const [confirmedBuddy, setConfirmedBuddy] = useState<BuddyProfile | null>(
+    null,
+  );
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [activeConnection, setActiveConnection] =
+    useState<ActiveBuddyConnection | null>(null);
+  const [showChat, setShowChat] = useState(false);
 
   const pageStyle = {
     gap: brand.spacing[32],
@@ -43,29 +56,62 @@ export function BuddySystem() {
     lineHeight: brand.typography.leading.relaxed,
   };
 
-  const findMatches = () => {
-    setMatches(matchBuddies(preferences));
+  const loadRecommendations = async (nextFilters = filters) => {
+    setLoading(true);
+    try {
+      const results = await fetchBuddyRecommendations({
+        interests: nextFilters.interests,
+        availability:
+          nextFilters.availability === "any"
+            ? undefined
+            : nextFilters.availability,
+        activity:
+          nextFilters.activity === "any" ? undefined : nextFilters.activity,
+      });
+      setRecommendations(results);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const connect = (buddy: BuddyProfile) => {
-    if (!optedIn) setOptedIn(true);
-    setActiveMatch(createMatch(buddy));
+  useEffect(() => {
+    void loadRecommendations(initialFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- initial load only
+  }, []);
+
+  const requestBuddy = async (buddy: BuddyProfile) => {
+    setPendingBuddy(buddy);
+    await sendBuddyRequest(buddy.userId, "you");
+    const match = await acceptBuddyRequest({
+      fromUserId: "you",
+      toUserId: buddy.userId,
+    });
+    const connection = createActiveConnection(buddy);
+    setActiveConnection({
+      ...connection,
+      conversationId: `buddy-chat-${match.buddyId}`,
+    });
+    setConfirmedBuddy(buddy);
+    setShowConfirm(true);
   };
 
-  const visibleMatches = useMemo(
-    () => (optedIn ? matches : []),
-    [matches, optedIn],
-  );
+  const openChat = () => {
+    if (confirmedBuddy && !activeConnection) {
+      setActiveConnection(createActiveConnection(confirmedBuddy));
+    }
+    setShowConfirm(false);
+    setShowChat(true);
+  };
 
   return (
     <div className="container buddy-page" style={pageStyle}>
       <CommunitySubnav />
 
       <header style={{ display: "grid", gap: brand.spacing[12] }}>
-        <h1 style={headingStyle}>Buddy System</h1>
+        <h1 style={headingStyle}>Find a Buddy</h1>
         <p style={bodyStyle}>
-          Match with compatible buddies for solo-living and solo-travel goals —
-          light check-ins or shared progress, always autonomy-first.
+          Short-term or long-term company for travel, co-working, walking,
+          meals, or shared interests — warm, minimal, and paced for solo living.
         </p>
       </header>
 
@@ -73,34 +119,47 @@ export function BuddySystem() {
         optedIn={optedIn}
         onOptOut={() => {
           setOptedIn(false);
-          setActiveMatch(null);
+          setActiveConnection(null);
+          setShowChat(false);
         }}
       />
 
       {optedIn ? (
         <>
-          <BuddyPreferencesForm
-            value={preferences}
-            onChange={setPreferences}
-            onFindMatches={findMatches}
+          <FindBuddyFilters
+            value={filters}
+            onChange={setFilters}
+            onSearch={() => void loadRecommendations(filters)}
+            loading={loading}
           />
 
           <section style={{ display: "grid", gap: brand.spacing[20] }}>
-            <h2 style={headingStyle}>Compatible buddies</h2>
-            <div
-              style={{
-                display: "grid",
-                gap: brand.spacing[20],
-              }}
-            >
-              {visibleMatches.map((buddy) => (
+            <h2 style={headingStyle}>Recommended buddies</h2>
+            {loading && recommendations.length === 0 ? (
+              <p style={bodyStyle}>Looking for soft matches…</p>
+            ) : null}
+            <div style={{ display: "grid", gap: brand.spacing[20] }}>
+              {recommendations.map((buddy) => (
                 <BuddyMatchCard
-                  key={buddy.id}
+                  key={buddy.userId}
                   buddy={buddy}
-                  onConnect={connect}
-                  onMessage={connect}
+                  onConnect={(next) => void requestBuddy(next)}
+                  onMessage={(next) => {
+                    setActiveConnection(createActiveConnection(next));
+                    setShowChat(true);
+                  }}
+                  ctaLabel={
+                    pendingBuddy?.userId === buddy.userId
+                      ? "Matched"
+                      : "Request buddy"
+                  }
                 />
               ))}
+              {!loading && recommendations.length === 0 ? (
+                <p style={bodyStyle}>
+                  No matches yet — try widening time or activity filters.
+                </p>
+              ) : null}
             </div>
           </section>
 
@@ -113,10 +172,10 @@ export function BuddySystem() {
             }}
           >
             <BuddyProgressTracker
-              buddyName={activeMatch?.buddy.name}
-              milestones={activeMatch?.milestones ?? []}
+              buddyName={activeConnection?.buddy.name}
+              milestones={activeConnection?.milestones ?? []}
               onToggle={(id) => {
-                setActiveMatch((current) => {
+                setActiveConnection((current) => {
                   if (!current) return current;
                   return {
                     ...current,
@@ -127,7 +186,29 @@ export function BuddySystem() {
                 });
               }}
             />
-            <BuddyChat match={activeMatch} />
+            {showChat ? (
+              <BuddyChat
+                match={activeConnection}
+                onClose={() => setShowChat(false)}
+              />
+            ) : (
+              <div
+                style={{
+                  borderRadius: brand.radius.lg,
+                  background: brand.colors.mist,
+                  boxShadow: brand.shadows.soft,
+                  padding: brand.spacing[20],
+                  display: "grid",
+                  gap: brand.spacing[12],
+                }}
+              >
+                <strong style={headingStyle}>Chat entry</strong>
+                <p style={bodyStyle}>
+                  After you match, open the placeholder chat from the
+                  confirmation or a buddy card.
+                </p>
+              </div>
+            )}
           </div>
         </>
       ) : (
@@ -165,6 +246,13 @@ export function BuddySystem() {
           </button>
         </div>
       )}
+
+      <MatchConfirmationModal
+        open={showConfirm}
+        buddy={confirmedBuddy}
+        onClose={() => setShowConfirm(false)}
+        onOpenChat={openChat}
+      />
     </div>
   );
 }

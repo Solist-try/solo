@@ -1,0 +1,65 @@
+.form {
+  display: grid;
+}
+
+.section {
+  display: grid;
+  gap: var(--space-brand-8, 8px);
+}
+
+.section h3,
+.field span {
+  margin: 0;
+  color: var(--brand-charcoal, #3a3a3c);
+  font-size: 1.05rem;
+}
+
+.section p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-brand-8, 8px);
+}
+
+.chip {
+  min-height: 2.1rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid rgba(183, 196, 178, 0.45);
+  background: rgba(255, 252, 250, 0.9);
+  color: var(--brand-charcoal, #3a3a3c);
+  font: inherit;
+  cursor: pointer;
+}
+
+.chipActive {
+  background: var(--brand-sage, #b7c4b2);
+  border-color: rgba(154, 174, 150, 0.55);
+}
+
+.row {
+  display: grid;
+  gap: var(--space-brand-12, 12px);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: var(--space-brand-8, 8px);
+}
+
+.field select {
+  border: 1px solid rgba(199, 184, 174, 0.45);
+  background: rgba(255, 252, 250, 0.95);
+  color: var(--brand-charcoal, #3a3a3c);
+}
+
+.actions {
+  display: flex;
+}

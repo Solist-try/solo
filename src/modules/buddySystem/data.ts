@@ -1,12 +1,41 @@
 import type {
-  BuddyGoal,
+  BuddyActivity,
+  BuddyAvailabilityWindow,
   BuddyInterest,
-  BuddyAvailability,
-  BuddyConnectionMode,
   BuddyProfile,
-  BuddyMatch,
   BuddyPreferences,
+  BuddyGoal,
+  ActiveBuddyConnection,
 } from "./types";
+
+export const BUDDY_INTERESTS: BuddyInterest[] = [
+  "Travel",
+  "Co-working",
+  "Walking",
+  "Meals",
+  "Solo Living",
+  "Emotional Support",
+  "Practical Tips",
+  "Safety",
+  "Money & Housing",
+];
+
+export const BUDDY_ACTIVITIES: BuddyActivity[] = [
+  "travel",
+  "co-working",
+  "walking",
+  "meals",
+  "shared interests",
+];
+
+export const BUDDY_AVAILABILITY: BuddyAvailabilityWindow[] = [
+  "weekdays",
+  "weekends",
+  "evenings",
+  "flexible",
+  "short-term",
+  "long-term",
+];
 
 export const BUDDY_GOALS: BuddyGoal[] = [
   "eat out alone",
@@ -17,80 +46,75 @@ export const BUDDY_GOALS: BuddyGoal[] = [
   "travel with less stress",
 ];
 
-export const BUDDY_INTERESTS: BuddyInterest[] = [
-  "Solo Living",
-  "Emotional Support",
-  "Practical Tips",
-  "Travel",
-  "Money & Housing",
-  "Safety",
-];
-
-export const BUDDY_AVAILABILITY: BuddyAvailability[] = [
-  "weekdays",
-  "weekends",
-  "evenings",
-  "flexible",
-];
-
 export const defaultBuddyPreferences: BuddyPreferences = {
-  goals: ["eat out alone", "build evening routines"],
-  interests: ["Solo Living", "Emotional Support"],
-  availability: ["evenings", "flexible"],
+  goals: ["first solo trip", "eat out alone"],
+  interests: ["Travel", "Walking", "Meals"],
+  availability: ["weekends", "flexible", "short-term"],
   connectionMode: "light",
+  preferredActivities: ["travel", "walking", "meals"],
+  location: "Anywhere",
 };
 
-export const buddyCatalog: BuddyProfile[] = [
+export const buddyProfilesSeed: BuddyProfile[] = [
   {
-    id: "buddy-mira",
+    userId: "buddy-mira",
     name: "Mira Chen",
-    bio: "Soft check-ins and steady solo-travel practice. Non-romantic, autonomy-first.",
-    goals: ["first solo trip", "travel with less stress", "eat out alone"],
+    bio: "Soft check-ins and calm travel days. Non-romantic, autonomy-first.",
     interests: ["Travel", "Solo Living", "Safety"],
-    availability: ["weekends", "flexible"],
-    connectionMode: "light",
-    compatibility: 0,
-    sharedGoals: [],
+    availability: "weekends",
+    preferredActivities: ["travel", "walking", "meals"],
+    location: "Lisbon · remote-friendly",
+    matchScore: 0,
   },
   {
-    id: "buddy-jordan",
+    userId: "buddy-jordan",
     name: "Jordan Hale",
-    bio: "Evening routines and emotional care — quiet accountability without pressure.",
-    goals: ["build evening routines", "declutter home", "eat out alone"],
-    interests: ["Emotional Support", "Practical Tips", "Solo Living"],
-    availability: ["evenings", "weekdays"],
-    connectionMode: "active",
-    compatibility: 0,
-    sharedGoals: [],
+    bio: "Evening walks and co-working quiet hours — supportive, no pressure.",
+    interests: ["Walking", "Co-working", "Emotional Support"],
+    availability: "evenings",
+    preferredActivities: ["walking", "co-working", "shared interests"],
+    location: "Berlin · evenings",
+    matchScore: 0,
   },
   {
-    id: "buddy-ava",
+    userId: "buddy-ava",
     name: "Ava Ruiz",
-    bio: "Budget calm and home systems for living alone with more ease.",
-    goals: ["budget for one", "declutter home", "build evening routines"],
-    interests: ["Money & Housing", "Practical Tips", "Solo Living"],
-    availability: ["weekdays", "flexible"],
-    connectionMode: "light",
-    compatibility: 0,
-    sharedGoals: [],
+    bio: "Meal swaps and practical solo-living systems for calmer weeks.",
+    interests: ["Meals", "Practical Tips", "Solo Living"],
+    availability: "weekdays",
+    preferredActivities: ["meals", "shared interests"],
+    location: "Mexico City · hybrid",
+    matchScore: 0,
   },
   {
-    id: "buddy-sam",
+    userId: "buddy-sam",
     name: "Sam Okonkwo",
-    bio: "First-trip planning and digital safety notes for solo travelers.",
-    goals: ["first solo trip", "travel with less stress", "budget for one"],
+    bio: "Short-term travel buddies and digital safety notes for solo trips.",
     interests: ["Travel", "Safety", "Money & Housing"],
-    availability: ["weekends", "evenings"],
-    connectionMode: "active",
-    compatibility: 0,
-    sharedGoals: [],
+    availability: "short-term",
+    preferredActivities: ["travel", "meals"],
+    location: "Lagos · short trips",
+    matchScore: 0,
+  },
+  {
+    userId: "buddy-lee",
+    name: "Lee Park",
+    bio: "Long-term co-working rhythm and weekend walking loops.",
+    interests: ["Co-working", "Walking", "Practical Tips"],
+    availability: "long-term",
+    preferredActivities: ["co-working", "walking"],
+    location: "Seoul · long-term",
+    matchScore: 0,
   },
 ];
 
-export function createDefaultMilestones(goals: BuddyGoal[]) {
-  const base = goals.slice(0, 3).map((goal, index) => ({
+/** @deprecated use buddyProfilesSeed */
+export const buddyCatalog = buddyProfilesSeed;
+
+export function createDefaultMilestones(labels: string[]) {
+  const base = labels.slice(0, 3).map((label, index) => ({
     id: `ms-${index + 1}`,
-    label: `Progress on “${goal}”`,
+    label: `Progress on “${label}”`,
     done: index === 0,
     shared: true,
   }));
@@ -106,15 +130,22 @@ export function createDefaultMilestones(goals: BuddyGoal[]) {
   ];
 }
 
-export function createMatch(buddy: BuddyProfile): BuddyMatch {
+export function createActiveConnection(
+  buddy: BuddyProfile,
+): ActiveBuddyConnection {
   return {
     buddy,
-    conversationId: `buddy-chat-${buddy.id}`,
+    conversationId: `buddy-chat-${buddy.userId}`,
     optedIn: true,
-    milestones: createDefaultMilestones(buddy.sharedGoals.length
-      ? buddy.sharedGoals
-      : buddy.goals),
+    milestones: createDefaultMilestones(
+      buddy.preferredActivities.length
+        ? buddy.preferredActivities
+        : buddy.interests,
+    ),
   };
 }
 
-export type { BuddyConnectionMode };
+/** @deprecated use createActiveConnection */
+export function createMatch(buddy: BuddyProfile): ActiveBuddyConnection {
+  return createActiveConnection(buddy);
+}

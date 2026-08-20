@@ -7,6 +7,10 @@ import {
 import { Link } from "react-router-dom";
 import { PREFERENCE_OPTIONS, useAuth } from "../auth";
 import { Avatar, Button } from "../components/ui";
+import {
+  getActiveBuddyConnections,
+  type BuddyConnectionSummary,
+} from "../modules/buddySystem";
 import { brand } from "../styles/brand-tokens";
 
 export function Profile() {
@@ -21,6 +25,9 @@ export function Profile() {
   const [toolkitItems, setToolkitItems] = useState(user?.toolkitItems ?? []);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [buddyConnections, setBuddyConnections] = useState<
+    BuddyConnectionSummary[]
+  >([]);
 
   useEffect(() => {
     if (!user) return;
@@ -31,6 +38,10 @@ export function Profile() {
     setSavedPosts(user.savedPosts);
     setToolkitItems(user.toolkitItems);
   }, [user]);
+
+  useEffect(() => {
+    setBuddyConnections(getActiveBuddyConnections("you"));
+  }, []);
 
   if (!user) return null;
 
@@ -157,6 +168,68 @@ export function Profile() {
             </p>
           </div>
         </div>
+      </section>
+
+      <section
+        className="profile-card"
+        style={{ ...mistCardStyle, animationDelay: "0.1s" }}
+      >
+        <h2 className="profile-section-title" style={headingStyle}>
+          Connections
+        </h2>
+        <p className="profile-section-lede" style={bodyStyle}>
+          Active buddies from the Buddy System — calm company you can revisit.
+        </p>
+        {buddyConnections.length === 0 ? (
+          <p className="profile-empty" style={bodyStyle}>
+            No active buddies yet.{" "}
+            <Link
+              to="/community/buddy"
+              style={{ color: brand.colors.sageDeep }}
+            >
+              Find a buddy
+            </Link>
+          </p>
+        ) : (
+          <ul className="profile-list" style={{ gap: brand.spacing[12] }}>
+            {buddyConnections.map((connection) => (
+              <li
+                key={`${connection.buddyId}-${connection.createdAt}`}
+                className="profile-list-item"
+                style={{
+                  gap: brand.spacing[12],
+                  padding: brand.spacing[12],
+                  borderRadius: brand.radius.md,
+                  background: brand.colors.white,
+                  borderLeft: `3px solid ${brand.colors.sage}`,
+                  boxShadow: brand.shadows.xs,
+                }}
+              >
+                <div>
+                  <h3 style={headingStyle}>{connection.name}</h3>
+                  <p className="profile-item-meta" style={bodyStyle}>
+                    {connection.location}
+                    {connection.preferredActivities.length
+                      ? ` · ${connection.preferredActivities.slice(0, 2).join(", ")}`
+                      : ""}
+                  </p>
+                </div>
+                <Link
+                  to="/community/buddy"
+                  className="profile-ghost"
+                  style={{
+                    borderRadius: brand.radius.md,
+                    color: brand.colors.sageDeep,
+                    textDecoration: "none",
+                    padding: `${brand.spacing[8]} ${brand.spacing[12]}`,
+                  }}
+                >
+                  Open
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <form

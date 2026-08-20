@@ -1,42 +1,103 @@
-import type { BuddyPreferences, BuddyProfile } from "./types";
-import { buddyCatalog } from "./data";
+import type {
+  BuddyFilters,
+  BuddyPreferences,
+  BuddyProfile,
+  BuddyRecommendationQuery,
+} from "./types";
+import { buddyProfilesSeed } from "./data";
+
+function asList(value: string | string[] | undefined): string[] {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
 
 function overlapScore(a: string[], b: string[]) {
   if (a.length === 0 || b.length === 0) return 0;
-  const setB = new Set(b);
-  const hits = a.filter((item) => setB.has(item)).length;
+  const setB = new Set(b.map((item) => item.toLowerCase()));
+  const hits = a.filter((item) => setB.has(item.toLowerCase())).length;
   return hits / Math.max(a.length, b.length);
 }
 
-/** Rank buddies by goals, interests, availability, and connection mode. */
-export function matchBuddies(preferences: BuddyPreferences): BuddyProfile[] {
-  return buddyCatalog
-    .map((buddy) => {
-      const sharedGoals = buddy.goals.filter((goal) =>
-        preferences.goals.includes(goal),
-      );
-      const goalScore = overlapScore(preferences.goals, buddy.goals);
-      const interestScore = overlapScore(preferences.interests, buddy.interests);
-      const availabilityScore = overlapScore(
-        preferences.availability,
-        buddy.availability,
-      );
-      const modeScore =
-        buddy.connectionMode === preferences.connectionMode ? 1 : 0.55;
+export function scoreBuddyProfile(
+  buddy: BuddyProfile,
+  query: {
+    interests?: string[];
+    availability?: string;
+    activity?: string;
+  },
+): number {
+  const interestScore = overlapScore(
+    query.interests ?? [],
+    buddy.interests,
+  );
+  const availabilityScore =
+    !query.availability ||
+    query.availability === "any" ||
+    query.availability === buddy.availability ||
+    buddy.availability === "flexible"
+      ? 1
+      : 0.35;
+  const activityScore =
+    !query.activity ||
+    query.activity === "any" ||
+    buddy.preferredActivities.includes(
+      query.activity as BuddyProfile["preferredActivities"][number],
+    )
+      ? 1
+      : overlapScore(asList(query.activity), buddy.preferredActivities);
 
-      const compatibility = Math.round(
-        (goalScore * 0.4 +
-          interestScore * 0.25 +
-          availabilityScore * 0.2 +
-          modeScore * 0.15) *
-          100,
-      );
+  return Math.round(
+    (interestScore * 0.5 + availabilityScore * 0.25 + activityScore * 0.25) *
+      100,
+  );
+}
 
-      return {
-        ...buddy,
-        sharedGoals,
-        compatibility,
-      };
+/** Rank buddies by shared interests + availability (+ optional activity). */
+export function recommendBuddies(
+  profiles: BuddyProfile[],
+  query: BuddyRecommendationQuery = {},
+  excludeUserId?: string,
+): BuddyProfile[] {
+  const interests = asList(query.interests as string[] | string | undefined);
+  const availability =
+    query.availability && query.availability !== "any"
+      ? query.availability
+      : undefined;
+  const activity =
+    query.activity && query.activity !== "any" ? query.activity : undefined;
+
+  return profiles
+    .filter((buddy) => buddy.userId !== excludeUserId)
+    .map((buddy) => ({
+      ...buddy,
+      matchScore: scoreBuddyProfile(buddy, {
+        interests,
+        availability,
+        activity,
+      }),
+    }))
+    .filter((buddy) => {
+      if (interests.length === 0 && !availability && !activity) return true;
+      return buddy.matchScore >= 35;
     })
-    .sort((a, b) => b.compatibility - a.compatibility);
+    .sort((a, b) => b.matchScore - a.matchScore);
+}
+
+export function filtersFromPreferences(
+  preferences: BuddyPreferences,
+): BuddyFilters {
+  return {
+    interests: preferences.interests,
+    availability: preferences.availability[0] ?? "any",
+    activity: preferences.preferredActivities[0] ?? "any",
+  };
+}
+
+/** Legacy helper used by older UI paths */
+export function matchBuddies(preferences: BuddyPreferences): BuddyProfile[] {
+  return recommendBuddies(buddyProfilesSeed, {
+    interests: preferences.interests,
+    availability: preferences.availability[0],
+    activity: preferences.preferredActivities[0],
+  });
 }
