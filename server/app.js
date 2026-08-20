@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { registerBuddyRoutes } from "./buddies/routes.js";
+import { registerSkillRoutes } from "./skills/routes.js";
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -45,6 +46,7 @@ app.get("/api/data", (_req, res) => {
 });
 
 registerBuddyRoutes(app);
+registerSkillRoutes(app);
 
 app.use(express.static(uiRoot));
 
@@ -52,6 +54,7 @@ app.get("*", (req, res, next) => {
   if (
     req.path.startsWith("/api") ||
     req.path.startsWith("/buddies") ||
+    req.path.startsWith("/skills") ||
     req.path === "/health"
   ) {
     return next();

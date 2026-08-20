@@ -6,7 +6,7 @@ import styles from "./Navbar.module.css";
 const links = [
   { to: "/community", label: "Community" },
   { to: "/community/buddy", label: "Buddies" },
-  { to: "/community/skill-swap", label: "Skills" },
+  { to: "/community/skill-swap", label: "Skill Swap" },
   { to: "/resources", label: "Resources" },
   { to: "/events", label: "Events" },
   { to: "/profile", label: "Profile" },

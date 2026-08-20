@@ -1,42 +1,60 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "../../../components/ui";
 import { brand } from "../../../styles/brand-tokens";
-import { SKILL_CATEGORIES } from "../data";
-import type { SkillCategory, SkillOfferInput } from "../types";
+import { SKILL_NAMES } from "../data";
+import type {
+  SkillAvailability,
+  SkillName,
+  SkillOfferInput,
+} from "../types";
 import styles from "./SkillForm.module.css";
+
+const AVAILABILITY: SkillAvailability[] = [
+  "weekdays",
+  "weekends",
+  "evenings",
+  "flexible",
+];
 
 export function SkillOfferForm({
   onSubmit,
 }: {
-  onSubmit: (input: SkillOfferInput) => void;
+  onSubmit: (input: SkillOfferInput) => void | Promise<void>;
 }) {
-  const [category, setCategory] = useState<SkillCategory>("Cooking basics");
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-  const [availability, setAvailability] = useState("Weekday evenings");
+  const [skillName, setSkillName] = useState<SkillName>("Cooking");
+  const [description, setDescription] = useState("");
+  const [availability, setAvailability] =
+    useState<SkillAvailability>("evenings");
+  const [location, setLocation] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
 
-  const submit = (event: FormEvent) => {
+  const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (!title.trim() || !summary.trim()) {
-      setError("Add a title and short summary to offer a skill.");
+    if (!description.trim() || !location.trim()) {
+      setError("Add a description and location to offer a skill.");
       return;
     }
     setError(null);
-    onSubmit({
-      category,
-      title: title.trim(),
-      summary: summary.trim(),
-      availability: availability.trim(),
-    });
-    setTitle("");
-    setSummary("");
+    setSaving(true);
+    try {
+      await onSubmit({
+        skillName,
+        description: description.trim(),
+        availability,
+        location: location.trim(),
+      });
+      setDescription("");
+      setLocation("");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
     <form
       className={styles.form}
-      onSubmit={submit}
+      onSubmit={(event) => void submit(event)}
       style={{
         gap: brand.spacing[12],
         padding: brand.spacing[20],
@@ -45,54 +63,63 @@ export function SkillOfferForm({
         boxShadow: brand.shadows.soft,
       }}
     >
-      <h3 style={{ fontFamily: brand.typography.heading }}>Offer a skill</h3>
-      <p>Share something practical you’ve figured out for solo living.</p>
+      <h3 style={{ fontFamily: brand.typography.heading }}>Create offer</h3>
+      <p>Share a skill the community can learn from — warm, practical, optional.</p>
       {error ? <p className={styles.error}>{error}</p> : null}
 
       <label className={styles.field}>
-        <span>Category</span>
+        <span>Skill</span>
         <select
-          value={category}
-          onChange={(event) => setCategory(event.target.value as SkillCategory)}
+          value={skillName}
+          onChange={(event) => setSkillName(event.target.value as SkillName)}
         >
-          {SKILL_CATEGORIES.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.label}
+          {SKILL_NAMES.map((name) => (
+            <option key={name} value={name}>
+              {name}
             </option>
           ))}
         </select>
       </label>
 
       <label className={styles.field}>
-        <span>Title</span>
-        <input
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          placeholder="e.g. One-pan dinners for one"
-          required
-        />
-      </label>
-
-      <label className={styles.field}>
-        <span>Summary</span>
+        <span>Description</span>
         <textarea
-          value={summary}
-          onChange={(event) => setSummary(event.target.value)}
-          placeholder="What can you walk someone through?"
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
+          placeholder="What can you gently walk someone through?"
           required
         />
       </label>
 
       <label className={styles.field}>
         <span>Availability</span>
-        <input
+        <select
           value={availability}
-          onChange={(event) => setAvailability(event.target.value)}
-          placeholder="Weekends, evenings…"
+          onChange={(event) =>
+            setAvailability(event.target.value as SkillAvailability)
+          }
+        >
+          {AVAILABILITY.map((slot) => (
+            <option key={slot} value={slot}>
+              {slot}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className={styles.field}>
+        <span>Location</span>
+        <input
+          value={location}
+          onChange={(event) => setLocation(event.target.value)}
+          placeholder="City or remote"
+          required
         />
       </label>
 
-      <Button type="submit">Post offer</Button>
+      <Button type="submit" disabled={saving}>
+        {saving ? "Posting…" : "Post offer"}
+      </Button>
     </form>
   );
 }

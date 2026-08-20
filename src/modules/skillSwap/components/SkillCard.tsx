@@ -1,35 +1,40 @@
 import { brand } from "../../../styles/brand-tokens";
 import { SKILL_CATEGORIES } from "../data";
-import type { SkillCategory } from "../types";
+import type { SkillName, SkillUrgency } from "../types";
 import styles from "./SkillCard.module.css";
 
 export function SkillCard({
-  category,
-  title,
-  summary,
+  skillName,
+  description,
   kind,
-  ownerName,
+  userName,
   availability,
+  location,
+  urgency,
   onSelect,
+  actionLabel,
+  onAction,
 }: {
-  category: SkillCategory;
-  title: string;
-  summary: string;
+  skillName: SkillName;
+  description: string;
   kind?: "offer" | "request" | "category";
-  ownerName?: string;
+  userName?: string;
   availability?: string;
+  location?: string;
+  urgency?: SkillUrgency;
   onSelect?: () => void;
+  actionLabel?: string;
+  onAction?: () => void;
 }) {
-  const meta = SKILL_CATEGORIES.find((item) => item.id === category);
+  const meta = SKILL_CATEGORIES.find((item) => item.id === skillName);
 
   return (
     <article
-      className={styles.card}
+      className={`${styles.card} ${styles.summer}`}
       style={{
         gap: brand.spacing[12],
         padding: brand.spacing[20],
         borderRadius: brand.radius.lg,
-        background: brand.colors.mist,
         boxShadow: brand.shadows.soft,
         cursor: onSelect ? "pointer" : undefined,
       }}
@@ -60,16 +65,35 @@ export function SkillCard({
       >
         {meta?.icon ?? "Skill"}
       </span>
-      <h3 style={{ fontFamily: brand.typography.heading }}>{title}</h3>
-      <p style={{ fontFamily: brand.typography.body }}>{summary}</p>
+      <h3 style={{ fontFamily: brand.typography.heading }}>{skillName}</h3>
+      <p style={{ fontFamily: brand.typography.body }}>{description}</p>
       <div className={styles.meta}>
-        <span className={styles.tag}>{category}</span>
         {kind && kind !== "category" ? (
           <span className={styles.tag}>{kind}</span>
         ) : null}
-        {ownerName ? <span className={styles.tag}>{ownerName}</span> : null}
+        {userName ? <span className={styles.tag}>{userName}</span> : null}
+        {location ? <span className={styles.tag}>{location}</span> : null}
         {availability ? <span className={styles.tag}>{availability}</span> : null}
+        {urgency ? <span className={styles.tag}>urgency · {urgency}</span> : null}
       </div>
+      {onAction && actionLabel ? (
+        <button
+          type="button"
+          className={styles.action}
+          onClick={(event) => {
+            event.stopPropagation();
+            onAction();
+          }}
+          style={{
+            borderRadius: brand.radius.md,
+            background: brand.colors.softSummerBlue,
+            color: brand.colors.charcoal,
+            fontFamily: brand.typography.body,
+          }}
+        >
+          {actionLabel}
+        </button>
+      ) : null}
     </article>
   );
 }

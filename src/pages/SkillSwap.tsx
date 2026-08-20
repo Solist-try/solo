@@ -1,34 +1,55 @@
-import { useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth";
 import { CommunitySubnav } from "../components/community/CommunitySubnav";
-import { Button } from "../components/ui";
 import {
+  MatchScreen,
   SKILL_CATEGORIES,
   SkillBadgeDisplay,
   SkillCard,
-  SkillMatchList,
   SkillOfferForm,
   SkillRequestForm,
-  SkillSessionScheduler,
-  findSkillMatches,
+  findSkillSwapMatches,
+  loadSkillHub,
+  postSkillMatch,
+  postSkillOffer,
+  postSkillRequest,
   skillBadgesSeed,
-  skillListingsSeed,
-  type SkillListing,
-  type SkillMatch,
-  type SkillSession,
+  type SkillOffer,
+  type SkillRequest,
+  type SkillSwapMatchView,
 } from "../modules/skillSwap";
 import { brand } from "../styles/brand-tokens";
 
 export function SkillSwap() {
   const { user } = useAuth();
-  const [listings, setListings] = useState<SkillListing[]>(skillListingsSeed);
-  const [badges, setBadges] = useState(skillBadgesSeed);
-  const [sessions, setSessions] = useState<SkillSession[]>([]);
-  const [selectedMatch, setSelectedMatch] = useState<SkillMatch | null>(null);
+  const [offers, setOffers] = useState<SkillOffer[]>([]);
+  const [requests, setRequests] = useState<SkillRequest[]>([]);
+  const [accepted, setAccepted] = useState<SkillSwapMatchView[]>([]);
+  const [badges] = useState(skillBadgesSeed);
   const [status, setStatus] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const matches = useMemo(() => findSkillMatches(listings), [listings]);
+  const suggested = useMemo(
+    () => findSkillSwapMatches(offers, requests),
+    [offers, requests],
+  );
+
+  const refresh = async () => {
+    setLoading(true);
+    try {
+      const hub = await loadSkillHub();
+      setOffers(hub.offers);
+      setRequests(hub.requests);
+      setAccepted(hub.accepted);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    void refresh();
+  }, []);
 
   const pageStyle = {
     gap: brand.spacing[32],
@@ -53,10 +74,11 @@ export function SkillSwap() {
       <CommunitySubnav />
 
       <header style={{ display: "grid", gap: brand.spacing[12] }}>
-        <h1 style={headingStyle}>Skill Swap</h1>
+        <h1 style={headingStyle}>Skill Swap Hub</h1>
         <p style={bodyStyle}>
-          Offer and request practical skills for solo living — cooking, budgeting,
-          home fixes, emotional tools, digital safety, and travel planning.
+          A warm, community-first exchange for languages, photography, cooking,
+          tech help, and local guidance — offer what you know, request what you
+          need.
         </p>
       </header>
 
@@ -66,17 +88,20 @@ export function SkillSwap() {
           gap: brand.spacing[12],
           padding: brand.spacing[20],
           borderRadius: brand.radius.lg,
-          background: `linear-gradient(155deg, rgba(183,196,178,0.35), ${brand.colors.mist} 50%, rgba(199,184,174,0.28))`,
+          background: `linear-gradient(155deg, rgba(143,166,184,0.28), ${brand.colors.mist} 52%, rgba(183,196,178,0.3))`,
           boxShadow: brand.shadows.soft,
         }}
       >
         <h2 style={{ ...headingStyle, fontSize: "1.1rem", margin: 0 }}>
-          Safety & boundaries
+          Community-first boundaries
         </h2>
         <p style={{ ...bodyStyle, margin: 0 }}>
-          Swaps are supportive and non-romantic. Keep sessions timed, practical,
-          and optional. Report or leave anytime via{" "}
-          <Link to="/safety" style={{ color: brand.colors.sageDeep, fontWeight: 600 }}>
+          Swaps stay supportive and non-romantic. Keep sessions timed and
+          optional. Safety tools live on{" "}
+          <Link
+            to="/safety"
+            style={{ color: brand.colors.sageDeep, fontWeight: 600 }}
+          >
             Safety
           </Link>
           .
@@ -84,7 +109,7 @@ export function SkillSwap() {
       </aside>
 
       <section style={{ display: "grid", gap: brand.spacing[20] }}>
-        <h2 style={headingStyle}>Skill categories</h2>
+        <h2 style={headingStyle}>Skill areas</h2>
         <div
           style={{
             display: "grid",
@@ -95,9 +120,8 @@ export function SkillSwap() {
           {SKILL_CATEGORIES.map((category) => (
             <SkillCard
               key={category.id}
-              category={category.id}
-              title={category.label}
-              summary={category.blurb}
+              skillName={category.id}
+              description={category.blurb}
               kind="category"
             />
           ))}
@@ -113,45 +137,73 @@ export function SkillSwap() {
         }}
       >
         <SkillOfferForm
-          onSubmit={(input) => {
-            setListings((current) => [
-              {
-                id: `offer-${Date.now()}`,
-                kind: "offer",
-                ownerId: user?.id ?? "you",
-                ownerName: user?.name ?? "You",
-                ...input,
-              },
-              ...current,
-            ]);
-            setStatus("Offer posted.");
+          onSubmit={async (input) => {
+            const offer = await postSkillOffer(
+              input,
+              user?.id ?? "you",
+              user?.name ?? "You",
+            );
+            setOffers((current) => [offer, ...current]);
+            setStatus(`Offer posted for ${offer.skillName}.`);
           }}
         />
         <SkillRequestForm
-          onSubmit={(input) => {
-            setListings((current) => [
-              {
-                id: `req-${Date.now()}`,
-                kind: "request",
-                ownerId: user?.id ?? "you",
-                ownerName: user?.name ?? "You",
-                ...input,
-              },
-              ...current,
-            ]);
-            setStatus("Request posted.");
+          onSubmit={async (input) => {
+            const request = await postSkillRequest(
+              input,
+              user?.id ?? "you",
+              user?.name ?? "You",
+            );
+            setRequests((current) => [request, ...current]);
+            setStatus(`Request posted for ${request.skillName}.`);
           }}
         />
       </div>
 
       {status ? (
-        <p role="status" style={{ ...bodyStyle, color: brand.colors.sageDeep }}>
+        <p
+          role="status"
+          style={{
+            ...bodyStyle,
+            color: brand.colors.sageDeep,
+            padding: brand.spacing[12],
+            borderRadius: brand.radius.md,
+            background: brand.colors.sageSoft,
+          }}
+        >
           {status}
         </p>
       ) : null}
 
       <section style={{ display: "grid", gap: brand.spacing[20] }}>
-        <h2 style={headingStyle}>Open listings</h2>
+        <h2 style={headingStyle}>Open offers</h2>
+        {loading && offers.length === 0 ? (
+          <p style={bodyStyle}>Loading offers…</p>
+        ) : (
+          <div
+            style={{
+              display: "grid",
+              gap: brand.spacing[20],
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            }}
+          >
+            {offers.map((offer) => (
+              <SkillCard
+                key={offer.id}
+                skillName={offer.skillName}
+                description={offer.description}
+                kind="offer"
+                userName={offer.userName}
+                availability={offer.availability}
+                location={offer.location}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section style={{ display: "grid", gap: brand.spacing[20] }}>
+        <h2 style={headingStyle}>Open requests</h2>
         <div
           style={{
             display: "grid",
@@ -159,122 +211,81 @@ export function SkillSwap() {
             gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
           }}
         >
-          {listings.map((listing) => (
+          {requests.map((request) => (
             <SkillCard
-              key={listing.id}
-              category={listing.category}
-              title={listing.title}
-              summary={listing.summary}
-              kind={listing.kind}
-              ownerName={listing.ownerName}
-              availability={listing.availability}
+              key={request.id}
+              skillName={request.skillName}
+              description={request.description}
+              kind="request"
+              userName={request.userName}
+              availability={request.availability}
+              location={request.location}
+              urgency={request.urgency}
             />
           ))}
         </div>
       </section>
 
-      <section style={{ display: "grid", gap: brand.spacing[20] }}>
-        <h2 style={headingStyle}>Matches (offer ↔ request)</h2>
-        <div
-          style={{
-            display: "grid",
-            gap: brand.spacing[20],
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            alignItems: "start",
-          }}
-        >
-          <SkillMatchList matches={matches} onSchedule={setSelectedMatch} />
-          <SkillSessionScheduler
-            match={selectedMatch}
-            onCancel={() => setSelectedMatch(null)}
-            onSchedule={(session) => {
-              setSessions((current) => [
-                {
-                  id: `session-${Date.now()}`,
-                  status: "scheduled",
-                  ...session,
-                },
-                ...current,
-              ]);
-              setBadges((current) =>
-                current.map((badge) =>
-                  badge.id === "badge-first"
-                    ? { ...badge, earned: true, count: (badge.count ?? 0) + 1 }
-                    : badge,
+      <MatchScreen
+        title="Match screen"
+        matches={suggested}
+        onMatch={async (view) => {
+          const result = await postSkillMatch({
+            offerId: view.offer.id,
+            requestId: view.request.id,
+            status: "accepted",
+          });
+          setAccepted((current) => [
+            {
+              ...view,
+              match: result.match,
+              score: result.match.score ?? view.score,
+            },
+            ...current.filter(
+              (item) =>
+                !(
+                  item.offer.id === view.offer.id &&
+                  item.request.id === view.request.id
                 ),
-              );
-              setSelectedMatch(null);
-              setStatus(
-                `Session scheduled (${session.mode}) for ${new Date(
-                  session.when,
-                ).toLocaleString()}.`,
-              );
-            }}
-          />
-        </div>
-      </section>
+            ),
+          ]);
+          setStatus(
+            result.notificationMessage ??
+              `Matched ${view.offer.skillName} — both people notified.`,
+          );
+        }}
+      />
 
-      {sessions.length > 0 ? (
-        <section style={{ display: "grid", gap: brand.spacing[12] }}>
-          <h2 style={headingStyle}>Scheduled sessions</h2>
-          <ul
+      {accepted.length > 0 ? (
+        <section style={{ display: "grid", gap: brand.spacing[20] }}>
+          <h2 style={headingStyle}>Accepted swaps</h2>
+          <div
             style={{
               display: "grid",
               gap: brand.spacing[12],
-              margin: 0,
-              padding: 0,
-              listStyle: "none",
             }}
           >
-            {sessions.map((session) => (
-              <li
-                key={session.id}
+            {accepted.map((view) => (
+              <article
+                key={`${view.offer.id}-${view.request.id}-accepted`}
                 style={{
                   padding: brand.spacing[20],
                   borderRadius: brand.radius.lg,
                   background: brand.colors.mist,
                   boxShadow: brand.shadows.soft,
+                  display: "grid",
+                  gap: brand.spacing[8],
                 }}
               >
-                <strong>{session.mode === "chat" ? "In-app chat" : "Virtual"}</strong>
-                {" · "}
-                {new Date(session.when).toLocaleString()}
-                {session.notes ? ` — ${session.notes}` : ""}
-                <div style={{ marginTop: brand.spacing[12] }}>
-                  <Button
-                    type="button"
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => {
-                      setSessions((current) =>
-                        current.map((item) =>
-                          item.id === session.id
-                            ? { ...item, status: "completed" }
-                            : item,
-                        ),
-                      );
-                      setBadges((current) =>
-                        current.map((badge) =>
-                          badge.id === "badge-helper"
-                            ? {
-                                ...badge,
-                                earned: true,
-                                count: (badge.count ?? 0) + 1,
-                              }
-                            : badge,
-                        ),
-                      );
-                      setStatus("Swap marked complete — reputation updated.");
-                    }}
-                  >
-                    {session.status === "completed"
-                      ? "Completed"
-                      : "Mark complete"}
-                  </Button>
-                </div>
-              </li>
+                <strong style={headingStyle}>{view.offer.skillName}</strong>
+                <p style={{ ...bodyStyle, margin: 0 }}>
+                  {view.offer.userName ?? "Offerer"} ↔{" "}
+                  {view.request.userName ?? "Requester"} ·{" "}
+                  {view.match.status}
+                </p>
+              </article>
             ))}
-          </ul>
+          </div>
         </section>
       ) : null}
 

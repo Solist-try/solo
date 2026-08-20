@@ -65,6 +65,52 @@ describe("Buddy System API", () => {
   });
 });
 
+describe("Skill Swap API", () => {
+  it("GET /skills/offers and /skills/requests return listings", async () => {
+    const offers = await request(app).get("/skills/offers");
+    expect(offers.statusCode).toBe(200);
+    expect(offers.body.offers.length).toBeGreaterThan(0);
+    expect(offers.body.offers[0]).toHaveProperty("skillName");
+
+    const requestsRes = await request(app).get("/skills/requests");
+    expect(requestsRes.statusCode).toBe(200);
+    expect(requestsRes.body.requests.length).toBeGreaterThan(0);
+    expect(requestsRes.body.requests[0]).toHaveProperty("urgency");
+  });
+
+  it("POST offer, request, and match notifies both users", async () => {
+    const offerRes = await request(app).post("/skills/offer").send({
+      skillName: "Cooking",
+      description: "One-pan dinners",
+      availability: "evenings",
+      location: "Lisbon",
+      userId: "api-you",
+      userName: "API You",
+    });
+    expect(offerRes.statusCode).toBe(201);
+
+    const requestRes = await request(app).post("/skills/request").send({
+      skillName: "Cooking",
+      description: "Need weeknight help",
+      urgency: "high",
+      location: "Lisbon",
+      availability: "evenings",
+      userId: "api-friend",
+      userName: "API Friend",
+    });
+    expect(requestRes.statusCode).toBe(201);
+
+    const matchRes = await request(app).post("/skills/match").send({
+      offerId: offerRes.body.offer.id,
+      requestId: requestRes.body.request.id,
+    });
+    expect(matchRes.statusCode).toBe(201);
+    expect(matchRes.body.match.status).toBe("accepted");
+    expect(matchRes.body.notification.offerUserId).toBe("api-you");
+    expect(matchRes.body.notification.requestUserId).toBe("api-friend");
+  });
+});
+
 describe("GET /styles.css and /app.js", () => {
   it("serves the UI assets", async () => {
     const css = await request(app).get("/styles.css");

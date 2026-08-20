@@ -28,6 +28,13 @@ const quickAccess: QuickCard[] = [
     Icon: BuddyIcon,
   },
   {
+    to: "/community/skill-swap",
+    title: "Skill Swap",
+    description: "Offer and request languages, cooking, tech help, and more.",
+    action: "Open skill swap",
+    Icon: SkillSwapIcon,
+  },
+  {
     to: "/resources",
     title: "Resources",
     description: "Guides, checklists, and calm packing rituals.",
@@ -201,19 +208,41 @@ export function Home() {
             >
               Looking for calm company?
             </p>
-            <Link
-              to="/community/buddy"
-              className="home-btn home-btn--secondary"
+            <div
               style={{
-                background: brand.colors.clay,
-                color: brand.colors.charcoal,
-                borderRadius: brand.radius.md,
-                fontFamily: brand.typography.body,
-                boxShadow: brand.shadows.soft,
+                display: "flex",
+                flexWrap: "wrap",
+                gap: brand.spacing[12],
+                justifyContent: "center",
               }}
             >
-              Find Buddy
-            </Link>
+              <Link
+                to="/community/buddy"
+                className="home-btn home-btn--secondary"
+                style={{
+                  background: brand.colors.clay,
+                  color: brand.colors.charcoal,
+                  borderRadius: brand.radius.md,
+                  fontFamily: brand.typography.body,
+                  boxShadow: brand.shadows.soft,
+                }}
+              >
+                Find Buddy
+              </Link>
+              <Link
+                to="/community/skill-swap"
+                className="home-btn home-btn--secondary"
+                style={{
+                  background: brand.colors.softSummerBlue,
+                  color: brand.colors.charcoal,
+                  borderRadius: brand.radius.md,
+                  fontFamily: brand.typography.body,
+                  boxShadow: brand.shadows.soft,
+                }}
+              >
+                Offer a Skill
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -238,7 +267,7 @@ export function Home() {
               Quick access
             </h2>
             <p style={bodyStyle}>
-              Calm doorways into the Go Solo experience — including Buddy.
+              Calm doorways into the Go Solo experience — Buddy, Skill Swap, and more.
             </p>
           </header>
 
@@ -357,6 +386,39 @@ function BuddyIcon() {
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function SkillSwapIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+      <path
+        d="M7.5 8.5h9.2M16.7 8.5l-2.2-2.2M16.7 8.5l-2.2 2.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16.5 15.5H7.3M7.3 15.5l2.2-2.2M7.3 15.5l2.2 2.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <rect
+        x="4.2"
+        y="4.2"
+        width="15.6"
+        height="15.6"
+        rx="3.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
       />
     </svg>
   );

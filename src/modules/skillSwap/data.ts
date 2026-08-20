@@ -1,114 +1,162 @@
 import type {
   SkillBadge,
-  SkillCategory,
-  SkillListing,
-  SkillMatch,
+  SkillName,
+  SkillOffer,
+  SkillRequest,
+  SkillSwapMatchView,
 } from "./types";
+import { findSkillSwapMatches } from "./matching";
 
+export const SKILL_NAMES: SkillName[] = [
+  "Languages",
+  "Photography",
+  "Cooking",
+  "Tech help",
+  "Local guidance",
+];
+
+/** Soft summer category meta for cards */
 export const SKILL_CATEGORIES: {
-  id: SkillCategory;
-  label: SkillCategory;
+  id: SkillName;
+  label: SkillName;
   icon: string;
   blurb: string;
 }[] = [
   {
-    id: "Cooking basics",
-    label: "Cooking basics",
+    id: "Languages",
+    label: "Languages",
+    icon: "Lang",
+    blurb: "Practice phrases and calm conversation swaps.",
+  },
+  {
+    id: "Photography",
+    label: "Photography",
+    icon: "Photo",
+    blurb: "Light tips for capturing solo days gently.",
+  },
+  {
+    id: "Cooking",
+    label: "Cooking",
     icon: "Cook",
     blurb: "Simple meals for one without the overwhelm.",
   },
   {
-    id: "Budgeting",
-    label: "Budgeting",
-    icon: "Budget",
-    blurb: "Calm money systems for living alone.",
+    id: "Tech help",
+    label: "Tech help",
+    icon: "Tech",
+    blurb: "Phone, laptop, and travel-app confidence.",
   },
   {
-    id: "Home fixes",
-    label: "Home fixes",
-    icon: "Home",
-    blurb: "Small repairs and home confidence.",
-  },
-  {
-    id: "Emotional regulation",
-    label: "Emotional regulation",
-    icon: "Care",
-    blurb: "Tools for steady evenings and soft resets.",
-  },
-  {
-    id: "Digital safety",
-    label: "Digital safety",
-    icon: "Safe",
-    blurb: "Privacy habits for solo travelers and renters.",
-  },
-  {
-    id: "Travel planning",
-    label: "Travel planning",
-    icon: "Travel",
-    blurb: "Gentle itineraries and packing without spiral.",
+    id: "Local guidance",
+    label: "Local guidance",
+    icon: "Local",
+    blurb: "Neighborhood walks and low-key orientation.",
   },
 ];
 
-export const skillListingsSeed: SkillListing[] = [
+export const skillOffersSeed: SkillOffer[] = [
   {
     id: "offer-1",
-    kind: "offer",
-    category: "Cooking basics",
-    title: "Weeknight meals for one",
-    summary: "Three low-mess recipes and a shopping rhythm that fits a small kitchen.",
-    ownerId: "u-mira",
-    ownerName: "Mira Chen",
-    availability: "Weekday evenings",
+    userId: "u-mira",
+    userName: "Mira Chen",
+    skillName: "Cooking",
+    description:
+      "Three low-mess weeknight recipes and a shopping rhythm for a small kitchen.",
+    availability: "evenings",
+    location: "Lisbon",
   },
   {
     id: "offer-2",
-    kind: "offer",
-    category: "Budgeting",
-    title: "Rent buffer spreadsheet",
-    summary: "A gentle walkthrough of deposits, utilities, and a safety buffer.",
-    ownerId: "u-sam",
-    ownerName: "Sam Okonkwo",
-    availability: "Weekends",
+    userId: "u-sam",
+    userName: "Sam Okonkwo",
+    skillName: "Tech help",
+    description:
+      "Calm walkthrough of travel apps, offline maps, and phone lock-down basics.",
+    availability: "weekends",
+    location: "Lagos",
   },
   {
     id: "offer-3",
-    kind: "offer",
-    category: "Digital safety",
-    title: "Travel phone lock-down",
-    summary: "Quick privacy checklist before a solo trip.",
-    ownerId: "u-ava",
-    ownerName: "Ava Ruiz",
-    availability: "Flexible",
+    userId: "u-ava",
+    userName: "Ava Ruiz",
+    skillName: "Photography",
+    description:
+      "Soft light tips for capturing markets and quiet streets without gear stress.",
+    availability: "flexible",
+    location: "Mexico City",
   },
   {
+    id: "offer-4",
+    userId: "u-lee",
+    userName: "Lee Park",
+    skillName: "Languages",
+    description:
+      "Gentle conversation practice for travel phrases — no judgment, short sessions.",
+    availability: "weekdays",
+    location: "Seoul",
+  },
+  {
+    id: "offer-5",
+    userId: "u-noah",
+    userName: "Noah P.",
+    skillName: "Local guidance",
+    description:
+      "Neighborhood orientation walks and café recommendations for arriving solo.",
+    availability: "flexible",
+    location: "Chiang Mai",
+  },
+];
+
+export const skillRequestsSeed: SkillRequest[] = [
+  {
     id: "req-1",
-    kind: "request",
-    category: "Emotional regulation",
-    title: "Quiet-night reset tools",
-    summary: "Looking for a 20-minute practice when evenings feel heavy.",
-    ownerId: "u-jordan",
-    ownerName: "Jordan Hale",
-    availability: "Evenings",
+    userId: "u-jordan",
+    userName: "Jordan Hale",
+    skillName: "Cooking",
+    description: "Looking for a 30-minute intro to cooking for one.",
+    urgency: "medium",
+    location: "Lisbon",
+    availability: "evenings",
   },
   {
     id: "req-2",
-    kind: "request",
-    category: "Home fixes",
-    title: "Basic tool confidence",
-    summary: "Want help naming what to keep in a small solo toolkit.",
-    ownerId: "u-alex",
-    ownerName: "Alex Rivera",
-    availability: "Weekends",
+    userId: "u-alex",
+    userName: "Alex Rivera",
+    skillName: "Local guidance",
+    description: "Need a calm first-day map of a new neighborhood.",
+    urgency: "high",
+    location: "Chiang Mai",
+    availability: "flexible",
   },
   {
     id: "req-3",
-    kind: "request",
-    category: "Travel planning",
-    title: "First solo trip outline",
-    summary: "Need a calm one-bag plan for a long weekend.",
-    ownerId: "u-lee",
-    ownerName: "Lee Park",
-    availability: "Flexible",
+    userId: "u-sofia",
+    userName: "Sofia L.",
+    skillName: "Photography",
+    description: "Want help framing market photos on a phone camera.",
+    urgency: "low",
+    location: "Mexico City",
+    availability: "weekends",
+  },
+  {
+    id: "req-4",
+    userId: "u-amir",
+    userName: "Amir N.",
+    skillName: "Languages",
+    description: "Practice basic greetings before a short trip.",
+    urgency: "medium",
+    location: "Seoul",
+    availability: "weekdays",
+  },
+  {
+    id: "req-5",
+    userId: "u-elena",
+    userName: "Elena S.",
+    skillName: "Tech help",
+    description: "Need help setting offline maps before travel.",
+    urgency: "high",
+    location: "Lagos",
+    availability: "weekends",
   },
 ];
 
@@ -142,32 +190,34 @@ export const skillBadgesSeed: SkillBadge[] = [
   },
 ];
 
-export function findSkillMatches(listings: SkillListing[]): SkillMatch[] {
-  const offers = listings.filter((item) => item.kind === "offer");
-  const requests = listings.filter((item) => item.kind === "request");
-  const matches: SkillMatch[] = [];
+/** @deprecated prefer skillOffersSeed / skillRequestsSeed */
+export const skillListingsSeed = [
+  ...skillOffersSeed.map((offer) => ({
+    id: offer.id,
+    kind: "offer" as const,
+    category: offer.skillName,
+    title: offer.skillName,
+    summary: offer.description,
+    ownerId: offer.userId,
+    ownerName: offer.userName ?? "Member",
+    availability: offer.availability,
+    location: offer.location,
+  })),
+  ...skillRequestsSeed.map((request) => ({
+    id: request.id,
+    kind: "request" as const,
+    category: request.skillName,
+    title: request.skillName,
+    summary: request.description,
+    ownerId: request.userId,
+    ownerName: request.userName ?? "Member",
+    availability: request.availability ?? "flexible",
+    location: request.location,
+    urgency: request.urgency,
+  })),
+];
 
-  for (const offer of offers) {
-    for (const request of requests) {
-      if (offer.ownerId === request.ownerId) continue;
-      if (offer.category !== request.category) continue;
-      const score =
-        offer.category === request.category
-          ? 78 +
-            (offer.availability
-              .toLowerCase()
-              .includes(request.availability.toLowerCase().split(" ")[0] ?? "")
-              ? 12
-              : 0)
-          : 0;
-      matches.push({
-        id: `match-${offer.id}-${request.id}`,
-        offer,
-        request,
-        score: Math.min(score, 98),
-      });
-    }
-  }
-
-  return matches.sort((a, b) => b.score - a.score);
+/** @deprecated use findSkillSwapMatches */
+export function findSkillMatches(): SkillSwapMatchView[] {
+  return findSkillSwapMatches(skillOffersSeed, skillRequestsSeed);
 }
