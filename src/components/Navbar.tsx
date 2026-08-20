@@ -7,6 +7,7 @@ const links = [
   { to: "/community", label: "Community" },
   { to: "/community/buddy", label: "Buddies" },
   { to: "/community/skill-swap", label: "Skill Swap" },
+  { to: "/community/same", label: "SAME" },
   { to: "/resources", label: "Resources" },
   { to: "/events", label: "Events" },
   { to: "/profile", label: "Profile" },

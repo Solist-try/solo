@@ -23,6 +23,7 @@ import {
   Safety,
   Settings,
   SkillSwap,
+  SameSystem,
   Support,
   Toolkit,
 } from "./pages";
@@ -45,6 +46,7 @@ export default function App() {
                 <Route path="community" element={<Community />} />
                 <Route path="community/buddy" element={<BuddySystem />} />
                 <Route path="community/skill-swap" element={<SkillSwap />} />
+                <Route path="community/same" element={<SameSystem />} />
                 <Route path="resources" element={<Resources />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="events" element={<Events />} />

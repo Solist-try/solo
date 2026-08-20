@@ -111,6 +111,52 @@ describe("Skill Swap API", () => {
   });
 });
 
+describe("SAME API", () => {
+  it("POST /same/goal and GET /same/goals", async () => {
+    const createRes = await request(app).post("/same/goal").send({
+      title: "Read 10 pages",
+      description: "Soft reading habit",
+      frequency: "daily",
+      category: "learning",
+      userId: "same-you",
+      userName: "SAME You",
+    });
+    expect(createRes.statusCode).toBe(201);
+    expect(createRes.body.goal.title).toBe("Read 10 pages");
+
+    const listRes = await request(app).get("/same/goals?userId=same-you");
+    expect(listRes.statusCode).toBe(200);
+    expect(
+      listRes.body.goals.some((goal) => goal.title === "Read 10 pages"),
+    ).toBe(true);
+  });
+
+  it("POST partner request and check-in", async () => {
+    const partnerRes = await request(app).post("/same/partner/request").send({
+      fromUserId: "same-you",
+      toUserId: "u-ava",
+    });
+    expect(partnerRes.statusCode).toBe(201);
+    expect(partnerRes.body.partner.partnerId).toBe("u-ava");
+
+    const goalRes = await request(app).post("/same/goal").send({
+      title: "Stretch",
+      description: "Morning stretch",
+      frequency: "daily",
+      category: "habits",
+      userId: "same-you",
+    });
+    const checkRes = await request(app).post("/same/checkin").send({
+      goalId: goalRes.body.goal.id,
+      userId: "same-you",
+      status: "done",
+      note: "Felt good",
+    });
+    expect(checkRes.statusCode).toBe(201);
+    expect(checkRes.body.checkIn.status).toBe("done");
+  });
+});
+
 describe("GET /styles.css and /app.js", () => {
   it("serves the UI assets", async () => {
     const css = await request(app).get("/styles.css");

@@ -35,6 +35,13 @@ const quickAccess: QuickCard[] = [
     Icon: SkillSwapIcon,
   },
   {
+    to: "/community/same",
+    title: "SAME",
+    description: "Gentle accountability partners for routines, habits, and goals.",
+    action: "Open SAME",
+    Icon: SameIcon,
+  },
+  {
     to: "/resources",
     title: "Resources",
     description: "Guides, checklists, and calm packing rituals.",
@@ -242,6 +249,19 @@ export function Home() {
               >
                 Offer a Skill
               </Link>
+              <Link
+                to="/community/same"
+                className="home-btn home-btn--secondary"
+                style={{
+                  background: brand.colors.sage,
+                  color: brand.colors.charcoal,
+                  borderRadius: brand.radius.md,
+                  fontFamily: brand.typography.body,
+                  boxShadow: brand.shadows.soft,
+                }}
+              >
+                Find Accountability Partner
+              </Link>
             </div>
           </div>
         </div>
@@ -267,7 +287,7 @@ export function Home() {
               Quick access
             </h2>
             <p style={bodyStyle}>
-              Calm doorways into the Go Solo experience — Buddy, Skill Swap, and more.
+              Calm doorways into Go Solo — Buddy, Skill Swap, SAME, and more.
             </p>
           </header>
 
@@ -419,6 +439,36 @@ function SkillSwapIcon() {
         fill="none"
         stroke="currentColor"
         strokeWidth="1.6"
+      />
+    </svg>
+  );
+}
+
+function SameIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+      <circle
+        cx="12"
+        cy="12"
+        r="7.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="3.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M12 4.8v2.2M12 17v2.2M4.8 12h2.2M17 12h2.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
       />
     </svg>
   );

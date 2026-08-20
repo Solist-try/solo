@@ -6,6 +6,7 @@ const links = [
   { to: "/community", label: "Feed", end: true },
   { to: "/community/buddy", label: "Buddy System", end: false },
   { to: "/community/skill-swap", label: "Skill Swap", end: false },
+  { to: "/community/same", label: "SAME", end: false },
 ] as const;
 
 export function CommunitySubnav() {

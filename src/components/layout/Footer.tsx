@@ -25,6 +25,7 @@ export function Footer() {
           <Link to="/community">Community</Link>
           <Link to="/community/buddy">Buddy System</Link>
           <Link to="/community/skill-swap">Skill Swap</Link>
+          <Link to="/community/same">SAME</Link>
           <Link to="/resources">Resources</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/events">Events</Link>

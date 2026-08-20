@@ -177,6 +177,26 @@ export function Community() {
             Offer and request practical skills — cook, budget, travel, and more.
           </span>
         </Link>
+        <Link
+          to="/community/same"
+          style={{
+            display: "grid",
+            gap: brand.spacing[12],
+            padding: brand.spacing[20],
+            borderRadius: brand.radius.lg,
+            background: `linear-gradient(155deg, rgba(143,166,184,0.35), ${brand.colors.mist} 55%, rgba(183,196,178,0.4))`,
+            boxShadow: brand.shadows.soft,
+            color: brand.colors.charcoal,
+            textDecoration: "none",
+          }}
+        >
+          <strong style={{ fontFamily: brand.typography.heading, fontSize: "1.15rem" }}>
+            SAME
+          </strong>
+          <span style={{ fontFamily: brand.typography.body, color: brand.colors.charcoalSoft }}>
+            Soft accountability partners for routines, habits, learning, and more.
+          </span>
+        </Link>
       </section>
 
       <GuidelinesReminder />

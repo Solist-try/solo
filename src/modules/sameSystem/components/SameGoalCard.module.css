@@ -1,0 +1,44 @@
+.card,
+.partner {
+  display: grid;
+  background: linear-gradient(
+    155deg,
+    rgba(233, 230, 227, 0.98) 0%,
+    rgba(183, 196, 178, 0.28) 100%
+  );
+  border: 1px solid rgba(183, 196, 178, 0.35);
+}
+
+.card h3,
+.partner h3 {
+  margin: 0;
+  color: var(--brand-charcoal, #3a3a3c);
+  font-size: 1.05rem;
+}
+
+.card p,
+.partner p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-brand-8, 8px);
+}
+
+.meta span {
+  display: inline-flex;
+  min-height: 1.75rem;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-md, 12px);
+  background: rgba(255, 252, 250, 0.85);
+  border: 1px solid rgba(183, 196, 178, 0.4);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--brand-charcoal, #3a3a3c);
+}
